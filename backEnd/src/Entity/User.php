@@ -2,22 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Security\Core\User\UserInterface;
-use App\Entity\Profil;
-use Doctrine\ORM\Mapping\InheritanceType;
-use ApiPlatform\Core\Action\NotFoundAction;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
-use Symfony\Component\Security\Core\Security;
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -25,133 +18,126 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "admin"="Admin", "formateur" = "Formateur", "apprenant" = "Apprenant", "cm"="Cm"})
- * @UniqueEntity("email",message="Cette adresse mail est déja utilisé.")
+ * @UniqueEntity("email",message="Cette adresse email est déja utilisé.")
  * @ApiResource(
- *     collectionOperations={
- *         "get"={"path"="/admin/users"},
- *         "post"={"path"="/admin/users"},
- *          "get_apprenants"={"method"="get",
- *                            "path"="/apprenants"}
+ *      collectionOperations={
+ *         "get"={"path"="/admin/users",
+ *                  "access_control"="(is_granted('ROLE_ADMIN'))",
+ *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *                  "normalization_context"={"groups"={"user:read"}}
+ *               }
  *     },
  *     itemOperations={
  *         "get"={"path"="/admin/users/{id}",
- *                "requirements"={"id"="\d+"}
+ *                "requirements"={"id"="\d+"},
+ *                  "access_control"="(is_granted('ROLE_ADMIN'))",
+ *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *                  "normalization_context"={"groups"={"user:read"}}
  *          },
- *         "put"={"path"="/admin/users/{id}",
- *                "requirements"={"id"="\d+"}
+ *         "delete"={"path"="/admin/users/{id}",
+ *                "requirements"={"id"="\d+"},
+ *                  "access_control"="(is_granted('ROLE_ADMIN'))",
+ *                  "access_control_message"="Vous n'avez pas access à cette Ressource"
  *          }
  *     }
  * )
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user:read", "user:write","Promo:read_P","brief_of_groupe_of_promo","brief_broullon_of_formateur","brief_valide_of_formateur","one_brief_of_promo","brief_assigned","all_briefs","Formateur:read_F","GroupeApprenant:read_GA","Apprenant:read_A","Stat_apprenant","App_check_stat_brief"})
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"user:read", "user:write","Brief:app_read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    protected $username;
+    private $email;
 
-    protected $roles = [];
+    private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(
-     *     message = "Ce Champ ne doit pas être vide."
-     * )
-     * @Groups({"user:read", "user:write"})
      */
-    protected $password;
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"user:read", "user:write","Promo:read_P","brief_of_groupe_of_promo","brief_broullon_of_formateur","brief_valide_of_formateur","one_brief_of_promo","brief_assigned","all_briefs","brief_of_promo","Formateur:read_F","GroupeApprenant:read_GA","Apprenant:read_A","Stat_apprenant","Apprenant_stat"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    protected $email;
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Ce Champ ne doit pas être vide."
+     * )
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message = "Ce Champ ne doit pas être vide."
+     * )
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $idDeleted = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=Profil::class, inversedBy="users")
-     * @Groups({"user:read", "user:write"})
-     * @ApiSubresource()
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"user:read","get_admins:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    protected $profil;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message = "Ce Champ ne doit pas être vide."
-     * )
-     * @Groups({"user:read", "user:write","brief_of_promo","Promo:read_P","brief_of_groupe_of_promo","brief_broullon_of_formateur","brief_valide_of_formateur","one_brief_of_promo","brief_assigned","all_briefs","Formateur:read_F","GroupeApprenant:read_GA","Apprenant:read_A","Stat_apprenant","Apprenant_stat"})
-     */
-    protected $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message = "Ce Champ ne doit pas être vide."
-     * )
-     * @Groups({"user:read", "user:write","brief_of_promo","Promo:read_P","brief_of_groupe_of_promo","brief_broullon_of_formateur","brief_valide_of_formateur","one_brief_of_promo","brief_assigned","all_briefs","Formateur:read_F","GroupeApprenant:read_GA","Apprenant:read_A","Stat_apprenant","Apprenant_stat"})
-     */
-    protected $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message = "Ce Champ ne doit pas être vide."
-     * )
-     * @Groups({"user:read", "user:write","brief_of_promo","Promo:read_P","brief_of_groupe_of_promo","brief_broullon_of_formateur","brief_valide_of_formateur","one_brief_of_promo","brief_assigned","all_briefs","Formateur:read_F","GroupeApprenant:read_GA","Apprenant:read_A"})
-     */
-    protected $adresse;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"Promo:read_P","GroupeApprenant:read_GA","Apprenant:read_A"})
-     */
-    protected $isConnected;
-
-    /**
-     * @ORM\OneToMany(targetEntity=CommentaireGeneral::class, mappedBy="user")
-     */
-    private $commentaireGenerals;
-
-    public function __construct()
-    {
-        $this->commentaireGenerals = new ArrayCollection();
-    }
+    private $profil;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     /**
      * A visual identifier that represents this user.
+     *
      * @see UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
+        return (string) $this->email;
     }
 
     /**
@@ -205,30 +191,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getProfil(): ?Profil
-    {
-        return $this->profil;
-    }
-
-    public function setProfil(?Profil $profil): self
-    {
-        $this->profil = $profil;
-
-        return $this;
-    }
-
     public function getPrenom(): ?string
     {
         return $this->prenom;
@@ -265,45 +227,37 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getIsConnected(): ?bool
+    public function getAvatar()
     {
-        return $this->isConnected;
+        return $this->avatar;
     }
 
-    public function setIsConnected(bool $isConnected): self
+    public function setAvatar($avatar): self
     {
-        $this->isConnected = $isConnected;
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+    public function getIdDeleted(): ?bool
+    {
+        return $this->idDeleted;
+    }
+
+    public function setIdDeleted(bool $idDeleted): self
+    {
+        $this->idDeleted = $idDeleted;
 
         return $this;
     }
 
-    /**
-     * @return Collection|CommentaireGeneral[]
-     */
-    public function getCommentaireGenerals(): Collection
+    public function getProfil(): ?profil
     {
-        return $this->commentaireGenerals;
+        return $this->profil;
     }
 
-    public function addCommentaireGeneral(CommentaireGeneral $commentaireGeneral): self
+    public function setProfil(?profil $profil): self
     {
-        if (!$this->commentaireGenerals->contains($commentaireGeneral)) {
-            $this->commentaireGenerals[] = $commentaireGeneral;
-            $commentaireGeneral->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaireGeneral(CommentaireGeneral $commentaireGeneral): self
-    {
-        if ($this->commentaireGenerals->contains($commentaireGeneral)) {
-            $this->commentaireGenerals->removeElement($commentaireGeneral);
-            // set the owning side to null (unless already changed)
-            if ($commentaireGeneral->getUser() === $this) {
-                $commentaireGeneral->setUser(null);
-            }
-        }
+        $this->profil = $profil;
 
         return $this;
     }

@@ -1,11 +1,11 @@
 <!--<h1 style="text-align:center">
   Formulaire de connexion
 </h1>-->
-  <div class="login">
+  <div class="login mx-auto pt-5">
     <h2 class="login-header">S'identifier</h2>
     <div class="login-container">
   
-      <form [formGroup]="loginForm" class="example-form" (ngSubmit)="seConnecter()">
+      <form [formGroup]="loginForm" class="example-form" (ngSubmit)="loginUser()">
 
         <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>

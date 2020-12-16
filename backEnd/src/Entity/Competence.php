@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TagRepository;
+use App\Repository\CompetenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=TagRepository::class)
+ * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
-class Tag
+class Competence
 {
     /**
      * @ORM\Id

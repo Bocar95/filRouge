@@ -47,38 +47,4 @@ class ApprenantRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    public function findByProfil($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->innerJoin('u.profil', 'p')
-            ->andWhere('p.libelle = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    public function findByEmail($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.email = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /*public function findByEmail($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->innerJoin('u.apprenant', 'a')
-            ->andWhere('a.email = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }*/
 }

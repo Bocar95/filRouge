@@ -47,15 +47,4 @@ class FormateurRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    public function findByEmail($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.email = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
 }

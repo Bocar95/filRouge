@@ -14,13 +14,11 @@ import {FormControl} from '@angular/forms';
 export class ConnexionComponent implements OnInit {
 
   loginForm: FormGroup;
-  isSubmitted  =  false;
   hide = true;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   passwordFormControl = new FormControl('', [Validators.required]);
-
 
   constructor(private authService: AuthService, private router: Router, private apiService: ApiService, private formBuilder: FormBuilder ) { }
   
@@ -31,10 +29,6 @@ export class ConnexionComponent implements OnInit {
       });
   }
 
-  getformControls() { 
-    return this.loginForm.controls; 
-  }
-
   getErrorMessage() {
     if (this.emailFormControl.hasError('required')) {
       return 'Veuillez saisir votre email.';
@@ -43,16 +37,27 @@ export class ConnexionComponent implements OnInit {
       return 'Veuillez saisir un email correct.';
     }
   }
-  
-  seConnecter(){
-    console.log(this.loginForm.value);
-    this.isSubmitted = true;
-    if(this.loginForm.invalid){
-      return ('dioumgeuh');
-    }
-    this.authService.seConnecter(this.loginForm.value);
-    this.router.navigateByUrl('/acceuil/admin');
-    //this.apiService.readProfil();
+
+  loginUser(){
+    this.authService.loginUser(this.loginForm.value)
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
   }
+
+  // getformControls() { 
+  //   return this.loginForm.controls; 
+  // }
+  
+  // seConnecter(){
+  //   console.log(this.loginForm.value);
+  //   if(this.loginForm.invalid){
+  //     return ('dioumgeuh');
+  //   }
+  //   this.authService.seConnecter(this.loginForm.value);
+  //   this.router.navigateByUrl('/acceuil/admin');
+  //   //this.apiService.readProfil();
+  // }
 
 }

@@ -2,27 +2,31 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Service\Service;
+use App\Repository\AdminRepository;
 use App\Repository\ProfilRepository;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class ApprenantController extends AbstractController
-{
+class AdminController extends AbstractController
+{  
     /**
-     * @Route("/api/apprenant", name="add_apprenant", methods={"POST"})
+     * @Route("/api/admin", name="add_admin", methods={"POST"})
      */
-    public function addApprenant(Request $request,SerializerInterface $serializer ,UserPasswordEncoderInterface $encoder, ProfilRepository $profilRepo, EntityManagerInterface $manager)
+    public function addAdmin(Request $request,SerializerInterface $serializer ,UserPasswordEncoderInterface $encoder, ProfilRepository $profilRepo, EntityManagerInterface $manager)
     {
-      if ($this->isGranted('ROLE_ADMIN','ROLE_FORMATEUR')) {
+      if ($this->isGranted('ROLE_ADMIN')) {
         $service = new Service($serializer,$encoder,$profilRepo);
-        $apprenant = $service->addUser('APPRENANT', $request,$manager);
+        $admin = $service->addUser('ADMIN', $request,$manager);
 
         return new JsonResponse("success",Response::HTTP_CREATED,[],true);
       }
@@ -30,4 +34,5 @@ class ApprenantController extends AbstractController
         return $this->json("Access denied!!!");
       }
     }
+
 }

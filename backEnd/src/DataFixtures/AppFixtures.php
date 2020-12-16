@@ -22,67 +22,67 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        $tabRoles = ['ROLE_ADMIN', 'ROLE_FORMATEUR', 'ROLE_CM', 'ROLE_APPRENANT'];
-        $tab = ['ADMIN', 'FORMATEUR', 'CM', 'APPRENANT'];
+        // $tabRoles = ['ROLE_ADMIN', 'ROLE_FORMATEUR', 'ROLE_CM', 'ROLE_APPRENANT'];
+        // $tab = ['ADMIN', 'FORMATEUR', 'CM', 'APPRENANT'];
 
-        $tabUser = [
-            [
-                "email"=>"admin@gmail.com",
-                "password"=>"admin",
-                "username"=>"Niass",
-                "prenom"=>"Baye",
-                "nom"=>"Niass",
-                "adresse"=>"Inconnue"
-            ],
-            [
-                "email"=>"formateur@gmail.com",
-                "password"=>"formateur",
-                "username"=>"Wane",
-                "prenom"=>"Birane",
-                "nom"=>"Wane",
-                "adresse"=>"Thies"
-            ],
-            [
-                "email"=>"cm@gmail.com",
-                "password"=>"cm",
-                "username"=>"Yankoba",
-                "prenom"=>"Yankoba",
-                "nom"=>"Mane",
-                "adresse"=>"Inconnue"
-            ],
-            [
-                "email"=>"apprenant@gmail.com",
-                "password"=>"apprenant",
-                "username"=>"qwerty",
-                "prenom"=>"Abdel",
-                "nom"=>"Kader",
-                "adresse"=>"Yoff"
-            ]
-        ];
+        // $tabUser = [
+        //     [
+        //         "email"=>"admin@gmail.com",
+        //         "password"=>"admin",
+        //         "username"=>"Niass",
+        //         "prenom"=>"Baye",
+        //         "nom"=>"Niass",
+        //         "adresse"=>"Inconnue"
+        //     ],
+        //     [
+        //         "email"=>"formateur@gmail.com",
+        //         "password"=>"formateur",
+        //         "username"=>"Wane",
+        //         "prenom"=>"Birane",
+        //         "nom"=>"Wane",
+        //         "adresse"=>"Thies"
+        //     ],
+        //     [
+        //         "email"=>"cm@gmail.com",
+        //         "password"=>"cm",
+        //         "username"=>"Yankoba",
+        //         "prenom"=>"Yankoba",
+        //         "nom"=>"Mane",
+        //         "adresse"=>"Inconnue"
+        //     ],
+        //     [
+        //         "email"=>"apprenant@gmail.com",
+        //         "password"=>"apprenant",
+        //         "username"=>"qwerty",
+        //         "prenom"=>"Abdel",
+        //         "nom"=>"Kader",
+        //         "adresse"=>"Yoff"
+        //     ]
+        // ];
 
-            for ($i=0; $i<count($tab); $i++){
-                $profils = new Profil();
-                $profils->setLibelle($tab[$i]);
+        //     for ($i=0; $i<count($tab); $i++){
+        //         $profils = new Profil();
+        //         $profils->setLibelle($tab[$i]);
 
-                $user = new User();
+        //         $user = new User();
 
-                $role = [$tabRoles[$i]];
-                $user->setRoles($role);
-                $user->setUsername($tabUser[$i]["username"]);
-                $user->setEmail($tabUser[$i]["email"]);
-                $user->setPrenom($tabUser[$i]["prenom"]);
-                $user->setNom($tabUser[$i]["nom"]);
-                $user->setAdresse($tabUser[$i]["adresse"]);
+        //         $role = [$tabRoles[$i]];
+        //         $user->setRoles($role);
+        //         $user->setUsername($tabUser[$i]["username"]);
+        //         $user->setEmail($tabUser[$i]["email"]);
+        //         $user->setPrenom($tabUser[$i]["prenom"]);
+        //         $user->setNom($tabUser[$i]["nom"]);
+        //         $user->setAdresse($tabUser[$i]["adresse"]);
 
 
-                $password = $this->encoder->encodePassword($user, $tabUser[$i]["password"]);
-                $user->setPassword($password);
-                $user->setProfil($profils);
+        //         $password = $this->encoder->encodePassword($user, $tabUser[$i]["password"]);
+        //         $user->setPassword($password);
+        //         $user->setProfil($profils);
 
-                $manager->persist($profils);
-                $manager->persist($user);
+        //         $manager->persist($profils);
+        //         $manager->persist($user);
 
-                $manager->flush();
-            }
+        //         $manager->flush();
+        //     }
     }
 }
