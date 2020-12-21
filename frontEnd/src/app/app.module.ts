@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './connexion/connexion.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from "./auth.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from "./service/auth.service";
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { LoginComponent } from './login/login.component';
 import { ProfilComponent } from './profil/profil.component';
@@ -16,10 +16,11 @@ import { FormateurComponent } from './formateur/formateur.component';
 import { CmComponent } from './cm/cm.component';
 import { ApprenantComponent } from './apprenant/apprenant.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { ProfilService } from './service/profil.service';
+import { AuthGuard } from './service/auth.guard';
+import { TokenInterceptorProvider } from './service/token-interceptor.service';
+import { VerifyTokenService } from './service/verify-token.service';
+import { AngularMaterialModule } from '../material.module';
 
 
 @NgModule({
@@ -42,14 +43,16 @@ import { MatIconModule } from '@angular/material/icon';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
+    AngularMaterialModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard,
+    ProfilService,
+    VerifyTokenService,
+    TokenInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { CUSTOM_ELEMENTS_SCHEMA }

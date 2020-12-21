@@ -23,7 +23,7 @@
 }
 
 .login-header {
-  background: rgb(88, 143, 129);
+  background: rgb(74, 122, 110);
   padding: 20px;
   font-size: 1.4em;
   font-weight: normal;
@@ -71,7 +71,7 @@
 }
 
 .login input[type="submit"]:hover {
-  background:rgb(70, 144, 126);
+  background:rgb(74, 122, 110);
   border-color: rgb(1, 29, 51);
 }
 

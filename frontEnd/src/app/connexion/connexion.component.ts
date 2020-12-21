@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
 import { Utilisateur } from  '../utilisateur';
-import { AuthService } from  '../auth.service';
+import { AuthService } from  '../service/auth.service';
 import { ApiService } from '../api.service';
 import {FormControl} from '@angular/forms';
 
@@ -38,10 +38,14 @@ export class ConnexionComponent implements OnInit {
     }
   }
 
-  loginUser(){
+  logIn(){
     this.authService.loginUser(this.loginForm.value)
       .subscribe(
-        res => console.log(res),
+        res => {
+          console.log(res),
+          localStorage.setItem('token', res.token),
+          this.router.navigate(['/acceuil'])
+        },
         err => console.log(err)
       )
   }

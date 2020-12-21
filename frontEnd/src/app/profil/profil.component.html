@@ -1,1 +1,20 @@
-<p>profil works!</p>
+
+
+<div class="row mt-3">
+  <div class="col-md-4 mb-3" *ngFor="let profil of profils">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Libelle</h5>
+        <p class="card-text">{{profil.libelle}}</p>
+        <a class="btn btn-success">Modifier</a>
+      </div>
+      <!-- <div class="card-footer text-muted">
+        {{event.date | date:'shortDate'}}
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<button [innerText]="btnText" (click)="onClickBtn()"></button>
+<hr>
+<input [disabled]="!ok" type="text">

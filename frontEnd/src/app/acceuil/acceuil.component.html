@@ -1,23 +1,21 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark">
   <a class="navbar-brand text-white">Prenom <br> NOM</a>
   <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
       <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarMenu">
 
-    <!--Le routage est fait selon l'utilisateur qui se connecte-->
-  <app-admin *ngIf="urlAdmin()===true"></app-admin>
-  <app-formateur *ngIf="urlFormateur()===true"></app-formateur>
-  <app-cm *ngIf="urlCm()===true"></app-cm>
-  <app-apprenant *ngIf="urlApprenant()===true"></app-apprenant>
+    <!--Le routage est fait selon l'utilisateur qui est connecté-->
+    <app-admin *ngIf="urlAdmin()===true"></app-admin>
+    <app-formateur *ngIf="urlFormateur()===true"></app-formateur>
+    <app-cm *ngIf="urlCm()===true"></app-cm>
+    <app-apprenant *ngIf="urlApprenant()===true"></app-apprenant>
 
   </div>
-
 </nav>
-<h3 class="text-center text-white">ACCEUIL</h3>
 
-<div class="container">
-  <ul class="list-group">
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-  </ul>
+<h2 class="text-center text-white mt-3"><strong>Bienvenue</strong></h2>
+
+<div class="container" *ngIf="urlAdmin()===true">
+    <app-profil></app-profil>
 </div>
