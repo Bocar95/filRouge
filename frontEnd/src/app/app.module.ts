@@ -5,11 +5,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './connexion/connexion.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from "./service/auth.service";
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { LoginComponent } from './login/login.component';
-import { ProfilComponent } from './profil/profil.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormateurComponent } from './formateur/formateur.component';
@@ -21,6 +20,7 @@ import { AuthGuard } from './service/auth.guard';
 import { TokenInterceptorProvider } from './service/token-interceptor.service';
 import { VerifyTokenService } from './service/verify-token.service';
 import { AngularMaterialModule } from '../material.module';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({

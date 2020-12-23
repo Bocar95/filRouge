@@ -92,7 +92,7 @@ class Profil
 
     public function setLibelle(string $libelle): self
     {
-        $this->libelle = $libelle;
+        $this->libelle = mb_strtoupper($libelle);
 
         return $this;
     }

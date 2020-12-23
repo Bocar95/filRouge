@@ -1,12 +1,24 @@
+<div class="row justify-content-center">
+  <form [formGroup]="addingProfil" class="example-form mt-3" (ngSubmit)="onClickBtn()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Libelle</mat-label>
+      <input matInput [formControl]="libelleFormControl" placeholder="Ex. ADMIN" required>
+    </mat-form-field>
+    <p>
+      <button type="submit" class="btn btn-success" [innerText]="btnText"></button>
+    </p>  
+  </form>
+</div>
 
+<hr>
 
-<div class="row mt-3">
+<div class="row mt-4">
   <div class="col-md-4 mb-3" *ngFor="let profil of profils">
     <div class="card text-center">
       <div class="card-body">
         <h5 class="card-title">Libelle</h5>
         <p class="card-text">{{profil.libelle}}</p>
-        <a class="btn btn-success">Modifier</a>
+        <a class="btn btn-primary">Modifier</a>
       </div>
       <!-- <div class="card-footer text-muted">
         {{event.date | date:'shortDate'}}
@@ -14,7 +26,3 @@
     </div>
   </div>
 </div>
-
-<button [innerText]="btnText" (click)="onClickBtn()"></button>
-<hr>
-<input [disabled]="!ok" type="text">

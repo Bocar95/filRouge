@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ProfilService } from '../service/profil.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profil',
@@ -12,12 +13,15 @@ import { HttpClient } from '@angular/common/http';
 export class ProfilComponent implements OnInit {
   
   profils: any = [];
+  addingProfil : FormGroup;
+  libelleFormControl = new FormControl('', [Validators.required]);
   ok = false;
-  btnText = 'Activer';
+  btnText = 'Ajouter';
 
   constructor(private profilService: ProfilService,
                private router: Router,
-               private http: HttpClient
+               private http: HttpClient,
+               private formBuilder: FormBuilder
               ) { }
 
   ngOnInit(): void {
@@ -27,14 +31,19 @@ export class ProfilComponent implements OnInit {
         console.log(data);
       }
     );
+    this.addingProfil = this.formBuilder.group({
+      libelle : this.libelleFormControl 
+    });
   }
-
-  addProfil() {
-  }
-
+  
   onClickBtn() {
-    this.ok = !this.ok;
-    this.btnText = !this.ok ? 'Activer' : 'Desactiver'
+    if(this.addingProfil.value){
+      this.profilService.addProfil(this.addingProfil.value).subscribe(
+        (res: any) => {
+          console.log(res)
+        }
+      );
+    }
   }
 
 }
