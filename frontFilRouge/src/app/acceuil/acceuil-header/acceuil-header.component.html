@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <a class="navbar-brand text-white">Acceuil</a>
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMenu">
+
+    <!--Le routage est fait selon l'utilisateur qui est connecté-->
+    <app-admin *ngIf="Admin()===true"></app-admin>
+    <app-formateur *ngIf="Formateur()===true"></app-formateur>
+    <app-cm *ngIf="Cm()===true"></app-cm>
+    <app-apprenant *ngIf="Apprenant()===true"></app-apprenant>
+
+  </div>
+</nav>

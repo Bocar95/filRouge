@@ -1,0 +1,60 @@
+<div class="mat-table w-100">
+  <table class="table table-striped text-white">
+    <thead>
+      <tr>
+        <th class="text-center">Libelle</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let profil of profils | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" id="{{ profil.id }}">
+        <td style="display: none;">{{ profil.id }}</td>
+        <td class="text-center">{{profil.libelle}}</td>
+        <td>
+          <div class="row">
+            <a class="btn btn-warning ml-3 mr-auto col-3" routerLink="{{ profil.id }}/details" [innerText]="btnDetail" style="font-size:1.25vw;"></a>
+            <a class="btn btn-primary col-3" (click)="onClickBtnPut()" [innerText]="btnModifier" style="font-size:1.25vw;"></a>
+            <a class="btn btn-danger  mr-3 ml-auto col-3" routerLink="{{ profil.id }}/delete" [innerText]="btnSupprimer" data-toggle="modal" data-target="#exampleModal" style="font-size:1.25vw;"></a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="totalElement()">
+  </ngb-pagination> -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Demande de confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sure de vouloir supprimer ce profil ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Non</button>
+        <button type="button" id="confirmModalYes" class="btn btn-primary" (click)="onClickBtnDelete()" data-dismiss="modal">Oui, je confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var theHREF;
+    let table = document.querySelector('table');
+
+    $("#confirmModalYes").click(function(e) {
+      $("#exampleModal").modal("close");
+    });
+});
+</script>

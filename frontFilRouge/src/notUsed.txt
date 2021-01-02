@@ -1,0 +1,18 @@
+  <div class="row mt-4">
+    <div class="col-md-4 mb-3" *ngFor="let profil of profils">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Libelle</h5>
+          <p class="card-text">{{profil.libelle}}</p>
+            <div class="row card-footer">
+                <a class="btn btn-warning mr-auto" routerLink="{{ profil.id }}/details">Détails</a>
+                <a (click)="onClickBtnPut()" class="btn btn-primary">Modifier</a>
+                <a (click)="onClickBtnDelete(profil.id)" data-id="{{ profil.id }}" class="btn btn-danger ml-auto">Supprimer</a>
+            </div>
+        </div>
+        <!-- <div class="card-footer text-muted">
+          {{event.date | date:'shortDate'}}
+        </div> -->
+      </div>
+    </div>
+  </div>
