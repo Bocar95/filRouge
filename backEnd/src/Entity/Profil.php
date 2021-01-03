@@ -25,6 +25,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
  *                  "normalization_context"={"groups"={"profil:read"}}
  *                },
+ *         "getUsersProfil"={"method"="get",
+ *                  "path"="/admin/profils/{id}/users",
+ *                  "access_control"="(is_granted('ROLE_ADMIN'))",
+ *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *                  "normalization_context"={"groups"={"users_profil:read"}}
+ *                },
  *         "post"={"path"="/admin/profils",
  *                  "access_control"="(is_granted('ROLE_ADMIN'))",
  *                  "access_control_message"="Vous n'avez pas access à cette Ressource"
@@ -77,8 +83,9 @@ class Profil
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="profil")
-     * @Groups({"users_profil:read"})
      * @ApiSubresource()
+     * 
+     * @Groups({"users_profil:read"})
      */
     private $users;
 

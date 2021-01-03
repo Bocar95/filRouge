@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ProfilService } from 'src/app/service/profil.service';
-import { ListProfilsComponent } from '../list-profils/list-profils.component';
 import { Router } from '@angular/router';
 
 

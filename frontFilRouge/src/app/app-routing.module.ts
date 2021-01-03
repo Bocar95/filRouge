@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'acceuil', component: AcceuilComponent, canActivate: [AuthGuard],
         children:[
           { path: ':id/details', component: DetailsProfilComponent },
+          { path: ':id/modifier', component: AcceuilComponent },
           { path: ':id/delete', component: AcceuilComponent }
         ]
   },

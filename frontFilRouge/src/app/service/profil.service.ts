@@ -25,6 +25,10 @@ export class ProfilService {
     return this.http.get(`${this.getProfilUrl}/${id}`);
   }
 
+  putProfil(id, libelle) {
+    return this.http.put(`${this.defaultProfilUrl}/${id}`, libelle);
+  }
+
   deleteProfil(id) {
     return this.http.delete(`${this.defaultProfilUrl}/${id}`);
   }
