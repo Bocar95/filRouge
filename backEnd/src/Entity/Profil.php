@@ -40,7 +40,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *         "get"={"path"="/admin/profils/{id}",
  *                  "requirements"={"id"="\d+"},
  *                  "access_control"="(is_granted('ROLE_ADMIN'))",
- *                  "access_control_message"="Vous n'avez pas access à cette Ressource"
+ *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *                  "normalization_context"={"groups"={"profil:read"}}
  *          },
  *         "put"={"path"="/admin/profils/{id}",
  *                  "requirements"={"id"="\d+"},

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Injector } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { ProfilService } from 'src/app/service/profil.service';
+import { ProfilService } from 'src/app/service/profilService/profil.service';
 import { Router } from '@angular/router';
 
 
@@ -26,11 +26,12 @@ export class AddProfilComponent implements OnInit {
   animal: string;
   name: string;
   	
-  constructor(private profilService: ProfilService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              public dialog: MatDialog
-              ) { }
+  constructor(
+    private profilService: ProfilService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.addingProfil = this.formBuilder.group({

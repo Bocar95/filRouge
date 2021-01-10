@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from "./service/auth.service";
+import { AuthService } from "./service/authService/auth.service";
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './acceuil/admin/admin.component';
@@ -14,9 +14,9 @@ import { FormateurComponent } from './acceuil/formateur/formateur.component';
 import { CmComponent } from './acceuil/cm/cm.component';
 import { ApprenantComponent } from './acceuil/apprenant/apprenant.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfilService } from './service/profil.service';
-import { AuthGuard } from './service/auth.guard';
-import { TokenInterceptorProvider } from './service/token-interceptor.service';
+import { ProfilService } from './service/profilService/profil.service';
+import { AuthGuard } from './service/authGuardService/auth.guard';
+import { TokenInterceptorProvider } from './service/tokenInterceptorService/token-interceptor.service';
 import { VerifyTokenService } from './service/verify-token.service';
 import { AngularMaterialModule } from '../material.module';
 import { ProfilComponent } from './acceuil/admin/profil/profil.component';
@@ -28,11 +28,15 @@ import { ListProfilsComponent } from './acceuil/admin/profil/list-profils/list-p
 import { AdminHeaderComponent } from './acceuil/admin/admin-header/admin-header.component';
 import { AdminBodyComponent } from './acceuil/admin/admin-body/admin-body.component';
 import { DefaultListProfilsComponent } from './acceuil/admin/profil/default-list-profils/default-list-profils.component';
-import { DetailsProfilComponent } from './acceuil/admin/profil/default-list-profils/details-profil/details-profil.component';
+import { DetailsProfilComponent } from './acceuil/admin/profil/details-profil/details-profil.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
+import { AddAdminComponent } from './acceuil/admin/admin-user/add-admin/add-admin.component';
+import { ListAdminComponent } from './acceuil/admin/admin-user/list-admin/list-admin.component';
+import { FormulaireAddUserComponent } from './acceuil/admin/formulaire-add-user/formulaire-add-user.component';
 
 
 
@@ -56,7 +60,11 @@ import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     AdminBodyComponent,
     DefaultListProfilsComponent,
     DetailsProfilComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    AdminUserComponent,
+    AddAdminComponent,
+    ListAdminComponent,
+    FormulaireAddUserComponent
   ],
   imports: [
     BrowserModule,

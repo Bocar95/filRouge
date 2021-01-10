@@ -30,9 +30,7 @@ class ProfilController extends AbstractController
 
             if(!empty($profil)) {
                 foreach ($profil->getUsers() as $profilUsers) {
-                    $users[] = [
-                        "Users"=>$userRepository->findOneBy([ 'id' => $profilUsers->getProfil()->getId() ])
-                    ];
+                    $users[] = $profilUsers;
                 }
             return $this->json($users, 200, [], ["groups" => ["users_profil:read"]]);
             }

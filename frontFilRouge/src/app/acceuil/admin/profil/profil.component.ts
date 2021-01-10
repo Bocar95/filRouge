@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilService } from '../../../service/profil.service';
+import { ProfilService } from '../../../service/profilService/profil.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';

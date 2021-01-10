@@ -1,0 +1,31 @@
+
+<hr>
+
+<div class="text-center" *ngIf="users.length>0">
+  <mat-label class="text-white">Voici la liste des utilisateurs avec le profil: <strong> {{profils.libelle}} </strong></mat-label>
+  <div class="mat-table table-striped table-bordered mt-2">
+    <table class="text-white w-100">
+      <thead>
+        <tr>
+          <th class="text-center">prenom</th>
+          <th class="text-center">nom</th>
+          <th class="text-center">email</th>
+          <th class="text-center">adresse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td class="text-center">{{user.prenom}}</td>
+          <td class="text-center">{{user.nom}}</td>
+          <td class="text-center">{{user.email}}</td>
+          <td class="text-center">{{user.adresse}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center">
+  <mat-label class="text-white" *ngIf="users.length<1"><strong> {{elseResponse}} </strong></mat-label>
+</div>
+

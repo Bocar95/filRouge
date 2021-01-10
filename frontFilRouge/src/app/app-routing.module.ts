@@ -1,26 +1,34 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AcceuilComponent } from './acceuil/acceuil.component';
-import { AuthGuard } from './service/auth.guard';
+import { AuthGuard } from './service/authGuardService/auth.guard';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { ProfilComponent } from './acceuil/admin/profil/profil.component';
-import { DetailsProfilComponent } from './acceuil/admin/profil/default-list-profils/details-profil/details-profil.component';
+import { DetailsProfilComponent } from './acceuil/admin/profil/details-profil/details-profil.component';
+import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
+import { FormulaireAddUserComponent } from './acceuil/admin/formulaire-add-user/formulaire-add-user.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'connexion'},
   { path: 'connexion', component: ConnexionComponent },
   { path: 'acceuil', component: AcceuilComponent, canActivate: [AuthGuard],
         children:[
-          { path: ':id/details', component: DetailsProfilComponent },
-          { path: ':id/modifier', component: AcceuilComponent },
-          { path: ':id/delete', component: AcceuilComponent }
+              { path: 'liste/profils', component: ProfilComponent,
+                    children:[
+                      { path: ':id/details', component: DetailsProfilComponent },
+                      { path: ':id/modifier', component: ProfilComponent },
+                      { path: ':id/delete', component: ProfilComponent }
+                    ]
+              },
+              { path: 'liste/admins', component: AdminUserComponent,
+                    children:[
+                      { path: ':id/delete', component: AdminUserComponent }
+                    ]
+              },
+              { path: 'ajouter/admin', component: FormulaireAddUserComponent }
         ]
-  },
-  { path: 'acceuil/admin', component: AcceuilComponent, canActivate: [AuthGuard] },
-  { path: 'acceuil/formateur', component: AcceuilComponent, canActivate: [AuthGuard] },
-  { path: 'acceuil/cm', component: AcceuilComponent, canActivate: [AuthGuard] },
-  { path: 'acceuil/apprenant', component: AcceuilComponent, canActivate: [AuthGuard] },
-  { path: 'profil', component: ProfilComponent }
+  }
 ];
 
 @NgModule({

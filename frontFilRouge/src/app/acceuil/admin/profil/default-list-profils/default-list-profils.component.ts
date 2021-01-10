@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { ProfilService } from 'src/app/service/profil.service';
+import { ProfilService } from 'src/app/service/profilService/profil.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({

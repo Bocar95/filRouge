@@ -1,5 +1,5 @@
-<div class="mat-table w-100">
-  <table class="table table-striped text-white">
+<div class="mat-table table-striped table-bordered">
+  <table class="text-white w-100">
     <thead>
       <tr>
         <th class="text-center">Libelle</th>
@@ -11,11 +11,19 @@
         <td style="display: none;">{{ profil.id }}</td>
         <td class="text-center">{{profil.libelle}}</td>
         <td>
-          <div class="row">
-            <a class="btn btn-warning ml-3 mr-auto col-3" routerLink="{{ profil.id }}/details" [innerText]="btnDetail" style="font-size:1.25vw;"></a>
-            <a class="btn btn-primary col-3" routerLink="{{ profil.id }}/modifier" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1.25vw;"></a>
-            <a class="btn btn-danger  mr-3 ml-auto col-3" routerLink="{{ profil.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1.25vw;"></a>
-          </div>
+          <section>
+            <div class="row justify-content-center">
+              <a mat-raised-button class="bg-warning col-2" routerLink="{{ profil.id }}/details" (click)="onClickBtnDetails(profil.id)" [innerText]="btnDetail" style="font-size:1.25vw;"></a>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-divider [vertical]="true"></mat-divider>
+              <a mat-raised-button class="bg-primary col-2" routerLink="{{ profil.id }}/modifier" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1.25vw;"></a>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-divider [vertical]="true"></mat-divider>
+                <mat-divider [vertical]="true"></mat-divider>
+              <a mat-raised-button class="bg-danger col-2" routerLink="{{ profil.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1.25vw;"></a>
+            </div>
+          </section>
         </td>
       </tr>
     </tbody>
@@ -32,7 +40,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Demande de confirmation</h5>
+        <h3 class="modal-title text-white" id="deleteModalLabel">Demande de confirmation</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -74,6 +82,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="currentRoute()">
+  <router-outlet></router-outlet>
 </div>
 
 <script>

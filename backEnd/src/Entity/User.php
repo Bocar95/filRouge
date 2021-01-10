@@ -49,8 +49,9 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_admins:read"})
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -59,15 +60,15 @@ class User implements UserInterface
      * )
      * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    private $email;
+    protected $email;
 
-    private $roles = [];
+    protected $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -76,7 +77,7 @@ class User implements UserInterface
      * )
      * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    private $prenom;
+    protected $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -85,7 +86,7 @@ class User implements UserInterface
      * )
      * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -94,24 +95,24 @@ class User implements UserInterface
      * )
      * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    private $adresse;
+    protected $adresse;
 
     /**
      * @ORM\Column(type="blob", nullable=true)
      */
-    private $avatar;
+    protected $avatar;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $idDeleted = false;
+    protected $isDeleted = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=Profil::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"user:read","get_admins:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
-    private $profil;
+    protected $profil;
 
     public function getId(): ?int
     {
@@ -238,14 +239,14 @@ class User implements UserInterface
 
         return $this;
     }
-    public function getIdDeleted(): ?bool
+    public function getIsDeleted(): ?bool
     {
-        return $this->idDeleted;
+        return $this->isDeleted;
     }
 
-    public function setIdDeleted(bool $idDeleted): self
+    public function setIsDeleted(bool $isDeleted): self
     {
-        $this->idDeleted = $idDeleted;
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }

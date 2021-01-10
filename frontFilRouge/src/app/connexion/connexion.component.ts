@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
-import { AuthService } from  '../service/auth.service';
+import { AuthService } from  '../service/authService/auth.service';
 import { ApiService } from '../api.service';
 import {FormControl} from '@angular/forms';
 
@@ -43,7 +43,7 @@ export class ConnexionComponent implements OnInit {
         res => {
           console.log(res),
           localStorage.setItem('token', res.token),
-          this.router.navigate(['/acceuil'])
+          this.router.navigate(['/acceuil/liste/profils'])
         },
         err => console.log(err)
       )

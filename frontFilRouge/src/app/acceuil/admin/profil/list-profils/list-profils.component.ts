@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilService } from 'src/app/service/profil.service';
+import { ProfilService } from 'src/app/service/profilService/profil.service';
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -20,12 +20,11 @@ export class ListProfilsComponent implements OnInit {
   id = [];
   toDelete: number;
   toUpdate: number;
+  toDetails: number;
   i = 0;
   j = 0;
   updatingProfil: FormGroup;
   libelleFormControl = new FormControl('', [Validators.required]);
-  public page= 1;
-  public pageSize= 5;
 
   constructor(private profilService: ProfilService,
               private router: Router,
@@ -47,7 +46,7 @@ export class ListProfilsComponent implements OnInit {
     this.snapshot = this.router.routerState.snapshot;
     this.url = this.snapshot['url'];
     this.id = this.url.split('/');
-    return this.id[2];
+    return this.id[4];
   }
 
   reloadCurrentRoute() {
@@ -59,9 +58,14 @@ export class ListProfilsComponent implements OnInit {
 
   reloadComponent() {
     let currentUrl = this.router.url;
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/acceuil']);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/acceuil/liste/profils']);
+  }
+
+  onClickBtnDetails(toLoad) {
+    this.reloadComponent();
+    return this.router.navigate([`/acceuil/liste/profils/${toLoad}/details`]);
   }
 
   onClickBtnPut() {
@@ -95,6 +99,17 @@ export class ListProfilsComponent implements OnInit {
       this.i++;
     }
     return this.j;
+  }
+
+  currentRoute() {
+    var split;
+    this.snapshot = this.router.routerState.snapshot;
+    this.url = this.snapshot['url'];
+    split = this.url.split('/');
+    if(split[5] == `details`) {
+      return true;
+    }
+    return false;
   }
 
 }

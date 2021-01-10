@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarMenu">
 
     <!--Le routage est fait selon l'utilisateur qui est connecté-->
-    <app-admin *ngIf="Admin()===true"></app-admin>
+    <app-admin-header *ngIf="Admin()===true"></app-admin-header>
     <app-formateur *ngIf="Formateur()===true"></app-formateur>
     <app-cm *ngIf="Cm()===true"></app-cm>
     <app-apprenant *ngIf="Apprenant()===true"></app-apprenant>

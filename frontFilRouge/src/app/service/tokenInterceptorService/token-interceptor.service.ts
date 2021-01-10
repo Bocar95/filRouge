@@ -1,8 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from '../authService/auth.service';
 import { Observable } from 'rxjs';
-import { ProfilService } from './profil.service';
+import { ProfilService } from '../profilService/profil.service';
 
 @Injectable({
   providedIn: 'root'

@@ -22,7 +22,7 @@ export class ProfilService {
   }
 
   getProfilById(id) {
-    return this.http.get(`${this.getProfilUrl}/${id}`);
+    return this.http.get(`${this.defaultProfilUrl}/${id}`);
   }
 
   putProfil(id, libelle) {
@@ -31,6 +31,10 @@ export class ProfilService {
 
   deleteProfil(id) {
     return this.http.delete(`${this.defaultProfilUrl}/${id}`);
+  }
+
+  getUsersOfProfil(id) {
+    return this.http.get(`${this.defaultProfilUrl}/${id}/users/?isDeleted=false`);
   }
 
 }
