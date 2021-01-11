@@ -26,21 +26,21 @@ class Service{
      public function __construct(SerializerInterface $serializer ,UserPasswordEncoderInterface $encoder, ProfilRepository $profilRepo){
       $this->serializer = $serializer;
       $this->encoder = $encoder;
-      $this->repo = $profilRepo;
+      $this->profilRepo = $profilRepo;
      }
 
-    public function addUser($profil, Request $request,$manager){
+    public function addUser($profil,$request,$manager){
       
-      $data = $request->request->all();
+      $data = $request->getContent();
 
       $uploadedFile = $request->files->get('avatar');
-
+      
       if($uploadedFile){
         $file = $uploadedFile->getRealPath();
         $avatar = fopen($file, 'r+');
         $data['avatar'] = $avatar;
       }
-
+      
       if($profil=='ADMIN'){
         $userType = Admin::class;
       }elseif ($profil=='FORMATEUR') {
@@ -51,10 +51,11 @@ class Service{
         $userType = Apprenant::class;
       }
 
-      $user = $this->serializer->denormalize($data, $userType, 'json');
-
-      $user->setProfil($this->repo->findOneBy(['libelle'=>$profil]));
-
+      $user = $this->serializer->decode($data, 'json');
+      $user = $this->serializer->denormalize($user, $userType, 'json');
+      
+      $user->setProfil($this->profilRepo->findOneBy(['libelle'=>$profil]));
+      
       $password = $user->getPassword();
       $user->setPassword($this->encoder->encodePassword($user,$password));
 

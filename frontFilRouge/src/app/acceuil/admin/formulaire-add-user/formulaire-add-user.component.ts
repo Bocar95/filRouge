@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminUserService } from 'src/app/service/adminUserService/admin-user.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-formulaire-add-user',
@@ -20,10 +22,14 @@ export class FormulaireAddUserComponent implements OnInit {
   telephoneFormControl = new FormControl('', [Validators.required]);
   btnText = 'Ajouter';
 
+  //Variable contenant le fichier à envoyer (elle doit avoir une valeur par défaut)
+  fichierAEnvoyer: File = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private addingAdminService: AdminUserService
+    private adminUserService: AdminUserService,
+    private http : HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -42,16 +48,15 @@ export class FormulaireAddUserComponent implements OnInit {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/acceuil/liste/profils']);
+    this.router.navigate(['/acceuil/ajouter/admin']);
   }
 
   onClickBtnAdd() {
     if(this.addingUser.value){
-      return this.addingAdminService.addAdmin(this.addingUser.value).subscribe(
+      return this.adminUserService.addAdmin(this.addingUser.value).subscribe(
         (res: any) => {
-          //this.reloadComponent();
-          console.log(res)
-          console.log('success')
+          console.log(res),
+          this.reloadComponent();
         }
       );
     }
