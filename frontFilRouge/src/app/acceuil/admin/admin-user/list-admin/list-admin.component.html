@@ -6,35 +6,41 @@
     <table class="text-white w-100">
       <thead>
         <tr>
-          <th class="text-center">prenom</th>
-          <th class="text-center">nom</th>
-          <th class="text-center">email</th>
-          <th class="text-center">adresse</th>
-          <th class="text-center">action</th>
+          <th class="text-center p-auto">prenom</th>
+          <th class="text-center p-auto">nom</th>
+          <th class="text-center p-auto">email</th>
+          <th class="text-center p-auto">adresse</th>
+          <th class="text-center p-auto">action</th>
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let admin of admins" id="{{ admin.id }}">
+        <tr *ngFor="let admin of admins" id="{{ admin.id }}">
           <td style="display: none;">{{ admin.id }}</td>
-          <td class="text-center">{{admin.prenom}}</td>
-          <td class="text-center">{{admin.nom}}</td>
-          <td class="text-center">{{admin.email}}</td>
-          <td class="text-center">{{admin.adresse}}</td>
+          <td class="text-center p-auto">{{admin.prenom}}</td>
+          <td class="text-center p-auto">{{admin.nom}}</td>
+          <td class="text-center p-auto">{{admin.email}}</td>
+          <td class="text-center p-auto">{{admin.adresse}}</td>
           <td>
             <section>
-            <div class="row justify-content-center">
-              <a mat-raised-button class="bg-primary col-3" routerLink="{{ admin.id }}/modifier" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1.25vw;"></a>
+            <div class="row justify-content-center p-auto m-auto" style="width:55%;">
+              <a mat-raised-button class="bg-primary col-2 pl-1 pr-1" routerLink="{{ admin.id }}/modifier" (click)="onClickBtnPut(admin.id)" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1vw;width:auto;"></a>
                 <mat-divider [vertical]="true"></mat-divider>
                 <mat-divider [vertical]="true"></mat-divider>
                 <mat-divider [vertical]="true"></mat-divider>
-              <a mat-raised-button class="bg-danger col-3" routerLink="{{ admin.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1.25vw;"></a>
+              <a mat-raised-button class="bg-danger col-2 pl-1 pr-1" routerLink="{{ admin.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1vw;"></a>
             </div>
             </section>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
+</div>
+
+<hr>
+
+<div *ngIf="currentRoute()">
+  <router-outlet></router-outlet>
+</div>
 
   <!-- deleteModal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -47,7 +53,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Êtes-vous sure de vouloir supprimer ce profil ?
+        Êtes-vous sure de vouloir supprimer cet <strong>admin</strong> ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Non</button>
@@ -56,3 +62,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    var theHREF;
+    let table = document.querySelector('table');
+
+    $("#confirmModalYes").click(function(e) {
+      $("#deleteModal").modal("close");
+      $("#updateModal").modal("close");
+    });
+});
+</script>

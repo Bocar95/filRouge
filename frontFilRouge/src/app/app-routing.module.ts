@@ -7,6 +7,7 @@ import { ProfilComponent } from './acceuil/admin/profil/profil.component';
 import { DetailsProfilComponent } from './acceuil/admin/profil/details-profil/details-profil.component';
 import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
 import { FormulaireAddUserComponent } from './acceuil/admin/formulaire-add-user/formulaire-add-user.component';
+import { FormulairePutUserComponent } from './acceuil/admin/formulaire-put-user/formulaire-put-user.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
               },
               { path: 'liste/admins', component: AdminUserComponent,
                     children:[
-                      { path: ':id/delete', component: AdminUserComponent }
+                      { path: ':id/delete', component: AdminUserComponent },
+                      { path: ':id/modifier', component: FormulairePutUserComponent }
                     ]
               },
               { path: 'ajouter/admin', component: FormulaireAddUserComponent }

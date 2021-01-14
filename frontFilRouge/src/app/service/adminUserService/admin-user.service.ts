@@ -20,6 +20,14 @@ export class AdminUserService {
     return this.http.post(this.defaultAdminUrl, data);
   }
 
+  getById(id) {
+    return this.http.get(`${this.defaultAdminUrl}/${id}`);
+  }
+
+  putAdmin(id:number, data){
+    return this.http.put(`${this.defaultAdminUrl}/${id}`, data);
+  }
+
   deleteAdmin(id) {
     return this.http.delete(`${this.defaultAdminUrl}/${id}`);
   }

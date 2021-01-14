@@ -16,6 +16,7 @@ export class ListAdminComponent implements OnInit {
   btnSupprimer = "Supprimer";
   snapshot: RouterStateSnapshot;
   id = [];
+  url: string;
 
   constructor(
     private adminUserService: AdminUserService,
@@ -48,6 +49,24 @@ export class ListAdminComponent implements OnInit {
 
   confirmModalNo() {
     return this.reloadComponent();
+  }
+
+  currentRoute() {
+    var split;
+    this.snapshot = this.router.routerState.snapshot;
+    this.url = this.snapshot['url'];
+    split = this.url.split('/');
+    if(split[5] == `modifier`) {
+      return true;
+    }
+    return false;
+  }
+
+  onClickBtnPut(id) {
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    return this.router.navigate([`/acceuil/liste/admins/${id}/modifier`]);
   }
 
   onClickBtnDelete() {
