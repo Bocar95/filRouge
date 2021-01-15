@@ -1,15 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminUserService } from 'src/app/service/adminUserService/admin-user.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-formulaire-add-user',
-  templateUrl: './formulaire-add-user.component.html',
-  styleUrls: ['./formulaire-add-user.component.css']
+  selector: 'app-formulaire-add-admin',
+  templateUrl: './formulaire-add-admin.component.html',
+  styleUrls: ['./formulaire-add-admin.component.css']
 })
-export class FormulaireAddUserComponent implements OnInit {
+export class FormulaireAddAdminComponent implements OnInit {
 
   addingUser: FormGroup;
   prenomFormControl = new FormControl('', [Validators.required]);

@@ -36,8 +36,11 @@ import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
 import { AddAdminComponent } from './acceuil/admin/admin-user/add-admin/add-admin.component';
 import { ListAdminComponent } from './acceuil/admin/admin-user/list-admin/list-admin.component';
-import { FormulaireAddUserComponent } from './acceuil/admin/formulaire-add-user/formulaire-add-user.component';
-import { FormulairePutUserComponent } from './acceuil/admin/formulaire-put-user/formulaire-put-user.component';
+import { ApprenantUserComponent } from './apprenant-user/apprenant-user.component';
+import { CmUserComponent } from './cm-user/cm-user.component';
+import { FormateurUserComponent } from './formateur-user/formateur-user.component';
+import { FormulaireAddAdminComponent } from './acceuil/admin/formulaire-add-admin/formulaire-add-admin.component';
+import { FormulairePutAdminComponent } from './acceuil/admin/formulaire-put-admin/formulaire-put-admin.component';
 
 
 
@@ -65,8 +68,11 @@ import { FormulairePutUserComponent } from './acceuil/admin/formulaire-put-user/
     AdminUserComponent,
     AddAdminComponent,
     ListAdminComponent,
-    FormulaireAddUserComponent,
-    FormulairePutUserComponent
+    ApprenantUserComponent,
+    CmUserComponent,
+    FormateurUserComponent,
+    FormulaireAddAdminComponent,
+    FormulairePutAdminComponent
   ],
   imports: [
     BrowserModule,

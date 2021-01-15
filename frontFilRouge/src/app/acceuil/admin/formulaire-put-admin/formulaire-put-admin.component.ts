@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { AdminUserService } from 'src/app/service/adminUserService/admin-user.service';
 
 @Component({
-  selector: 'app-formulaire-put-user',
-  templateUrl: './formulaire-put-user.component.html',
-  styleUrls: ['./formulaire-put-user.component.css']
+  selector: 'app-formulaire-put-admin',
+  templateUrl: './formulaire-put-admin.component.html',
+  styleUrls: ['./formulaire-put-admin.component.css']
 })
-export class FormulairePutUserComponent implements OnInit {
+export class FormulairePutAdminComponent implements OnInit {
 
   admin = {};
   snapshot: RouterStateSnapshot;
   url;
   id;
+
 
   putUserForm: FormGroup;
   prenomFormControl = new FormControl();
@@ -88,8 +89,6 @@ export class FormulairePutUserComponent implements OnInit {
         }
       );
     }
-
   }
 
 }
-

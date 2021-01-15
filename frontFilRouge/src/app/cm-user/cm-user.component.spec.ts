@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormulaireAddUserComponent } from './formulaire-add-user.component';
+import { CmUserComponent } from './cm-user.component';
 
-describe('FormulaireAddUserComponent', () => {
-  let component: FormulaireAddUserComponent;
-  let fixture: ComponentFixture<FormulaireAddUserComponent>;
+describe('CmUserComponent', () => {
+  let component: CmUserComponent;
+  let fixture: ComponentFixture<CmUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormulaireAddUserComponent ]
+      declarations: [ CmUserComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormulaireAddUserComponent);
+    fixture = TestBed.createComponent(CmUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

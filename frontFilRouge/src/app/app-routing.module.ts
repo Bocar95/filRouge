@@ -1,4 +1,4 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { AuthGuard } from './service/authGuardService/auth.guard';
@@ -6,8 +6,8 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { ProfilComponent } from './acceuil/admin/profil/profil.component';
 import { DetailsProfilComponent } from './acceuil/admin/profil/details-profil/details-profil.component';
 import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
-import { FormulaireAddUserComponent } from './acceuil/admin/formulaire-add-user/formulaire-add-user.component';
-import { FormulairePutUserComponent } from './acceuil/admin/formulaire-put-user/formulaire-put-user.component';
+import { FormulaireAddAdminComponent } from './acceuil/admin/formulaire-add-admin/formulaire-add-admin.component';
+import { FormulairePutAdminComponent } from './acceuil/admin/formulaire-put-admin/formulaire-put-admin.component';
 
 
 const routes: Routes = [
@@ -25,10 +25,10 @@ const routes: Routes = [
               { path: 'liste/admins', component: AdminUserComponent,
                     children:[
                       { path: ':id/delete', component: AdminUserComponent },
-                      { path: ':id/modifier', component: FormulairePutUserComponent }
+                      { path: ':id/modifier', component: FormulairePutAdminComponent }
                     ]
               },
-              { path: 'ajouter/admin', component: FormulaireAddUserComponent }
+              { path: 'ajouter/admin', component: FormulaireAddAdminComponent }
         ]
   }
 ];
