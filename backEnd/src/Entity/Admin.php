@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=AdminRepository::class)
  * @ApiResource(
  *      collectionOperations={
- *         "get"={"path"="/admin",
+ *         "get"={"path"="/admins",
  *                  "access_control"="(is_granted('ROLE_ADMIN'))",
  *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
  *                  "normalization_context"={"groups"={"get_admins:read"}}

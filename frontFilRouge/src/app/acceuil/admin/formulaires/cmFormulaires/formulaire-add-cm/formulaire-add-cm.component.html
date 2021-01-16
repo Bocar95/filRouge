@@ -1,0 +1,58 @@
+<div class="addCm mx-auto pt-5">
+  <h2 class="addCm-header">Ajout d'admin</h2>
+  <div class="addCm-container">
+    <form [formGroup]="addingCm" class="example-form" (ngSubmit)="onClickBtnAdd()">
+      <div class="container">
+        <div class="row">
+          <article class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Prenom</mat-label>
+              <input matInput [formControl]="prenomFormControl" placeholder="Prenom" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+      
+            <mat-form-field class="example-full-width">
+              <mat-label>Nom</mat-label>
+              <input matInput [formControl]="nomFormControl" placeholder="Nom" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+      
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input matInput [formControl]="passwordFormControl" placeholder="die123akatsuki" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+          </article>
+
+          <article  class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+      
+            <mat-form-field class="example-full-width">
+              <mat-label>Adresse</mat-label>
+              <input matInput [formControl]="adresseFormControl" placeholder="Dieuppeul" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+      
+            <mat-form-field class="example-full-width">
+              <mat-label>Telephone</mat-label>
+              <input matInput [formControl]="telephoneFormControl" placeholder="771231212" required>
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+          </article>
+          <article class="col-4">
+            
+          </article>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <p>
+          <input type="submit" value="Ajouter">
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+/* 'Open Sans' font from Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+.putFormateur {
+  width: 100%;
+  font-size: 16px;
+}
+
+.putFormateur-header,
+.putFormateur p {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid black;
+}
+
+.putFormateur-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: rgb(15, 66, 107);
+}
+
+.putFormateur-header {
+  background: rgb(74, 122, 110);
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.putFormateur-container {
+  background: rgb(143, 216, 198);
+  padding: 9px;
+  width: 100%;
+}
+
+.putFormateur p {
+  padding: 9px;
+  width: 30%;
+}
+
+.putFormateur input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 7px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/*.putFormateur input[type="email"],
+.putFormateur input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}*/
+
+.putFormateur input[type="prenom"]:focus,
+.putFormateur input[type="nom"]:focus,
+.putFormateur input[type="email"]:focus,
+.putFormateur input[type="password"]:focus,
+.putFormateur input[type="adresse"]:focus,
+.putFormateur input[type="telephone"]:focus{
+  border-color: #888;
+}
+
+.putFormateur input[type="submit"] {
+  background: rgb(88, 143, 129);
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.putFormateur input[type="submit"]:hover {
+  background:rgb(74, 122, 110);
+  border-color: rgb(1, 29, 51);
+}
+
+.putFormateur input[type="submit"]:focus {
+  border-color: rgb(1, 29, 51);
+}
+
+/*Material Angular*/
+
+/*Email Input*/
+
+.example-form {
+  /* min-width: 150px;
+  max-width: 500px; */
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+/*Password Input*/
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}

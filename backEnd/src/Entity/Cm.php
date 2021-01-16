@@ -11,7 +11,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @ORM\Entity(repositoryClass=CmRepository::class)
  * @ApiResource(
  *      collectionOperations={
- *         "get"={"path"="/cm",
+ *         "get"={"path"="/cms",
  *                  "access_control"="(is_granted('ROLE_ADMIN'))",
  *                  "access_control_message"="Vous n'avez pas access à cette Ressource",
  *                  "normalization_context"={"groups"={"get_cm:read"}}

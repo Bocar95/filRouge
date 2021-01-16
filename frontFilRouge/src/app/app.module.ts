@@ -34,13 +34,21 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminUserComponent } from './acceuil/admin/admin-user/admin-user.component';
-import { AddAdminComponent } from './acceuil/admin/admin-user/add-admin/add-admin.component';
 import { ListAdminComponent } from './acceuil/admin/admin-user/list-admin/list-admin.component';
-import { ApprenantUserComponent } from './apprenant-user/apprenant-user.component';
-import { CmUserComponent } from './cm-user/cm-user.component';
-import { FormateurUserComponent } from './formateur-user/formateur-user.component';
-import { FormulaireAddAdminComponent } from './acceuil/admin/formulaire-add-admin/formulaire-add-admin.component';
-import { FormulairePutAdminComponent } from './acceuil/admin/formulaire-put-admin/formulaire-put-admin.component';
+import { ApprenantUserComponent } from './acceuil/admin/apprenant-user/apprenant-user.component';
+import { CmUserComponent } from './acceuil/admin/cm-user/cm-user.component';
+import { FormateurUserComponent } from './acceuil/admin/formateur-user/formateur-user.component';
+import { FormulaireAddAdminComponent } from './acceuil/admin/formulaires/adminFormulaires/formulaire-add-admin/formulaire-add-admin.component';
+import { FormulairePutAdminComponent } from './acceuil/admin/formulaires/adminFormulaires/formulaire-put-admin/formulaire-put-admin.component';
+import { ListApprenantComponent } from './acceuil/admin/apprenant-user/list-apprenant/list-apprenant.component';
+import { ListFormateurComponent } from './acceuil/admin/formateur-user/list-formateur/list-formateur.component';
+import { ListCmComponent } from './acceuil/admin/cm-user/list-cm/list-cm.component';
+import { FormulaireAddApprenantComponent } from './acceuil/admin/formulaires/apprenantFormulaires/formulaire-add-apprenant/formulaire-add-apprenant.component';
+import { FormulairePutApprenantComponent } from './acceuil/admin/formulaires/apprenantFormulaires/formulaire-put-apprenant/formulaire-put-apprenant.component';
+import { FormulaireAddCmComponent } from './acceuil/admin/formulaires/cmFormulaires/formulaire-add-cm/formulaire-add-cm.component';
+import { FormulairePutCmComponent } from './acceuil/admin/formulaires/cmFormulaires/formulaire-put-cm/formulaire-put-cm.component';
+import { FormulaireAddFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-add-formateur/formulaire-add-formateur.component';
+import { FormulairePutFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-put-formateur/formulaire-put-formateur.component';
 
 
 
@@ -66,13 +74,23 @@ import { FormulairePutAdminComponent } from './acceuil/admin/formulaire-put-admi
     DetailsProfilComponent,
     DialogOverviewExampleDialog,
     AdminUserComponent,
-    AddAdminComponent,
+    FormulaireAddAdminComponent,
     ListAdminComponent,
     ApprenantUserComponent,
     CmUserComponent,
     FormateurUserComponent,
     FormulaireAddAdminComponent,
-    FormulairePutAdminComponent
+    FormulairePutAdminComponent,
+    FormulaireAddApprenantComponent,
+    ListApprenantComponent,
+    ListFormateurComponent,
+    ListCmComponent,
+    FormulairePutApprenantComponent,
+    FormulaireAddApprenantComponent,
+    FormulaireAddCmComponent,
+    FormulairePutCmComponent,
+    FormulaireAddFormateurComponent,
+    FormulairePutFormateurComponent
   ],
   imports: [
     BrowserModule,

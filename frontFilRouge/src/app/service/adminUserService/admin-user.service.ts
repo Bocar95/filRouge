@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AdminUserService {
 
   defaultAdminUrl = 'http://127.0.0.1:8000/api/admin';
-  getAdminUrl = 'http://127.0.0.1:8000/api/admin?isDeleted=false';
+  getAdminUrl = 'http://127.0.0.1:8000/api/admins?isDeleted=false';
 
   constructor(private http: HttpClient) { }
 

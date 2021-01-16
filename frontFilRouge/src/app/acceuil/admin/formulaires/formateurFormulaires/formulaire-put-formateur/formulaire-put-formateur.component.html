@@ -1,0 +1,52 @@
+<div class="putFormateur mx-auto mt-3 mb-3">
+  <h2 class="putFormateur-header" *ngIf="formateur">
+    Vous allez faire une modification des données de {{ formateur['prenom'] }} {{ formateur['nom'] }}
+  </h2>
+  <div class="putFormateur-container">
+    <form [formGroup]="putFormateurForm" class="example-form" (ngSubmit)="onClickBtnValider()">
+      <div class="container">
+        <div class="row">
+          <article class="col-4">
+
+            <mat-form-field class="example-full-width">
+              <mat-label>prenom</mat-label>
+              <input matInput [formControl]="prenomFormControl" [value]="formateur['prenom']" placeholder="Prenom">
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+      
+            <mat-form-field class="example-full-width">
+              <mat-label>nom</mat-label>
+              <input matInput [formControl]="nomFormControl" [value]="formateur['nom']" placeholder="Nom">
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+
+          </article>
+
+          <article  class="col-4">
+
+            <mat-form-field class="example-full-width">
+              <mat-label>email</mat-label>
+              <input matInput [formControl]="emailFormControl" [value]="formateur['email']" placeholder="Ex. pat@example.com">
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>adresse</mat-label>
+              <input matInput [formControl]="adresseFormControl" [value]="formateur['adresse']" placeholder="Dieuppeul">
+              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </mat-form-field>
+
+          </article>
+          <article class="col-4">
+            
+          </article>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <p>
+          <input type="submit" value="Valider">
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
