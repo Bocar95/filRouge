@@ -15,7 +15,7 @@ export class AdminUserService {
     return this.http.get(this.getAdminUrl);
   }
 
-  addAdmin(data){
+  addAdmin(data: any){
     return this.http.post(this.defaultAdminUrl, data);
   }
 

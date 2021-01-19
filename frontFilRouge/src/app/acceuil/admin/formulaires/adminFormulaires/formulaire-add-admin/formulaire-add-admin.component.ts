@@ -48,10 +48,9 @@ export class FormulaireAddAdminComponent implements OnInit {
     if(this.addingUser.value){
       return this.adminUserService.addAdmin(this.addingUser.value).subscribe(
         (res: any) => {
-          console.log(res),
-          this.reloadComponent()
+          console.log(res)
         }
-      )
+      ),this.reloadComponent();
     }
   }
 

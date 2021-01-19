@@ -99,6 +99,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="blob", nullable=true)
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
      */
     protected $avatar;
 

@@ -50,7 +50,7 @@ export class FormulaireAddApprenantComponent implements OnInit {
         (res: any) => {
           console.log(res)
         }
-        ),this.reloadComponent();
+      ),this.reloadComponent();
     }
   }
 
