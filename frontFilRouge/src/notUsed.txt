@@ -16,3 +16,8 @@
       </div>
     </div>
   </div>
+
+
+  // for(var i=0, len = this.elementFind.length; i < len ; i++  ){
+  //   this.competences = this.elementFind[i];
+  // }

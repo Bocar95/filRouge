@@ -1,0 +1,25 @@
+
+<div class="text-center" *ngIf="competences.length>0">
+  <mat-label class="text-white">Voici la liste des compétences associés à ce groupe de compétence</mat-label>
+  <div class="mat-table table-striped table-bordered mt-2">
+    <table class="text-white w-100">
+      <thead>
+        <tr>
+          <th class="text-center">libelle</th>
+          <th class="text-center">descriptif</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let competence of competences">
+          <td class="text-center">{{competence.libelle}}</td>
+          <td class="text-center">{{competence.descriptif}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center">
+  <mat-label class="text-white" *ngIf="competences.length<1">{{elseResponse}}</mat-label>
+</div>
+

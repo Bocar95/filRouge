@@ -17,6 +17,10 @@ import { FormulaireAddCmComponent } from './acceuil/admin/formulaires/cmFormulai
 import { FormateurUserComponent } from './acceuil/admin/formateur-user/formateur-user.component';
 import { FormulairePutFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-put-formateur/formulaire-put-formateur.component';
 import { FormulaireAddFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-add-formateur/formulaire-add-formateur.component';
+import { GroupeCompetenceComponent } from './acceuil/admin/groupe-competence/groupe-competence.component';
+import { FormulairePutGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-put-grp-competence/formulaire-put-grp-competence.component';
+import { FormulaireAddGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-add-grp-competence/formulaire-add-grp-competence.component';
+import { DetailsGrpCompetenceComponent } from './acceuil/admin/groupe-competence/details-grp-competence/details-grp-competence.component';
 
 
 const routes: Routes = [
@@ -62,6 +66,15 @@ const routes: Routes = [
                     ]
               },
               { path: 'ajouter/formateur', component: FormulaireAddFormateurComponent },
+
+              { path: 'liste/groupeCompetences', component: GroupeCompetenceComponent,
+                    children:[
+                      { path: ':id/details', component: DetailsGrpCompetenceComponent },
+                      { path: ':id/delete', component: GroupeCompetenceComponent },
+                      { path: ':id/modifier', component: FormulairePutGrpCompetenceComponent }
+                    ]
+              },
+              { path: 'ajouter/groupeCompetence', component: FormulaireAddGrpCompetenceComponent } 
         ]
   }
 ];

@@ -1,8 +1,8 @@
-<div class="addAdmin mx-auto mt-3 mb-3">
-  <h2 class="addAdmin-header" *ngIf="admin">
+<div class="putAdmin mx-auto mt-3 mb-3">
+  <h2 class="putAdmin-header" *ngIf="admin">
     Vous allez faire une modification des données de {{ admin['prenom'] }} {{ admin['nom'] }}
   </h2>
-  <div class="addAdmin-container">
+  <div class="putAdmin-container">
     <form [formGroup]="putUserForm" class="example-form" (ngSubmit)="onClickBtnValider()">
       <div class="container">
         <div class="row">

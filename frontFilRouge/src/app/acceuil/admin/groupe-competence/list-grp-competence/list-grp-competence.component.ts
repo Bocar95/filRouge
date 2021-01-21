@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { AdminUserService } from 'src/app/service/adminUserService/admin-user.service';
+import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
 
 @Component({
-  selector: 'app-list-admin',
-  templateUrl: './list-admin.component.html',
-  styleUrls: ['./list-admin.component.css']
+  selector: 'app-list-grp-competence',
+  templateUrl: './list-grp-competence.component.html',
+  styleUrls: ['./list-grp-competence.component.css']
 })
-export class ListAdminComponent implements OnInit {
+export class ListGrpCompetenceComponent implements OnInit {
 
-  admins = [];
+  grpCompetences = [];
   btnAjouter = "Ajouter";
-  btnNewAdmin = "Nouveau Admin";
+  btnNewGrpCompetence = "Nouveau";
   btnModifier = "Modifier";
   btnSupprimer = "Supprimer";
   snapshot: RouterStateSnapshot;
@@ -19,14 +19,14 @@ export class ListAdminComponent implements OnInit {
   url: string;
 
   constructor(
-    private adminUserService: AdminUserService,
+    private GroupeCompetenceService: GroupeCompetenceService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.adminUserService.getAdmins().subscribe(
+    this.GroupeCompetenceService.getGrpCompetences().subscribe(
       (data : any) => {
-        this.admins = data,
+        this.grpCompetences = data,
         console.log(data)
       }
     )
@@ -44,7 +44,7 @@ export class ListAdminComponent implements OnInit {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/acceuil/liste/admins']);
+    this.router.navigate(['/acceuil/liste/groupeCompetences']);
   }
 
   confirmModalNo() {
@@ -56,30 +56,33 @@ export class ListAdminComponent implements OnInit {
     this.snapshot = this.router.routerState.snapshot;
     this.url = this.snapshot['url'];
     split = this.url.split('/');
-    if(split[5] == `modifier`) {
+    if((split[5] == `modifier`) || (split[5] == `details`)) {
       return true;
     }
     return false;
+  }
+
+  onClickBtnDetails(toLoad) {
+    this.reloadComponent();
+    return this.router.navigate([`/acceuil/liste/groupeCompetences/${toLoad}/details`]);
   }
 
   onClickBtnPut(id) {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/admins/${id}/modifier`]);
+    return this.router.navigate([`/acceuil/liste/groupeCompetences/${id}/modifier`]);
   }
 
   onClickBtnDelete() {
     var toDelete: number;
     toDelete = this.getIdOnUrl();
     console.log(toDelete);
-    //var toRemove = this.profils.slice().pop();
-     return this.adminUserService.deleteAdmin(toDelete).subscribe(
+     return this.GroupeCompetenceService.deleteGrpCompetence(toDelete).subscribe(
       (res: any) => { 
-        this.reloadComponent();
+        
         console.log(res)
       }
-    );
+    ),this.reloadComponent();
   }
-
 }

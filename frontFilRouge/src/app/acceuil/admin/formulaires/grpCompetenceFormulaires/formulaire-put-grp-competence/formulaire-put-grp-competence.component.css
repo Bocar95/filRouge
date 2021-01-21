@@ -2,19 +2,19 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 
-.putAdmin {
+.putGrpCompetence {
   width: 100%;
   font-size: 16px;
 }
 
-.putAdmin-header,
-.putAdmin p {
+.putGrpCompetence-header,
+.putGrpCompetence p {
   margin-top: 0;
   margin-bottom: 0;
   border: 1px solid black;
 }
 
-.putAdmin-triangle {
+.putGrpCompetence-triangle {
   width: 0;
   margin-right: auto;
   margin-left: auto;
@@ -22,7 +22,7 @@
   border-bottom-color: rgb(15, 66, 107);
 }
 
-.putAdmin-header {
+.putGrpCompetence-header {
   background: rgb(74, 122, 110);
   padding: 20px;
   font-size: 1.4em;
@@ -32,18 +32,18 @@
   color: #fff;
 }
 
-.putAdmin-container {
+.putGrpCompetence-container {
   background: rgb(143, 216, 198);
   padding: 9px;
   width: 100%;
 }
 
-.putAdmin p {
+.putGrpCompetence p {
   padding: 9px;
   width: 30%;
 }
 
-.putAdmin input {
+.putGrpCompetence input {
   box-sizing: border-box;
   display: block;
   width: 100%;
@@ -53,35 +53,35 @@
   font-size: 0.95em;
 }
 
-/*.putAdmin input[type="email"],
-.putAdmin input[type="password"] {
+/*.putGrpCompetence input[type="email"],
+.putGrpCompetence input[type="password"] {
   background: #fff;
   border-color: #bbb;
   color: #555;
 }*/
 
-.putAdmin input[type="prenom"]:focus,
-.putAdmin input[type="nom"]:focus,
-.putAdmin input[type="email"]:focus,
-.putAdmin input[type="password"]:focus,
-.putAdmin input[type="adresse"]:focus,
-.putAdmin input[type="telephone"]:focus{
+.putGrpCompetence input[type="prenom"]:focus,
+.putGrpCompetence input[type="nom"]:focus,
+.putGrpCompetence input[type="email"]:focus,
+.putGrpCompetence input[type="password"]:focus,
+.putGrpCompetence input[type="adresse"]:focus,
+.putGrpCompetence input[type="telephone"]:focus{
   border-color: #888;
 }
 
-.putAdmin input[type="submit"] {
+.putGrpCompetence input[type="submit"] {
   background: rgb(88, 143, 129);
   border-color: transparent;
   color: #fff;
   cursor: pointer;
 }
 
-.putAdmin input[type="submit"]:hover {
+.putGrpCompetence input[type="submit"]:hover {
   background:rgb(74, 122, 110);
   border-color: rgb(1, 29, 51);
 }
 
-.putAdmin input[type="submit"]:focus {
+.putGrpCompetence input[type="submit"]:focus {
   border-color: rgb(1, 29, 51);
 }
 

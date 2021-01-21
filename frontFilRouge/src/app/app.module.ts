@@ -49,6 +49,11 @@ import { FormulaireAddCmComponent } from './acceuil/admin/formulaires/cmFormulai
 import { FormulairePutCmComponent } from './acceuil/admin/formulaires/cmFormulaires/formulaire-put-cm/formulaire-put-cm.component';
 import { FormulaireAddFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-add-formateur/formulaire-add-formateur.component';
 import { FormulairePutFormateurComponent } from './acceuil/admin/formulaires/formateurFormulaires/formulaire-put-formateur/formulaire-put-formateur.component';
+import { GroupeCompetenceComponent } from './acceuil/admin/groupe-competence/groupe-competence.component';
+import { ListGrpCompetenceComponent } from './acceuil/admin/groupe-competence/list-grp-competence/list-grp-competence.component';
+import { FormulaireAddGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-add-grp-competence/formulaire-add-grp-competence.component';
+import { FormulairePutGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-put-grp-competence/formulaire-put-grp-competence.component';
+import { DetailsGrpCompetenceComponent } from './acceuil/admin/groupe-competence/details-grp-competence/details-grp-competence.component';
 
 
 
@@ -90,7 +95,12 @@ import { FormulairePutFormateurComponent } from './acceuil/admin/formulaires/for
     FormulaireAddCmComponent,
     FormulairePutCmComponent,
     FormulaireAddFormateurComponent,
-    FormulairePutFormateurComponent
+    FormulairePutFormateurComponent,
+    GroupeCompetenceComponent,
+    ListGrpCompetenceComponent,
+    FormulaireAddGrpCompetenceComponent,
+    FormulairePutGrpCompetenceComponent,
+    DetailsGrpCompetenceComponent
   ],
   imports: [
     BrowserModule,

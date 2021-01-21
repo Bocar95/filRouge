@@ -1,0 +1,42 @@
+<div class="putGrpCompetence mx-auto mt-3 mb-3">
+    <h2 class="putGrpCompetence-header" *ngIf="grpCompetence">
+      Vous allez faire une modification des données.
+    </h2>
+    <div class="putGrpCompetence-container">
+      <form [formGroup]="grpCompetenceForm" class="example-form" (ngSubmit)="onClickBtnValider()">
+        <div class="container">
+          <div class="row">
+            <article class="col-4">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Libellé</mat-label>
+                    <input matInput [formControl]="libelleFormControl" [value]="grpCompetence['libelle']" placeholder="Libelle">
+                    <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
+            
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Descriptif</mat-label>
+                    <input matInput [formControl]="descriptifFormControl" [value]="grpCompetence['descriptif']" placeholder="Descriptif">
+                    <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
+            </article>
+  
+            <article  class="col-4">
+                <mat-form-field>
+                    <mat-label>Competences</mat-label>
+                    <mat-select [formControl]="competenceFormControl" [value]="grpCompetence['competences']" multiple>
+                      <mat-option *ngFor="let competence of competenceList" [value]="competence.id">{{competence.libelle}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </article>
+
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <p>
+            <input type="submit" value="Valider">
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  

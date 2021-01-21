@@ -4,11 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CompetenceRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
@@ -32,8 +36,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      },
  *      "put"={"path"="/admin/competences/{id}",
  *          "access_control"="(is_granted('ROLE_ADMIN','ROLE_FORMATEUR','ROLE_CM'))",
- *          "access_control_message"="Vous n'avez pas access à cette Ressource",
- *          "normalization_context"={"groups"={"put_competences:read"}}
+ *          "access_control_message"="Vous n'avez pas access à cette Ressource"
  *      },
  *      "delete"={"path"="/admin/competences/{id}",
  *          "access_control"="(is_granted('ROLE_ADMIN','ROLE_FORMATEUR','ROLE_CM'))",
@@ -42,6 +45,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  }
  * )
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
+ * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class Competence
 {
@@ -49,18 +53,25 @@ class Competence
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_competences:read", "getById_competences:read", "put_competences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Assert\NotBlank(
+     *     message = "Ce Champ ne doit pas être vide."
+     * )
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","put_grpCompetences"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_competences:read", "getById_competences:read", "put_competences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Assert\NotBlank(
+     *     message = "Ce Champ ne doit pas être vide."
+     * )
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","put_grpCompetences"})
      */
     private $descriptif;
 
