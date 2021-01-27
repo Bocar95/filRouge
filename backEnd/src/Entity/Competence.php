@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ApiResource(
@@ -45,6 +46,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *  }
  * )
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
+ * @UniqueEntity("libelle",message="Cet libellé existe déja.")
  * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
  */
 class Competence
@@ -62,7 +64,7 @@ class Competence
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","put_grpCompetences"})
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
      */
     private $libelle;
 
@@ -71,7 +73,7 @@ class Competence
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","put_grpCompetences"})
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
      */
     private $descriptif;
 
@@ -87,6 +89,7 @@ class Competence
 
     /**
      * @ORM\OneToMany(targetEntity=NiveauCompetence::class, mappedBy="competences", cascade="persist")
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
      */
     private $niveauCompetences;
 

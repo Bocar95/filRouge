@@ -1,0 +1,121 @@
+/* 'Open Sans' font from Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+.addCompetence {
+  width: 100%;
+  font-size: 16px;
+}
+
+.addCompetence-header,
+.addCompetence p {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid black;
+}
+
+.addCompetence-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: rgb(15, 66, 107);
+}
+
+.addCompetence-header {
+  background: rgb(74, 122, 110);
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.addCompetence-container {
+  background: rgb(143, 216, 198);
+  padding: 9px;
+  width: 100%;
+}
+
+.addCompetence p {
+  padding: 9px;
+  width: 30%;
+}
+
+.addCompetence input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 7px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/*.addCompetence input[type="email"],
+.addCompetence input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}*/
+
+.addCompetence input[type="prenom"]:focus,
+.addCompetence input[type="nom"]:focus,
+.addCompetence input[type="email"]:focus,
+.addCompetence input[type="password"]:focus,
+.addCompetence input[type="adresse"]:focus,
+.addCompetence input[type="telephone"]:focus{
+  border-color: #888;
+}
+
+.addCompetence input[type="submit"] {
+  background: rgb(88, 143, 129);
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.addCompetence input[type="submit"]:hover {
+  background:rgb(74, 122, 110);
+  border-color: rgb(1, 29, 51);
+}
+
+.addCompetence input[type="submit"]:focus {
+  border-color: rgb(1, 29, 51);
+}
+
+/*Material Angular*/
+
+/*Email Input*/
+
+.example-form {
+  /* min-width: 150px;
+  max-width: 500px; */
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+/*Password Input*/
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+

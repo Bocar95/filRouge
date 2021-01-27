@@ -1,0 +1,41 @@
+<div class="putCompetence mx-auto mt-3 mb-3">
+  <h2 class="putCompetence-header" *ngIf="competence">
+    Vous allez faire une modification des données.
+  </h2>
+  <div class="putCompetence-container">
+    <form [formGroup]="competenceForm" class="example-form" (ngSubmit)="onClickBtnValider()">
+      <div class="container">
+        <div class="row">
+          <article class="col-4">
+              <mat-form-field class="example-full-width">
+                  <mat-label>Libellé</mat-label>
+                  <input matInput [formControl]="libelleFormControl" [value]="competence['libelle']" placeholder="Libelle">
+                  <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+          
+                <mat-form-field class="example-full-width">
+                  <mat-label>Descriptif</mat-label>
+                  <input matInput [formControl]="descriptifFormControl" [value]="competence['descriptif']" placeholder="Descriptif">
+                  <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+          </article>
+
+          <article  class="col-4">
+              <mat-form-field>
+                  <mat-label>Niveaux</mat-label>
+                  <mat-select [formControl]="niveauCompetencesFormControl" [value]="competence['niveauCompetences']" multiple>
+                    <mat-option *ngFor="let niveau of niveauList" [value]="niveau.id">{{niveau.libelle}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+          </article>
+
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <p>
+          <input type="submit" value="Valider">
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

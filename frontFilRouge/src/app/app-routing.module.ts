@@ -21,6 +21,10 @@ import { GroupeCompetenceComponent } from './acceuil/admin/groupe-competence/gro
 import { FormulairePutGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-put-grp-competence/formulaire-put-grp-competence.component';
 import { FormulaireAddGrpCompetenceComponent } from './acceuil/admin/formulaires/grpCompetenceFormulaires/formulaire-add-grp-competence/formulaire-add-grp-competence.component';
 import { DetailsGrpCompetenceComponent } from './acceuil/admin/groupe-competence/details-grp-competence/details-grp-competence.component';
+import { DetailsCompetencesComponent } from './acceuil/admin/competences/details-competences/details-competences.component';
+import { CompetencesComponent } from './acceuil/admin/competences/competences.component';
+import { FormulairePutCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-put-competence/formulaire-put-competence.component';
+import { FormulaireAddCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-add-competence/formulaire-add-competence.component';
 
 
 const routes: Routes = [
@@ -74,7 +78,16 @@ const routes: Routes = [
                       { path: ':id/modifier', component: FormulairePutGrpCompetenceComponent }
                     ]
               },
-              { path: 'ajouter/groupeCompetence', component: FormulaireAddGrpCompetenceComponent } 
+              { path: 'ajouter/groupeCompetence', component: FormulaireAddGrpCompetenceComponent }, 
+
+              { path: 'liste/competences', component: CompetencesComponent,
+                    children:[
+                      { path: ':id/details', component: DetailsCompetencesComponent },
+                      { path: ':id/delete', component: CompetencesComponent },
+                      { path: ':id/modifier', component: FormulairePutCompetenceComponent }
+                    ]
+              },
+              { path: 'ajouter/competence', component: FormulaireAddCompetenceComponent } 
         ]
   }
 ];

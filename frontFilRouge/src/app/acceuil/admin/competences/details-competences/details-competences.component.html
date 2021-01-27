@@ -1,0 +1,28 @@
+
+<div class="text-center" *ngIf="niveaux.length>0">
+    <mat-label class="text-white">Voici la liste des niveaux dédier à ce compétence</mat-label>
+    <div class="mat-table table-striped table-bordered mt-2">
+      <table class="text-white w-100">
+        <thead>
+          <tr>
+            <th class="text-center">libelle</th>
+            <th class="text-center">Critére d'évaluation</th>
+            <th class="text-center">Groupe d'actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let niveau of niveaux">
+            <td class="text-center">{{niveau.libelle}}</td>
+            <td class="text-center">{{niveau.critereEvaluation}}</td>
+            <td class="text-center">{{niveau.groupeAction}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <mat-label class="text-white" *ngIf="niveaux.length<1">{{elseResponse}}</mat-label>
+  </div>
+  
+  

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
+import { CompetenceServiceService } from 'src/app/service/competenceService/competence-service.service';
 
 @Component({
-  selector: 'app-list-grp-competence',
-  templateUrl: './list-grp-competence.component.html',
-  styleUrls: ['./list-grp-competence.component.css']
+  selector: 'app-list-competences',
+  templateUrl: './list-competences.component.html',
+  styleUrls: ['./list-competences.component.css']
 })
-export class ListGrpCompetenceComponent implements OnInit {
+export class ListCompetencesComponent implements OnInit {
 
-  grpCompetences = [];
+  competences = [];
   btnAjouter = "Ajouter";
-  btnNewGrpCompetence = "Nouveau";
+  btnNewCompetence = "Nouveau";
   btnModifier = "Modifier";
   btnSupprimer = "Supprimer";
   snapshot: RouterStateSnapshot;
@@ -19,14 +19,14 @@ export class ListGrpCompetenceComponent implements OnInit {
   url: string;
 
   constructor(
-    private GroupeCompetenceService: GroupeCompetenceService,
+    private competenceService: CompetenceServiceService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.GroupeCompetenceService.getGrpCompetences().subscribe(
+    this.competenceService.getCompetences().subscribe(
       (data : any) => {
-        this.grpCompetences = data,
+        this.competences = data,
         console.log(data)
       }
     )
@@ -44,7 +44,7 @@ export class ListGrpCompetenceComponent implements OnInit {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/acceuil/liste/groupeCompetences']);
+    this.router.navigate(['/acceuil/liste/competences']);
   }
 
   confirmModalNo() {
@@ -64,22 +64,23 @@ export class ListGrpCompetenceComponent implements OnInit {
 
   onClickBtnDetails(toLoad) {
     this.reloadComponent();
-    return this.router.navigate([`/acceuil/liste/groupeCompetences/${toLoad}/details`]);
+    return this.router.navigate([`/acceuil/liste/competences/${toLoad}/details`]);
   }
 
   onClickBtnPut(id) {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/groupeCompetences/${id}/modifier`]);
+    return this.router.navigate([`/acceuil/liste/competences/${id}/modifier`]);
   }
 
   onClickBtnDelete() {
     var toDelete: number;
     toDelete = this.getIdOnUrl();
     console.log(toDelete);
-     return this.GroupeCompetenceService.deleteGrpCompetence(toDelete).subscribe(
+     return this.competenceService.deleteCompetence(toDelete).subscribe(
       (res: any) => { 
+        
         console.log(res)
       }
     ),this.reloadComponent();

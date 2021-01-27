@@ -1,0 +1,63 @@
+<div class="addCompetence mx-auto pt-5">
+    <h2 class="addCompetence-header">Ajout d'une competence</h2>
+    <div class="addCompetence-container">
+      <form [formGroup]="addingCompetence" class="example-form" (ngSubmit)="onClickBtnAdd()">
+        <div class="container">
+          <div class="row">
+            <article class="col-4">
+              <mat-form-field class="example-full-width">
+                <mat-label>Libellé</mat-label>
+                <input matInput [formControl]="libelleFormControl" placeholder="Libelle" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+        
+              <mat-form-field class="example-full-width">
+                <mat-label>Descriptif</mat-label>
+                <input matInput [formControl]="descriptifFormControl" placeholder="Descriptif" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+            </article>
+            
+            <article class="col-4">
+                <mat-form-field appearance="fill" class="example-full-width">
+                  <mat-label>Niveau</mat-label>
+                  <mat-select [formControl]="niveauCompetencesFormControl" multiple>
+                    <mat-option *ngFor="let niveau of niveauCompetencesList" [value]="niveau.id">{{niveau.libelle}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+                <!-- <div class="btn btn-primary" (click)="showOrHide()" *ngIf="showForms == false">Nouveau niveau</div>
+                <div class="btn btn-danger" (click)="showOrHide()" *ngIf="showForms == true">Annuler</div> -->
+            </article>
+
+            <article class="col-4">
+                <!-- <div id="addingNiveau" style="width:100%;height:100%;" *ngIf="showForms == true">
+                    <form [formGroup]="addingNiveau" class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Libellé</mat-label>
+                            <input matInput [formControl]="niveauLibelleFormControl" placeholder="Libelle" required>
+                            <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Critere d'évaluation</mat-label>
+                            <input matInput [formControl]="niveauCritereEvaluationFormControl" placeholder="Libelle" required>
+                            <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Groupe d'action</mat-label>
+                            <input matInput [formControl]="niveauGroupeActionFormControl" placeholder="Libelle" required>
+                            <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </form>
+                </div> -->
+            </article>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <p>
+            <input type="submit" value="Ajouter">
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
