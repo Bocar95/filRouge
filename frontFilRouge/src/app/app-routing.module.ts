@@ -25,6 +25,10 @@ import { DetailsCompetencesComponent } from './acceuil/admin/competences/details
 import { CompetencesComponent } from './acceuil/admin/competences/competences.component';
 import { FormulairePutCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-put-competence/formulaire-put-competence.component';
 import { FormulaireAddCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-add-competence/formulaire-add-competence.component';
+import { ReferentielComponent } from './acceuil/admin/referentiel/referentiel.component';
+import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details-referentiel/details-referentiel.component';
+import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
+import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
 
 
 const routes: Routes = [
@@ -87,7 +91,15 @@ const routes: Routes = [
                       { path: ':id/modifier', component: FormulairePutCompetenceComponent }
                     ]
               },
-              { path: 'ajouter/competence', component: FormulaireAddCompetenceComponent } 
+              { path: 'ajouter/competence', component: FormulaireAddCompetenceComponent },
+
+              { path: 'liste/referentiels', component: ReferentielComponent,
+                    children:[
+                      { path: ':id/details', component: DetailsReferentielComponent },
+                      { path: ':id/modifier', component: FormulairePutReferentielComponent }
+                    ]
+              },
+              { path: 'ajouter/referentiel', component: FormulaireAddReferentielComponent }
         ]
   }
 ];

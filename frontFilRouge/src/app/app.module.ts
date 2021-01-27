@@ -59,6 +59,11 @@ import { ListCompetencesComponent } from './acceuil/admin/competences/list-compe
 import { DetailsCompetencesComponent } from './acceuil/admin/competences/details-competences/details-competences.component';
 import { FormulaireAddCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-add-competence/formulaire-add-competence.component';
 import { FormulairePutCompetenceComponent } from './acceuil/admin/formulaires/competencesFormulaires/formulaire-put-competence/formulaire-put-competence.component';
+import { ReferentielComponent } from './acceuil/admin/referentiel/referentiel.component';
+import { ListReferentielComponent } from './acceuil/admin/referentiel/list-referentiel/list-referentiel.component';
+import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details-referentiel/details-referentiel.component';
+import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
+import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
 
 
 
@@ -110,7 +115,12 @@ import { FormulairePutCompetenceComponent } from './acceuil/admin/formulaires/co
     ListCompetencesComponent,
     DetailsCompetencesComponent,
     FormulaireAddCompetenceComponent,
-    FormulairePutCompetenceComponent
+    FormulairePutCompetenceComponent,
+    ReferentielComponent,
+    ListReferentielComponent,
+    DetailsReferentielComponent,
+    FormulaireAddReferentielComponent,
+    FormulairePutReferentielComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/referentiels" [innerText]="btnNewReferentiel" style="font-size:1.25vw;"></a>
+
+<hr>
+
+<div class="row mt-4">
+  <div class="col-md-4 mb-3" *ngFor="let referentiel of referentiels">
+    <div class="card text-center text-light">
+      <div class="card-body">
+        <p class="card-text"><strong>Libelle : </strong>{{referentiel.libelle}}</p>
+        <p class="card-text"><strong>Presentation : </strong>{{referentiel.presentation}}</p>
+        <p class="card-text"><strong>Critére d'évaluation : </strong>{{referentiel.critereEvaluation}}</p>
+        <p class="card-text"><strong>Critére d'admission : </strong>{{referentiel.critereAdmission}}</p>
+        <div class="row card-footer">
+          <a (click)="onClickBtnDetails(referentiel.id)" class="btn btn-warning mr-auto" routerLink="{{referentiel.id}}/details">Détails</a>
+          <a (click)="onClickBtnPut(referentiel.id)" routerLink="{{ referentiel.id }}/modifier" data-target="#updateModal" data-toggle="modal" class="btn btn-primary">Modifier</a>
+        </div>
+      </div>
+        <!-- <div class="card-footer text-muted">
+          {{event.date | date:'shortDate'}}
+        </div> -->
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+<div *ngIf="currentRoute()">
+  <router-outlet></router-outlet>
+</div>
+
