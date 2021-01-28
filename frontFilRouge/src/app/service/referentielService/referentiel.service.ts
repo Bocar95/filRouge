@@ -27,4 +27,8 @@ export class ReferentielService {
     return this.http.put(`${this.defaultReferentielUrl}/${id}`, data);
   }
 
+  getGrpCompOfRefById(id:number) {
+    return this.http.get(`${this.defaultReferentielUrl}/${id}/grpecompetences`);
+  }
+
 }

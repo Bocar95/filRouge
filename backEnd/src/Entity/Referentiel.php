@@ -7,6 +7,7 @@ use App\Repository\ReferentielRepository;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
@@ -22,7 +23,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *              "normalization_context"={"groups"={"get_Referentiels:read"}}
  *          },
  *          "post"={
- *              "path"="/admin/referentiels"
+ *              "path"="/admin/referentiels",
+ *              "route_name"="api_add_referentiels"
  *          }
  *      },
  *      itemOperations={
@@ -31,14 +33,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *              "security_post_denormalize_message"="Vous n'avez pas ce privilége.",
  *              "path"="/admin/referentiels/{id}"
  *          },
- *          "getRefIdGrpCompetences"={
- *              "methods"="get",
- *              "path"="/api/admin/referentiels/{id}/grpecompetences",
+ *          "get_GrpCompOfRefById"={
+ *              "method"="get",
+ *              "path"="/admin/referentiels/{id}/grpecompetences",
+ *              "normalization_context"={"groups"={"get_GrpCompOfRefById:read"}}
  *           },
  *           "put"={
- *              "security_post_denormalize"="is_granted('EDIT', object)",
- *              "security_post_denormalize_message"="Vous n'avez pas ce privilége.",
- *              "path"="/admin/referentiels/{id}"
+ *              "path"="/admin/referentiels/{id}",
+ *              "route_name"="put_Referentiel"
  *            }
  *      }
  * )
@@ -91,7 +93,8 @@ class Referentiel
 
     /**
      * @ORM\ManyToMany(targetEntity=GroupeCompetence::class, inversedBy="referentiels")
-     * @Groups({"get_Referentiels:read"})
+     * @ApiSubresource()
+     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read"})
      */
     private $groupeCompetences;
 

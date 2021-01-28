@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Referentiel;
 use App\Entity\GroupeCompetence;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReferentielRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\GroupeCompetenceRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,4 +58,64 @@ class ReferentielController extends AbstractController
       return $this->json(["message" => "Vous n'avez pas ce privilége."], Response::HTTP_FORBIDDEN);
     }
   }
+
+  /**
+  * @Route(path="/api/admin/referentiels/{id}", name="put_Referentiel", methods={"PUT"})
+  */
+  public function putGrpCompetences(Request $request,SerializerInterface $serializer, $id, EntityManagerInterface $entityManager,ValidatorInterface $validator, ReferentielRepository $refRepo, GroupeCompetenceRepository $grpCompRepo)
+  {
+    $referentiel = new Referentiel();
+    if($this->isGranted("EDIT",$referentiel)){
+      // Get Body content of the Request
+      $referentielJson = $request->getContent();
+      //On détermine si le referentiel existe dans la base de données
+      $referentiel = $refRepo-> find($id);
+      if (isset($referentiel)){
+        // On transforme les données json en tableau
+        $referentielTab = $serializer->decode($referentielJson, 'json');
+        //On détermine si dans le tableau nous avons les champs libellé et descriptif sont rempli
+        //puis on les set.
+        if (!empty($referentielTab["libelle"])){
+          $referentiel->setLibelle($referentielTab["libelle"]);
+        }
+        if (!empty($referentielTab["presentation"])){
+          $referentiel->setPresentation($referentielTab["presentation"]);
+        }
+        if (!empty($referentielTab["programme"])){
+          $referentiel->setProgramme($referentielTab["programme"]);
+        }
+        if (!empty($referentielTab["critereEvaluation"])){
+          $referentiel->setCritereEvaluation($referentielTab["critereEvaluation"]);
+        }
+        if (!empty($referentielTab["critereAdmission"])){
+          $referentiel->setCritereAdmission($referentielTab["critereAdmission"]);
+        }
+        //On récupére les groupes de compétences qu'on met dans un tableau
+        $grpCompetencesTab = $referentielTab["groupeCompetences"];
+        //return $this->json($grpCompetencesTab);
+        
+        if (!empty($grpCompetencesTab)){
+          //On parcour le tableau de groupe competence
+          foreach ($grpCompetencesTab as $id){
+            $grpCompetence = new GroupeCompetence();
+            if (is_int($id)) {
+              //On crée un objet
+              $grpCompetence = $grpCompRepo-> find($id);
+              if (isset($grpCompetence)){
+                $referentiel->addGroupeCompetence($grpCompetence);
+              }
+            }
+          }
+        }
+        $entityManager->persist($referentiel);
+        $entityManager->flush();
+        return new JsonResponse("success");
+      }else{
+        return $this->json(["message" => "Il n'existe pas de referentiel avec cet id."], Response::HTTP_FORBIDDEN);
+      }
+    }else{
+      return $this->json(["message" => "Vous n'avez pas ce privilége."], Response::HTTP_FORBIDDEN);
+    }
+  }
+
 }

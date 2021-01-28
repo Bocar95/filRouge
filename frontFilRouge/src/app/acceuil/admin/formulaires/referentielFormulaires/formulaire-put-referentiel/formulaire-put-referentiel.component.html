@@ -1,1 +1,60 @@
-<p>formulaire-put-referentiel works!</p>
+<div class="putReferentiel mx-auto mt-3 mb-3">
+  <h2 class="putReferentiel-header" *ngIf="referentiel">
+    Vous allez faire une modification des données.
+  </h2>
+  <div class="putReferentiel-container">
+    <form [formGroup]="puttingReferentielForm" class="example-form" (ngSubmit)="onClickBtnValider()">
+      <div class="container">
+        <div class="row">
+            <article class="col-4">
+              <mat-form-field class="example-full-width">
+                <mat-label>Libellé</mat-label>
+                <input matInput [formControl]="libelleFormControl" [value]="referentiel['libelle']" placeholder="Libelle" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+        
+              <mat-form-field class="example-full-width">
+                <mat-label>Presentation</mat-label>
+                <input matInput [formControl]="presentationFormControl" [value]="referentiel['presentation']" placeholder="Presentation" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+            </article>
+  
+            <article class="col-4">
+              <mat-form-field class="example-full-width">
+                <mat-label>Programme</mat-label>
+                <input matInput [formControl]="programmeFormControl" [value]="referentiel['programme']" placeholder="Programme">
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+  
+              <mat-form-field class="example-full-width">
+                <mat-label>Critére d'évaluation</mat-label>
+                <input matInput [formControl]="critereEvaluationFormControl" [value]="referentiel['critereEvaluation']" placeholder="Critére d'évaluation" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+            </article>
+  
+            <article class="col-4">
+              <mat-form-field class="example-full-width">
+                <mat-label>Critére d'admission</mat-label>
+                <input matInput [formControl]="critereAdmissionFormControl" [value]="referentiel['critereAdmission']" placeholder="Critére d'admission" required>
+                <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field>
+  
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Groupe Competence</mat-label>
+                <mat-select [formControl]="grpCompetenceFormControl" [value]="referentiel['groupeCompetence']" multiple>
+                  <mat-option *ngFor="let grpCompetence of grpCompetenceList" [value]="grpCompetence.id">{{grpCompetence.libelle}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </article>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <p>
+          <input type="submit" value="Valider">
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
