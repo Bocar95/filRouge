@@ -64,6 +64,7 @@ import { ListReferentielComponent } from './acceuil/admin/referentiel/list-refer
 import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details-referentiel/details-referentiel.component';
 import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
 import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
+import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/plus-de-details-ref-grp-comp/plus-de-details-ref-grp-comp.component';
 
 
 
@@ -120,7 +121,8 @@ import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/r
     ListReferentielComponent,
     DetailsReferentielComponent,
     FormulaireAddReferentielComponent,
-    FormulairePutReferentielComponent
+    FormulairePutReferentielComponent,
+    PlusDeDetailsRefGrpCompComponent
   ],
   imports: [
     BrowserModule,

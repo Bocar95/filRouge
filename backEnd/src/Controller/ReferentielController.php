@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Competence;
 use App\Entity\Referentiel;
 use App\Entity\GroupeCompetence;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,7 +49,6 @@ class ReferentielController extends AbstractController
         $groupeCompetence = $grpCompRepo-> find($value);
         $referentiel->addGroupeCompetence($groupeCompetence);
       }
-
       //$entityManager = $this->getDoctrine()->getManager();
       $entityManager->persist($referentiel);
       $entityManager->flush();
@@ -118,4 +118,31 @@ class ReferentielController extends AbstractController
     }
   }
 
+  /**
+  * @Route(path="/api/admin/referentiels/{id}/grpecompetences/{id2}",
+  *        name="get_CompOfGrpCompByIdOfRefById",
+  *        methods={"GET"}
+  *)
+  */
+  public function getCompOfGrpCompByIdOfRefById(Request $request,SerializerInterface $serializer, $id, $id2, EntityManagerInterface $entityManager,ValidatorInterface $validator, ReferentielRepository $RefRepo, GroupeCompetenceRepository $grpCompRepo)
+  {
+    $referentiel = new Referentiel();
+    $competence = new Competence();
+    if($this->isGranted("VIEW",$referentiel)){
+      //On détermine si le referentiel existe dans la base de données
+      $referentiel = $RefRepo-> find($id);
+      if (isset($referentiel)){
+        foreach ($referentiel->getGroupeCompetences() as $grpCompetence){
+          if($grpCompetence == $grpCompRepo->find($id2)) {
+            $competence = $grpCompetence->getCompetences();
+          }
+        }
+        return $this->json($competence, 200, [], ["groups" => ["get_CompOfGrpCompByIdOfRefById:read"]]);
+        }else{
+          return $this->json(["message" => "Ce référentiel n'existe pas."], Response::HTTP_FORBIDDEN);
+        }
+    }else{
+      return $this->json(["message" => "Vous n'avez pas ce privilége."], Response::HTTP_FORBIDDEN);
+    }
+  }
 }

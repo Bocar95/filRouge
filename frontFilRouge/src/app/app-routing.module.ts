@@ -29,6 +29,7 @@ import { ReferentielComponent } from './acceuil/admin/referentiel/referentiel.co
 import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details-referentiel/details-referentiel.component';
 import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
 import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
+import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/plus-de-details-ref-grp-comp/plus-de-details-ref-grp-comp.component';
 
 
 const routes: Routes = [
@@ -95,7 +96,11 @@ const routes: Routes = [
 
               { path: 'liste/referentiels', component: ReferentielComponent,
                     children:[
-                      { path: ':id/details', component: DetailsReferentielComponent },
+                      { path: ':id/details', component: DetailsReferentielComponent,
+                            children:[
+                              { path: ':id/competences', component: PlusDeDetailsRefGrpCompComponent }
+                            ]
+                      },
                       { path: ':id/modifier', component: FormulairePutReferentielComponent }
                     ]
               },

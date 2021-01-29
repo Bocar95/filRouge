@@ -9,12 +9,16 @@
         <tr>
           <th class="text-center">libelle</th>
           <th class="text-center">descriptif</th>
+          <th class="text-center">Plus de détails</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let grpCompetence of grpCompetences">
           <td class="text-center">{{grpCompetence.libelle}}</td>
           <td class="text-center">{{grpCompetence.descriptif}}</td>
+          <td class="text-center">
+            <a mat-raised-button class="bg-warning" routerLink="{{ grpCompetence.id }}/competences" (click)="onClickBtnMoreDetails(grpCompetence.id)" [innerText]="btnMoreDeDetail" style="font-size:1.25vw;"></a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -25,3 +29,7 @@
   <mat-label class="text-white" *ngIf="grpCompetences.length<1">{{elseResponse}}</mat-label>
 </div>
 
+
+<div *ngIf="currentRoute()">
+  <router-outlet></router-outlet>
+</div>

@@ -38,6 +38,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *              "path"="/admin/referentiels/{id}/grpecompetences",
  *              "normalization_context"={"groups"={"get_GrpCompOfRefById:read"}}
  *           },
+ *          "get_CompOfGrpCompByIdOfRefById"={
+ *              "method"="get",
+ *              "path"="/admin/referentiels/{id}/grpecompetences/{id2}",
+ *              "route_name"="get_CompOfGrpCompByIdOfRefById"
+ *           },
  *           "put"={
  *              "path"="/admin/referentiels/{id}",
  *              "route_name"="put_Referentiel"
@@ -94,7 +99,7 @@ class Referentiel
     /**
      * @ORM\ManyToMany(targetEntity=GroupeCompetence::class, inversedBy="referentiels")
      * @ApiSubresource()
-     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read"})
+     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read"})
      */
     private $groupeCompetences;
 

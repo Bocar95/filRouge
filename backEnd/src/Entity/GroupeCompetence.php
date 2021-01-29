@@ -70,7 +70,7 @@ class GroupeCompetence
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_GrpCompOfRefById:read"})
+     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read"})
      */
     private $id;
 
@@ -79,7 +79,7 @@ class GroupeCompetence
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read"})
+     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read"})
      */
     private $libelle;
 
@@ -100,7 +100,7 @@ class GroupeCompetence
     /**
      * @ORM\ManyToMany(targetEntity=Competence::class, inversedBy="groupeCompetences", cascade="persist")
      * @ApiSubresource()
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_Referentiels:read"})
+     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_Referentiels:read","get_CompOfGrpCompByIdOfRefById:read"})
      */
     private $competences;
 

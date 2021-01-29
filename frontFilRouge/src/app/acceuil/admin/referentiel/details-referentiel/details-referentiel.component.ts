@@ -18,6 +18,7 @@ export class DetailsReferentielComponent implements OnInit {
   toDetails: number;
   i = 0;
   j = 0;
+  btnMoreDeDetail = 'Plus de détails';
   elseResponse = 'Il n\'y a pas encore de groupe de competences dédier à ce référentiel.';
 
   constructor(
@@ -43,11 +44,27 @@ export class DetailsReferentielComponent implements OnInit {
     return this.id[4];
   }
 
-  reloadCurrentRoute() {
+  reloadComponent() {
     let currentUrl = this.router.url;
-    return this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
-    });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([`/acceuil/liste/referentiels/${this.getIdOnUrl()}/details`]);
+  }
+
+  onClickBtnMoreDetails(toLoad) {
+    this.reloadComponent();
+    return this.router.navigate([`/acceuil/liste/referentiels/${this.getIdOnUrl()}/details/${toLoad}/competences`]);
+  }
+
+  currentRoute() {
+    var split;
+    this.snapshot = this.router.routerState.snapshot;
+    this.url = this.snapshot['url'];
+    split = this.url.split('/');
+    if(split[7] == `competences`) {
+      return true;
+    }
+    return false;
   }
 
 }
