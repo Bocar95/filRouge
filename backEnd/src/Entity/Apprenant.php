@@ -45,8 +45,45 @@ use ApiPlatform\Core\Annotation\ApiResource;
 class Apprenant extends User
 {
 
+    /**
+     * @ORM\ManyToMany(targetEntity=GroupeApprenants::class, mappedBy="apprenants")
+     */
+    private $groupeApprenants;
+
+    public function __construct()
+    {
+        $this->groupeApprenants = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection|GroupeApprenants[]
+     */
+    public function getGroupeApprenants(): Collection
+    {
+        return $this->groupeApprenants;
+    }
+
+    public function addGroupeApprenant(GroupeApprenants $groupeApprenant): self
+    {
+        if (!$this->groupeApprenants->contains($groupeApprenant)) {
+            $this->groupeApprenants[] = $groupeApprenant;
+            $groupeApprenant->addApprenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupeApprenant(GroupeApprenants $groupeApprenant): self
+    {
+        if ($this->groupeApprenants->removeElement($groupeApprenant)) {
+            $groupeApprenant->removeApprenant($this);
+        }
+
+        return $this;
     }
 }

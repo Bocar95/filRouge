@@ -65,6 +65,12 @@ import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details
 import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
 import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
 import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/plus-de-details-ref-grp-comp/plus-de-details-ref-grp-comp.component';
+import { PromoComponent } from './acceuil/admin/promo/promo.component';
+import { FormulaireAddPromoComponent } from './acceuil/admin/formulaires/promoFormulaires/formulaire-add-promo/formulaire-add-promo.component';
+import { FormulairePutPromoComponent } from './acceuil/admin/formulaires/promoFormulaires/formulaire-put-promo/formulaire-put-promo.component';
+import { DetailsPromoComponent } from './acceuil/admin/promo/details-promo/details-promo.component';
+import { ListPromoComponent } from './acceuil/admin/promo/list-promo/list-promo.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -122,7 +128,12 @@ import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/pl
     DetailsReferentielComponent,
     FormulaireAddReferentielComponent,
     FormulairePutReferentielComponent,
-    PlusDeDetailsRefGrpCompComponent
+    PlusDeDetailsRefGrpCompComponent,
+    PromoComponent,
+    ListPromoComponent,
+    FormulaireAddPromoComponent,
+    FormulairePutPromoComponent,
+    DetailsPromoComponent
   ],
   imports: [
     BrowserModule,
@@ -137,6 +148,7 @@ import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/pl
     MatPaginatorModule,
     NgbModule,
     NgbPaginationModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService,

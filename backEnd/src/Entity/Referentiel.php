@@ -103,9 +103,15 @@ class Referentiel
      */
     private $groupeCompetences;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promo::class, mappedBy="referentiel")
+     */
+    private $promos;
+
     public function __construct()
     {
         $this->groupeCompetences = new ArrayCollection();
+        $this->promos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,4 +215,35 @@ class Referentiel
 
         return $this;
     }
+
+    /**
+     * @return Collection|Promo[]
+     */
+    public function getPromos(): Collection
+    {
+        return $this->promos;
+    }
+
+    public function addPromo(Promo $promo): self
+    {
+        if (!$this->promos->contains($promo)) {
+            $this->promos[] = $promo;
+            $promo->setReferentiel($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromo(Promo $promo): self
+    {
+        if ($this->promos->removeElement($promo)) {
+            // set the owning side to null (unless already changed)
+            if ($promo->getReferentiel() === $this) {
+                $promo->setReferentiel(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

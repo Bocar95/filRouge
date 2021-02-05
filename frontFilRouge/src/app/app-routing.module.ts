@@ -30,6 +30,10 @@ import { DetailsReferentielComponent } from './acceuil/admin/referentiel/details
 import { FormulairePutReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-put-referentiel/formulaire-put-referentiel.component';
 import { FormulaireAddReferentielComponent } from './acceuil/admin/formulaires/referentielFormulaires/formulaire-add-referentiel/formulaire-add-referentiel.component';
 import { PlusDeDetailsRefGrpCompComponent } from './acceuil/admin/referentiel/plus-de-details-ref-grp-comp/plus-de-details-ref-grp-comp.component';
+import { PromoComponent } from './acceuil/admin/promo/promo.component';
+import { FormulairePutPromoComponent } from './acceuil/admin/formulaires/promoFormulaires/formulaire-put-promo/formulaire-put-promo.component';
+import { FormulaireAddPromoComponent } from './acceuil/admin/formulaires/promoFormulaires/formulaire-add-promo/formulaire-add-promo.component';
+import { DetailsPromoComponent } from './acceuil/admin/promo/details-promo/details-promo.component';
 
 
 const routes: Routes = [
@@ -104,7 +108,15 @@ const routes: Routes = [
                       { path: ':id/modifier', component: FormulairePutReferentielComponent }
                     ]
               },
-              { path: 'ajouter/referentiel', component: FormulaireAddReferentielComponent }
+              { path: 'ajouter/referentiel', component: FormulaireAddReferentielComponent },
+
+              { path: 'liste/promos', component: PromoComponent,
+                    children:[
+                      { path: ':id/details', component: DetailsPromoComponent },
+                      { path: ':id/modifier', component: FormulairePutPromoComponent }
+                    ]
+              },
+              { path: 'ajouter/promo', component: FormulaireAddPromoComponent }
         ]
   }
 ];
