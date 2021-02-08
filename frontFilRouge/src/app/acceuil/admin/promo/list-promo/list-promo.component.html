@@ -1,1 +1,44 @@
-<p>list-promo works!</p>
+<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/promo" [innerText]="btnNewPromo" style="font-size:1.25vw;"></a>
+
+<hr>
+
+<div class="row mt-4">
+  <div class="col-md-4 mb-3" *ngFor="let promo of promos">
+    <div class="card text-center text-light">
+      <div class="card-body">
+        <p class="card-text"><strong>Titre : </strong>{{promo.titre}}</p>
+        <p class="card-text"><strong>Description : </strong>{{promo.description | summarize:30}}</p>
+        <p class="card-text"><strong>Annee : </strong>{{promo.annee | date }}</p>
+        <p class="card-text"><strong>Fabrique : </strong>{{promo.fabrique}}</p>
+        <p class="card-text"><strong>Lieu : </strong>{{promo.lieu}}</p>
+        <p class="card-text"><strong>Date de Début : </strong>{{promo.dateDebut | date }}</p>
+        <p class="card-text"><strong>Date de Fin (provisoire) : </strong>{{promo.dateFinProvisoire | date }}</p>
+        <div class="row card-footer">
+          <a (click)="onClickBtnDetails(promo.id)" class="btn btn-warning mr-auto" routerLink="{{promo.id}}/details">Détails</a>
+          <a (click)="onClickBtnPut(promo.id)" routerLink="{{ promo.id }}/modifier" data-target="#updateModal" data-toggle="modal" class="btn btn-primary">Modifier</a>
+        </div>
+      </div>
+        <!-- <div class="card-footer text-muted">
+          {{event.date | date:'shortDate'}}
+        </div> -->
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+<div *ngIf="currentRoute()">
+  <router-outlet></router-outlet>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var theHREF;
+    let table = document.querySelector('table');
+
+    $("#confirmModalYes").click(function(e) {
+      $("#updateModal").modal("close");
+    });
+});
+</script>

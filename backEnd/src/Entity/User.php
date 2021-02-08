@@ -49,7 +49,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $id;
 
@@ -58,7 +58,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $email;
 
@@ -75,7 +75,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $prenom;
 
@@ -84,7 +84,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $nom;
 
@@ -93,13 +93,13 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $adresse;
 
     /**
      * @ORM\Column(type="blob", nullable=true)
-     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"users_profil:read","user:read","admin:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $avatar;
 
@@ -111,7 +111,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Profil::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:read","get_admins:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read"})
+     * @Groups({"user:read","get_admins:read","get_admin_by_id:read","get_admins:read","get_apprenants:read","get_apprenant_by_id:read","get_formateurs:read","get_formateur_by_id:read","get_cm:read","get_cm_by_id:read","getPromos:read"})
      */
     protected $profil;
 

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GroupeApprenantsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=GroupeApprenantsRepository::class)
@@ -21,31 +22,37 @@ class GroupeApprenants
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"getPromos:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"getPromos:read"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"getPromos:read"})
      */
     private $dateCreation;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"getPromos:read"})
      */
     private $status = true;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"getPromos:read"})
      */
     private $type;
 
     /**
      * @ORM\ManyToMany(targetEntity=Apprenant::class, inversedBy="groupeApprenants")
+     * @Groups({"getPromos:read"})
      */
     private $apprenants;
 

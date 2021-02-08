@@ -57,37 +57,37 @@ class Referentiel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $presentation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $programme;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $critereEvaluation;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read"})
      */
     private $critereAdmission;
 
@@ -99,7 +99,7 @@ class Referentiel
     /**
      * @ORM\ManyToMany(targetEntity=GroupeCompetence::class, inversedBy="referentiels")
      * @ApiSubresource()
-     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read"})
+     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","getPromos:read"})
      */
     private $groupeCompetences;
 

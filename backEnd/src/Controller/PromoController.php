@@ -89,7 +89,6 @@ class PromoController extends AbstractController
               );
             $mailer->send($message);
           }
-            
       }
       $promo->addGroupeApprenant($groupeApprenant);
 

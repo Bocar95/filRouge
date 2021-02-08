@@ -71,6 +71,7 @@ import { FormulairePutPromoComponent } from './acceuil/admin/formulaires/promoFo
 import { DetailsPromoComponent } from './acceuil/admin/promo/details-promo/details-promo.component';
 import { ListPromoComponent } from './acceuil/admin/promo/list-promo/list-promo.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SummarizePipe } from './summarize.pipe';
 
 
 
@@ -133,7 +134,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ListPromoComponent,
     FormulaireAddPromoComponent,
     FormulairePutPromoComponent,
-    DetailsPromoComponent
+    DetailsPromoComponent,
+    SummarizePipe
   ],
   imports: [
     BrowserModule,
