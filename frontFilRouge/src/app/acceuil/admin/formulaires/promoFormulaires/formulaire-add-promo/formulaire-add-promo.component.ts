@@ -17,7 +17,11 @@ export class FormulaireAddPromoComponent implements OnInit {
   addingPromo: FormGroup;
   titreFormControl = new FormControl('', [Validators.required]);
   descriptifFormControl = new FormControl('', [Validators.required]);
-  anneeFormControl = new FormControl();
+  anneeFormControl = new FormControl('', [Validators.required]);
+  fabriqueFormControl = new FormControl('', [Validators.required]);
+  lieuFormControl = new FormControl('', [Validators.required]);
+  dateDebutFormControl = new FormControl('', [Validators.required]);
+  dateFinProvisoireFormControl = new FormControl('', [Validators.required]);
   referentielFormControl = new FormControl();
   formateurFormControl = new FormControl();
   apprenantFormControl = new FormControl();
@@ -55,7 +59,11 @@ export class FormulaireAddPromoComponent implements OnInit {
     this.addingPromo = this.formBuilder.group({
       titre : this.titreFormControl,
       description : this.descriptifFormControl,
-      annee : this.transform(this.anneeFormControl),
+      annee : this.anneeFormControl,
+      fabrique : this.fabriqueFormControl,
+      lieu : this.lieuFormControl,
+      dateDebut : this.dateDebutFormControl,
+      dateFinProvisoire : this.dateFinProvisoireFormControl,
       referentiels : this.referentielFormControl,
       formateurs : this.formateurFormControl,
       apprenants : this.apprenantFormControl,
@@ -71,11 +79,11 @@ export class FormulaireAddPromoComponent implements OnInit {
     alert("Ajouter avec success");
   }
 
-  transform(value) {
-    var datePipe = new DatePipe("en-US");
-     value = datePipe.transform(value, 'yyyy/dd/MM/');
-     return value;
- }
+  // transform(value) {
+  //   var datePipe = new DatePipe("en-US");
+  //    value = datePipe.transform(value, 'yyyy/dd/MM/');
+  //    return value;
+  // }
 
   onClickBtnAdd() {
     //console.log(this.addingPromo.value);

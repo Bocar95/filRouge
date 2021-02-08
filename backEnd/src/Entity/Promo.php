@@ -42,12 +42,12 @@ class Promo
     private $description;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $annee;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $fabrique;
 
@@ -57,22 +57,22 @@ class Promo
     private $langue;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $lieu;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $dateDebut;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $dateFin;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $dateFinProvisoire;
 
@@ -133,12 +133,12 @@ class Promo
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee(): ?string
     {
         return $this->annee;
     }
 
-    public function setAnnee(\DateTimeInterface $annee): self
+    public function setAnnee(string $annee): self
     {
         $this->annee = $annee;
 
@@ -182,35 +182,35 @@ class Promo
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): self
+    public function setDateDebut(string $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?string
     {
         return $this->dateFin;
     }
 
-    public function setDateFin(\DateTimeInterface $dateFin): self
+    public function setDateFin(string $dateFin): self
     {
         $this->dateFin = $dateFin;
 
         return $this;
     }
-    public function getDateFinProvisoire(): ?\DateTimeInterface
+    public function getDateFinProvisoire(): ?string
     {
         return $this->dateFinProvisoire;
     }
 
-    public function setDateFinProvisoire(\DateTimeInterface $dateFinProvisoire): self
+    public function setDateFinProvisoire(string $dateFinProvisoire): self
     {
         $this->dateFinProvisoire = $dateFinProvisoire;
 

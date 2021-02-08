@@ -36,9 +36,11 @@ class PromoController extends AbstractController
 
       $promo->setTitre($promoTab["titre"]);
       $promo->setDescription($promoTab["description"]);
-      $promo->setAnnee(new DateTime("08/02/2020"));
-      $promo->setDateDebut(new DateTime("08/02/2020"));
-      $promo->setDateFinProvisoire(new DateTime("08/12/2020"));
+      $promo->setAnnee($promoTab["annee"]);
+      $promo->setFabrique($promoTab["fabrique"]);
+      $promo->setLieu($promoTab["lieu"]);
+      $promo->setDateDebut($promoTab["dateDebut"]);
+      $promo->setDateFinProvisoire($promoTab["dateFinProvisoire"]);
 
       $referentielTab = $promoTab["referentiels"];
       $formateursTab = $promoTab["formateurs"];
