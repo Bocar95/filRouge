@@ -5,6 +5,7 @@ import { ReferentielService } from 'src/app/service/referentielService/referenti
 import { FormateurUserService } from '../../../../../service/formateurUserService/formateur-user.service';
 import { ApprenantUserService } from '../../../../../service/apprenantUserService/apprenant-user.service';
 import { PromoService } from 'src/app/service/promoService/promo.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-formulaire-add-promo',
@@ -54,7 +55,7 @@ export class FormulaireAddPromoComponent implements OnInit {
     this.addingPromo = this.formBuilder.group({
       titre : this.titreFormControl,
       description : this.descriptifFormControl,
-      annee : this.anneeFormControl,
+      annee : this.transform(this.anneeFormControl),
       referentiels : this.referentielFormControl,
       formateurs : this.formateurFormControl,
       apprenants : this.apprenantFormControl,
@@ -69,6 +70,12 @@ export class FormulaireAddPromoComponent implements OnInit {
     this.router.navigate(['/acceuil/ajouter/promo']);
     alert("Ajouter avec success");
   }
+
+  transform(value) {
+    var datePipe = new DatePipe("en-US");
+     value = datePipe.transform(value, 'yyyy/dd/MM/');
+     return value;
+ }
 
   onClickBtnAdd() {
     //console.log(this.addingPromo.value);
