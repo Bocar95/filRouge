@@ -2,26 +2,37 @@
 <hr>
 
 <div class="text-center" *ngIf="users.length>0">
-  <mat-label class="text-white">Voici la liste des utilisateurs avec le profil: <strong> {{profils.libelle}} </strong></mat-label>
-  <div class="mat-table table-striped table-bordered mt-2">
-    <table class="text-white w-100">
-      <thead>
-        <tr>
-          <th class="text-center">prenom</th>
-          <th class="text-center">nom</th>
-          <th class="text-center">email</th>
-          <th class="text-center">adresse</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td class="text-center">{{user.prenom}}</td>
-          <td class="text-center">{{user.nom}}</td>
-          <td class="text-center">{{user.email}}</td>
-          <td class="text-center">{{user.adresse}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <mat-label class="text-white">VOICI LA LISTE DES UTILISATEURS AVEC LE PROFIL: <strong> {{profils.libelle}} </strong></mat-label>
+
+  <div class="card mt-3">
+    <p-table id="p-table" dataKey="id" editMode="row" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" 
+          currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
+          styleClass="p-datatable-striped" [value]="users">
+        <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center">prenom</th>
+              <th class="text-center">nom</th>
+              <th class="text-center">email</th>
+              <th class="text-center">adresse</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="user">
+                <td style="text-align:center">
+                  {{user.prenom}}
+                </td>
+                <td style="text-align:center">
+                  {{user.nom}}
+                </td>
+                <td style="text-align:center">
+                  {{user.email}}
+                </td>
+                <td style="text-align:center">
+                  {{user.adresse}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
   </div>
 </div>
 

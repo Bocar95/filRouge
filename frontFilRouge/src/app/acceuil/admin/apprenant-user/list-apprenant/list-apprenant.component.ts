@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { ApprenantUserService } from '../../../../service/apprenantUserService/apprenant-user.service';
 
 @Component({
@@ -17,10 +18,14 @@ export class ListApprenantComponent implements OnInit {
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
+  first = 0;
+  rows = 5;
+  clonedProducts: { } = {};
 
   constructor(
     private ApprenantUserService: ApprenantUserService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -69,17 +74,27 @@ export class ListApprenantComponent implements OnInit {
     return this.router.navigate([`/acceuil/liste/apprenants/${id}/modifier`]);
   }
 
-  onClickBtnDelete() {
-    var toDelete: number;
-    toDelete = this.getIdOnUrl();
-    console.log(toDelete);
-    //var toRemove = this.profils.slice().pop();
-     return this.ApprenantUserService.deleteApprenant(toDelete).subscribe(
-      (res: any) => { 
-        this.reloadComponent();
-        console.log(res)
-      }
-    );
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Êtes-vous sure de vouloir supprimer cet Apprenant?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          var toDelete: number;
+          toDelete = this.getIdOnUrl();
+          console.log(toDelete);
+          //var toRemove = this.profils.slice().pop();
+          return this.ApprenantUserService.deleteApprenant(toDelete).subscribe(
+            (res: any) => { 
+              this.reloadComponent();
+              console.log(res)
+            }
+          );
+        },
+        reject: () => {
+          // return this.reloadComponent();
+        }
+    });
   }
 
 }

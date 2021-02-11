@@ -1,101 +1,38 @@
-<div class="mat-table table-striped table-bordered">
-  <table class="text-white w-100">
-    <thead>
-      <tr>
-        <th class="text-center">Libelle</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  *ngFor="let profil of profils" id="{{ profil.id }}">
-        <td style="display: none;">{{ profil.id }}</td>
-        <td class="text-center">{{profil.libelle}}</td>
-        <td>
-          <section>
-            <div class="row justify-content-center">
-              <a mat-raised-button class="bg-warning col-2" routerLink="{{ profil.id }}/details" (click)="onClickBtnDetails(profil.id)" [innerText]="btnDetail" style="font-size:1.25vw;"></a>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-              <a mat-raised-button class="bg-primary col-2" routerLink="{{ profil.id }}/modifier" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1.25vw;"></a>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-              <a mat-raised-button class="bg-danger col-2" routerLink="{{ profil.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1.25vw;"></a>
-            </div>
-          </section>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- <ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="totalElement()">
-  </ngb-pagination> -->
-</div>
-
-<!-- updateModal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title text-white" id="updateModalLabel">Modification</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row justify-content-center">
-          <form [formGroup]="updatingProfil" class="example-form mt-3">
-            <mat-form-field class="example-full-width">
-              <mat-label class=" text-secondary">Libelle</mat-label>
-              <input matInput [formControl]="libelleFormControl" placeholder="Ex. ADMIN" required>
-            </mat-form-field>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Annuler</button>
-              <button type="button" id="confirmModalYes" class="btn btn-success" (click)="onClickBtnPut()" data-dismiss="modal">Confirmer</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+<div class="card">
+      <p-table id="p-table" dataKey="id" editMode="row" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" 
+            currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
+            styleClass="p-datatable-striped" [value]="elements1">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th style="text-align:center">Libelle</th>
+                  <th style="text-align:center">Actions</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-profil let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="profil">
+                  <td  style="text-align:center">
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input pInputText type="text" [(ngModel)]="profil.libelle">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{profil.libelle}}
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                  <td style="text-align:center">
+                      <button routerLink="{{ profil.id }}/details" (click)="onClickBtnDetails(profil.id)" pButton pRipple type="button" icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning p-mr-2"></button>
+                      <button *ngIf="!editing" (click)="onRowEditInit(profil)" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                      <button *ngIf="editing" (click)="onRowEditSave(profil, profil.id)" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                      <button *ngIf="editing" (click)="onRowEditCancel(profil, ri)" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+                      <p-confirmPopup></p-confirmPopup>
+                      <button routerLink="{{ profil.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
   </div>
-</div>
 
-<!-- deleteModal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title text-white" id="deleteModalLabel">Demande de confirmation</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sure de vouloir supprimer ce profil ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Non</button>
-        <button type="button" id="confirmModalYes" class="btn btn-primary" (click)="onClickBtnDelete()" data-dismiss="modal">Oui, je confirm</button>
-      </div>
-    </div>
+  <div *ngIf="currentRoute()">
+    <router-outlet></router-outlet>
   </div>
-</div>
-
-<div *ngIf="currentRoute()">
-  <router-outlet></router-outlet>
-</div>
-
-<script>
-  $(document).ready(function () {
-    var theHREF;
-    let table = document.querySelector('table');
-
-    $("#confirmModalYes").click(function(e) {
-      $("#deleteModal").modal("close");
-      $("#updateModal").modal("close");
-    });
-});
-</script>

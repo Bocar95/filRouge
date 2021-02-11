@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { FormateurUserService } from '../../../../service/formateurUserService/formateur-user.service';
 
 @Component({
@@ -17,10 +18,14 @@ export class ListFormateurComponent implements OnInit {
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
+  first = 0;
+  rows = 5;
+  clonedProducts: { } = {};
 
   constructor(
     private formateurUserService: FormateurUserService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +85,29 @@ export class ListFormateurComponent implements OnInit {
         console.log(res)
       }
     );
+  }
+
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Êtes-vous sure de vouloir supprimer ce Formateur?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          var toDelete: number;
+          toDelete = this.getIdOnUrl();
+          console.log(toDelete);
+          //var toRemove = this.profils.slice().pop();
+           return this.formateurUserService.deleteFormateur(toDelete).subscribe(
+            (res: any) => { 
+              this.reloadComponent();
+              console.log(res)
+            }
+          );
+        },
+        reject: () => {
+          // return this.reloadComponent();
+        }
+    });
   }
 
 }

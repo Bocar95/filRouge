@@ -28,7 +28,6 @@ class AdminController extends AbstractController
         $service = new Service($serializer,$encoder,$profilRepo);
         $admin = $service->addUser('ADMIN', $request,$manager);
         //return $this->json($admin);
-
         return new JsonResponse("success",Response::HTTP_CREATED,[],true);
       }
       else{

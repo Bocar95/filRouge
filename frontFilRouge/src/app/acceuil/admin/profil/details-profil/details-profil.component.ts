@@ -6,7 +6,13 @@ import { element } from 'protractor';
 @Component({
   selector: 'app-details-profil',
   templateUrl: './details-profil.component.html',
-  styleUrls: ['./details-profil.component.css']
+  styleUrls: ['./details-profil.component.css'],
+  styles: [`
+      :host ::ng-deep .p-cell-editing {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      }
+  `]
 })
 export class DetailsProfilComponent implements OnInit {
 
@@ -18,7 +24,9 @@ export class DetailsProfilComponent implements OnInit {
   toDetails: number;
   i = 0;
   j = 0;
-  elseResponse = 'Il n\'y a pas encore d\'utilisateur pour ce profil.';
+  elseResponse = 'Il N\'Y A PAS ENCORE D\'UTILISATEUR AVEC CE POUR.';
+  first = 0;
+  rows = 5;
 
   constructor(
     private profilService: ProfilService,

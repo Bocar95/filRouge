@@ -1,4 +1,4 @@
-<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/referentiel" [innerText]="btnNewReferentiel" style="font-size:1.25vw;"></a>
+<a routerLink="/acceuil/ajouter/referentiel" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
 
 <hr>
 
@@ -6,13 +6,21 @@
   <div class="col-md-4 mb-3" *ngFor="let referentiel of referentiels">
     <div class="card text-center text-light">
       <div class="card-body">
-        <p class="card-text"><strong>Libelle : </strong>{{referentiel.libelle}}</p>
-        <p class="card-text"><strong>Presentation : </strong>{{referentiel.presentation}}</p>
-        <p class="card-text"><strong>Critére d'évaluation : </strong>{{referentiel.critereEvaluation}}</p>
-        <p class="card-text"><strong>Critére d'admission : </strong>{{referentiel.critereAdmission}}</p>
+        <p class="card-text">{{referentiel.libelle}}</p>
+        <p-accordion [multiple]="true">
+          <p-accordionTab header="Presentation">
+            {{referentiel.presentation}}
+          </p-accordionTab>
+          <p-accordionTab header="Critére d'évaluation">
+            {{referentiel.critereEvaluation}}
+          </p-accordionTab>
+          <p-accordionTab header="Critére d'admission">
+            {{referentiel.critereAdmission}}
+          </p-accordionTab>
+        </p-accordion>
         <div class="row card-footer">
-          <a (click)="onClickBtnDetails(referentiel.id)" class="btn btn-warning mr-auto" routerLink="{{referentiel.id}}/details">Détails</a>
-          <a (click)="onClickBtnPut(referentiel.id)" routerLink="{{ referentiel.id }}/modifier" data-target="#updateModal" data-toggle="modal" class="btn btn-primary">Modifier</a>
+          <a (click)="onClickBtnDetails(referentiel.id)" routerLink="{{referentiel.id}}/details" pButton pRipple icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning"></a>
+          <a (click)="onClickBtnPut(referentiel.id)" routerLink="{{ referentiel.id }}/modifier" pButton pRipple icon="pi pi-pencil" data-target="#updateModal" data-toggle="modal" class="p-button-rounded p-button-text"></a>
         </div>
       </div>
         <!-- <div class="card-footer text-muted">

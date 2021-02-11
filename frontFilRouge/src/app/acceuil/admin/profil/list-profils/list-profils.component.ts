@@ -2,38 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { ProfilService } from 'src/app/service/profilService/profil.service';
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-list-profils',
   templateUrl: './list-profils.component.html',
-  styleUrls: ['./list-profils.component.css']
+  styleUrls: ['./list-profils.component.css'],
+  styles: [`
+      :host ::ng-deep .p-cell-editing {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      }
+  `]
 })
 
 export class ListProfilsComponent implements OnInit {
 
-  profils = [];
-  btnDetail = "Detail";
-  btnModifier = "Modifier";
-  btnSupprimer = "Supprimer";
+  elements1 = [];
   snapshot: RouterStateSnapshot;
   url: string;
   id = [];
   toDelete: number;
   toUpdate: number;
   toDetails: number;
-  i = 0;
-  j = 0;
   updatingProfil: FormGroup;
   libelleFormControl = new FormControl('', [Validators.required]);
+  first = 0;
+  rows = 4;
 
-  constructor(private profilService: ProfilService,
-              private router: Router,
-              private formBuilder: FormBuilder){  }
+  clonedProducts: { } = {};
+
+  constructor(
+    private profilService: ProfilService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private confirmationService : ConfirmationService
+  ){  }
 
   ngOnInit(): void {
     this.profilService.getProfil().subscribe(
       (data: any) => {
-        this.profils = data;
+        this.elements1 = data;
         console.log(data)
       }
     );
@@ -68,37 +77,42 @@ export class ListProfilsComponent implements OnInit {
     return this.router.navigate([`/acceuil/liste/profils/${toLoad}/details`]);
   }
 
-  onClickBtnPut() {
-    this.toUpdate= this.getIdOnUrl();
-    return this.profilService.putProfil(this.toUpdate, this.updatingProfil.value).subscribe(
+  onRowEditInit(profil) {
+    this.clonedProducts[profil.id] = {...profil};
+  }
+
+  onRowEditSave(profil, id) {
+    return this.profilService.putProfil(id, profil).subscribe(
       (res: any) => { 
-        this.reloadComponent();
         console.log(res)
       }
     );
   }
 
-  onClickBtnDelete() {
-    this.toDelete = this.getIdOnUrl();
-    //var toRemove = this.profils.slice().pop();
-     return this.profilService.deleteProfil(this.toDelete).subscribe(
-      (res: any) => { 
-        this.reloadComponent();
-        console.log(res)
-      }
-    );
+  onRowEditCancel(profil, index: number) {
+    this.elements1[index] = this.clonedProducts[profil.id];
+    delete this.clonedProducts[profil.id];
   }
 
-  confirmModalNo() {
-    return this.reloadComponent();
-  }
-
-  totalElement() {
-    while(this.profils[this.i]) {
-      this.j = this.j+1;
-      this.i++;
-    }
-    return this.j;
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Êtes-vous sure de vouloir supprimer ce profil?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.toDelete = this.getIdOnUrl();
+          //var toRemove = this.profils.slice().pop();
+           return this.profilService.deleteProfil(this.toDelete).subscribe(
+            (res: any) => { 
+              this.reloadComponent();
+              console.log(res)
+            }
+          );
+        },
+        reject: () => {
+          // return this.reloadComponent();
+        }
+    });
   }
 
   currentRoute() {

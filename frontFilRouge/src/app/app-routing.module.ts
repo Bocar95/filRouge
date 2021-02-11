@@ -50,52 +50,52 @@ const routes: Routes = [
               },
               { path: 'liste/admins', component: AdminUserComponent,
                     children:[
-                      { path: ':id/delete', component: AdminUserComponent },
-                      { path: ':id/modifier', component: FormulairePutAdminComponent }
+                      { path: ':id/delete', component: AdminUserComponent }
                     ]
               },
+              { path: 'liste/admins/:id/modifier', component: FormulairePutAdminComponent },
               { path: 'ajouter/admin', component: FormulaireAddAdminComponent },
 
               { path: 'liste/apprenants', component: ApprenantUserComponent,
                     children:[
-                      { path: ':id/delete', component: ApprenantUserComponent },
-                      { path: ':id/modifier', component: FormulairePutApprenantComponent }
+                      { path: ':id/delete', component: ApprenantUserComponent }
                     ]
               },
+              { path: 'liste/apprenants/:id/modifier', component: FormulairePutApprenantComponent },
               { path: 'ajouter/apprenant', component: FormulaireAddApprenantComponent },
 
               { path: 'liste/cms', component: CmUserComponent,
                     children:[
-                      { path: ':id/delete', component: CmUserComponent },
-                      { path: ':id/modifier', component: FormulairePutCmComponent }
+                      { path: ':id/delete', component: CmUserComponent }
                     ]
               },
+              { path: 'liste/cms/:id/modifier', component: FormulairePutCmComponent },
               { path: 'ajouter/cm', component: FormulaireAddCmComponent },
 
               { path: 'liste/formateurs', component: FormateurUserComponent,
                     children:[
-                      { path: ':id/delete', component: FormateurUserComponent },
-                      { path: ':id/modifier', component: FormulairePutFormateurComponent }
+                      { path: ':id/delete', component: FormateurUserComponent }
                     ]
               },
+              { path: 'liste/formateurs/:id/modifier', component: FormulairePutFormateurComponent },
               { path: 'ajouter/formateur', component: FormulaireAddFormateurComponent },
 
               { path: 'liste/groupeCompetences', component: GroupeCompetenceComponent,
                     children:[
                       { path: ':id/details', component: DetailsGrpCompetenceComponent },
-                      { path: ':id/delete', component: GroupeCompetenceComponent },
-                      { path: ':id/modifier', component: FormulairePutGrpCompetenceComponent }
+                      { path: ':id/delete', component: GroupeCompetenceComponent }
                     ]
               },
+              { path: 'liste/groupeCompetences/:id/modifier', component: FormulairePutGrpCompetenceComponent },
               { path: 'ajouter/groupeCompetence', component: FormulaireAddGrpCompetenceComponent }, 
 
               { path: 'liste/competences', component: CompetencesComponent,
                     children:[
                       { path: ':id/details', component: DetailsCompetencesComponent },
-                      { path: ':id/delete', component: CompetencesComponent },
-                      { path: ':id/modifier', component: FormulairePutCompetenceComponent }
+                      { path: ':id/delete', component: CompetencesComponent }
                     ]
               },
+              { path: 'liste/competences/:id/modifier', component: FormulairePutCompetenceComponent },
               { path: 'ajouter/competence', component: FormulaireAddCompetenceComponent },
 
               { path: 'liste/referentiels', component: ReferentielComponent,
@@ -108,14 +108,15 @@ const routes: Routes = [
                       { path: ':id/modifier', component: FormulairePutReferentielComponent }
                     ]
               },
+              { path: 'liste/referentiels/:id/modifier', component: FormulairePutReferentielComponent },
               { path: 'ajouter/referentiel', component: FormulaireAddReferentielComponent },
 
               { path: 'liste/promos', component: PromoComponent,
                     children:[
-                      { path: ':id/details', component: DetailsPromoComponent },
-                      { path: ':id/modifier', component: FormulairePutPromoComponent }
+                      { path: ':id/details', component: DetailsPromoComponent }
                     ]
               },
+              { path: 'liste/promos/:id/modifier', component: FormulairePutPromoComponent },
               { path: 'ajouter/promo', component: FormulaireAddPromoComponent }
         ]
   }

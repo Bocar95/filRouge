@@ -72,6 +72,22 @@ import { DetailsPromoComponent } from './acceuil/admin/promo/details-promo/detai
 import { ListPromoComponent } from './acceuil/admin/promo/list-promo/list-promo.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SummarizePipe } from './summarize.pipe';
+import { AccordionModule } from 'primeng/accordion';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { PaginatorModule } from 'primeng/paginator';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import {SplitterModule} from 'primeng/splitter';
+import { AdminUserService } from './service/adminUserService/admin-user.service';
+import { ApprenantUserService } from './service/apprenantUserService/apprenant-user.service';
+import { FormateurUserService } from './service/formateurUserService/formateur-user.service';
+import { CmUserService } from './service/cmUserService/cm-user.service';
+import { GroupeCompetenceService } from './service/groupeCompetenceService/groupe-competence.service';
+import { CompetenceServiceService } from './service/competenceService/competence-service.service';
+import { ReferentielService } from './service/referentielService/referentiel.service';
+import { PromoService } from './service/promoService/promo.service';
 
 
 
@@ -150,12 +166,29 @@ import { SummarizePipe } from './summarize.pipe';
     MatPaginatorModule,
     NgbModule,
     NgbPaginationModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AccordionModule,
+    TableModule,
+    DropdownModule,
+    ButtonModule,
+    PaginatorModule,
+    AccordionModule,
+    ConfirmPopupModule,
+    SplitterModule
   ],
   providers: [
     AuthService,
     AuthGuard,
     ProfilService,
+    AdminUserService,
+    ApprenantUserService,
+    FormateurUserService,
+    CmUserService,
+    GroupeCompetenceService,
+    CompetenceServiceService,
+    ReferentielService,
+    PromoService,
+    ConfirmationService,
     VerifyTokenService,
     TokenInterceptorProvider
   ],

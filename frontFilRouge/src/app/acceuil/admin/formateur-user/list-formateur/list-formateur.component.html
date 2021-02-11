@@ -1,76 +1,49 @@
-<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/formateur" [innerText]="btnNewFormateur" style="font-size:1.25vw;"></a>
+<a routerLink="/acceuil/ajouter/formateur" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3" style="background-color: rgb(74, 122, 110);"></a>
 
 <hr>
 
-<div class="mat-table table-striped table-bordered">
-    <table class="text-white w-100">
-      <thead>
-        <tr>
-          <th class="text-center p-auto">prenom</th>
-          <th class="text-center p-auto">nom</th>
-          <th class="text-center p-auto">email</th>
-          <th class="text-center p-auto">adresse</th>
-          <th class="text-center p-auto">action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let formateur of formateurs" id="{{ formateur.id }}">
-          <td style="display: none;">{{ formateur.id }}</td>
-          <td class="text-center p-auto">{{formateur.prenom}}</td>
-          <td class="text-center p-auto">{{formateur.nom}}</td>
-          <td class="text-center p-auto">{{formateur.email}}</td>
-          <td class="text-center p-auto">{{formateur.adresse}}</td>
-          <td>
-            <section>
-            <div class="row justify-content-center p-auto m-auto" style="width:55%;">
-              <a mat-raised-button class="bg-primary col-2 pl-1 pr-1" routerLink="{{ formateur.id }}/modifier" (click)="onClickBtnPut(formateur.id)" data-target="#updateModal" data-toggle="modal" [innerText]="btnModifier" style="font-size:1vw;width:auto;"></a>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-                <mat-divider [vertical]="true"></mat-divider>
-              <a mat-raised-button class="bg-danger col-2 pl-1 pr-1" routerLink="{{ formateur.id }}/delete" data-target="#deleteModal" data-toggle="modal" [innerText]="btnSupprimer" style="font-size:1vw;"></a>
-            </div>
-            </section>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="card">
+  <p-table id="p-table" styleClass="p-datatable-responsive-demo" dataKey="id" editMode="row" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" 
+        currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
+        [value]="formateurs">
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="text-align:center">Prenom</th>
+              <th style="text-align:center">Nom</th>
+              <th style="text-align:center">Email</th>
+              <th style="text-align:center">Adresse</th>
+              <th style="text-align:center">Actions</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-formateur let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="formateur">
+            <td style="text-align:center">
+                  {{formateur.prenom}}
+            </td>
+            <td style="text-align:center">
+                  {{formateur.nom}}
+            </td>
+            <td style="text-align:center">
+                  {{formateur.email}}
+            </td>
+            <td style="text-align:center">
+                  {{formateur.adresse}}
+            </td>
+            <td style="text-align:center">
+              <button  routerLink="{{formateur.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              <p-confirmPopup></p-confirmPopup>
+              <button *ngIf="!editing" routerLink="{{ formateur.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
+            </td>
+          </tr>
+      </ng-template>
+  </p-table>
 </div>
 
-<hr>
-
-<div *ngIf="currentRoute()">
-  <router-outlet></router-outlet>
-</div>
-
-  <!-- deleteModal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title text-white" id="deleteModalLabel">Demande de confirmation</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sure de vouloir supprimer ce formateur ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Non</button>
-        <button type="button" id="confirmModalYes" class="btn btn-primary" (click)="onClickBtnDelete()" data-dismiss="modal">Oui, je confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  $(document).ready(function () {
-    var theHREF;
-    let table = document.querySelector('table');
-
-    $("#confirmModalYes").click(function(e) {
-      $("#deleteModal").modal("close");
-      $("#updateModal").modal("close");
-    });
-});
-</script>
+<!-- <p-splitter [style]="{'height': '300px'}">
+  <ng-template>
+      Panel 1
+  </ng-template>
+  <ng-template>
+      Panel 2
+  </ng-template>
+</p-splitter> -->
