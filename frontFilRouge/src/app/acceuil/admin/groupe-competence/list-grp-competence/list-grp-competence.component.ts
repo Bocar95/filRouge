@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
 
 @Component({
@@ -7,29 +8,48 @@ import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService
   templateUrl: './list-grp-competence.component.html',
   styleUrls: ['./list-grp-competence.component.css']
 })
+
 export class ListGrpCompetenceComponent implements OnInit {
 
   grpCompetences = [];
-  btnAjouter = "Ajouter";
-  btnNewGrpCompetence = "Nouveau";
-  btnModifier = "Modifier";
-  btnSupprimer = "Supprimer";
+  competencesElements = [];
+  competences = [];
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
+  disabled = false;
+
+  first = 0;
+  rows = 5;
+  clonedProducts: { } = {};
+  index: number = null;
+  lastIndex = -1;
+
+  elseResponse = 'Il n\'y a pas encore de competences dédier à ce groupe de compétence.';
 
   constructor(
-    private GroupeCompetenceService: GroupeCompetenceService,
-    private router: Router
+    private groupeCompetenceService: GroupeCompetenceService,
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
-    this.GroupeCompetenceService.getGrpCompetences().subscribe(
+    this.groupeCompetenceService.getGrpCompetences().subscribe(
       (data : any) => {
         this.grpCompetences = data,
         console.log(data)
       }
-    )
+    );
+  }
+
+  showCompetencesById(id){
+    return this.groupeCompetenceService.getCompetencesOfGrpCompetence(id).subscribe(
+      (res: any) => {
+        this.competencesElements = res;
+        this.competences = this.competencesElements["competences"];
+        console.log(res);
+      }
+    );
   }
 
   getIdOnUrl() {
@@ -44,11 +64,7 @@ export class ListGrpCompetenceComponent implements OnInit {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/acceuil/liste/groupeCompetences']);
-  }
-
-  confirmModalNo() {
-    return this.reloadComponent();
+    this.router.navigate([`/acceuil/liste/groupeCompetences`]);
   }
 
   currentRoute() {
@@ -74,14 +90,47 @@ export class ListGrpCompetenceComponent implements OnInit {
     return this.router.navigate([`/acceuil/liste/groupeCompetences/${id}/modifier`]);
   }
 
-  onClickBtnDelete() {
-    var toDelete: number;
-    toDelete = this.getIdOnUrl();
-    console.log(toDelete);
-     return this.GroupeCompetenceService.deleteGrpCompetence(toDelete).subscribe(
+  onRowEditInit(grpCompetence) {
+    this.clonedProducts[grpCompetence.id] = {...grpCompetence};
+  }
+
+  onRowEditSave(grpCompetence, id) {
+    console.log(grpCompetence);
+    return this.groupeCompetenceService.putGrpCompetence(id, grpCompetence).subscribe(
       (res: any) => { 
         console.log(res)
       }
-    ),this.reloadComponent();
+    );
   }
+
+  onRowEditCancel(grpCompetence, index: number) {
+    this.grpCompetences[index] = this.clonedProducts[grpCompetence.id];
+    delete this.clonedProducts[grpCompetence.id];
+  }
+
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target,
+        message: 'Êtes-vous sure de vouloir supprimer ce grpCompetence?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          var toDelete: number;
+          toDelete = this.getIdOnUrl();
+          //var toRemove = this.grpCompetences.slice().pop();
+          return this.groupeCompetenceService.deleteGrpCompetence(toDelete).subscribe(
+            (res: any) => { 
+              console.log(res)
+            }
+          ),this.reloadComponent();
+        },
+        reject: () => {
+          // return this.reloadComponent();
+        }
+    });
+  }
+
+  closeAccordion() {
+    this.index = this.lastIndex--;
+  }
+
 }

@@ -1,62 +1,31 @@
-<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/groupeCompetence" [innerText]="btnNewGrpCompetence" style="font-size:1.25vw;"></a>
+<a routerLink="/acceuil/ajouter/groupeCompetence" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
 
 <hr>
 
 <div class="row mt-4">
   <div class="col-md-4 mb-3" *ngFor="let grpCompetence of grpCompetences">
-    <div class="card text-center text-light">
-      <div class="card-body">
-        <p class="card-text"><strong>Libelle : </strong>{{grpCompetence.libelle}}</p>
-        <p class="card-text"><strong>Descriptif : </strong>{{grpCompetence.descriptif}}</p>
-        <div class="row card-footer">
-          <a (click)="onClickBtnDetails(grpCompetence.id)" class="btn btn-warning mr-auto" routerLink="{{grpCompetence.id}}/details">Détails</a>
-          <a (click)="onClickBtnPut(grpCompetence.id)" routerLink="{{ grpCompetence.id }}/modifier" data-target="#updateModal" data-toggle="modal" class="btn btn-primary">Modifier</a>
-          <a routerLink="{{ grpCompetence.id }}/delete" data-target="#deleteModal" data-toggle="modal" class="btn btn-danger ml-auto">Supprimer</a>
-        </div>
-      </div>
-        <!-- <div class="card-footer text-muted">
-          {{event.date | date:'shortDate'}}
-        </div> -->
-    </div>
+    <p-card header="{{grpCompetence.libelle}}" styleClass="p-card-shadow">
+      <p>
+        {{grpCompetence.descriptif | summarize: 50}}
+      </p>
+      <p-accordion [activeIndex]="index" (click)="closeAccordion()">
+        <p-accordionTab header="Compétences" (click)="showCompetencesById(grpCompetence.id)" routerLink="{{grpCompetence.id}}/competences">
+          <div *ngFor="let competence of competences">
+            <p >{{competence.libelle}}</p>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+      <ng-template pTemplate="footer">
+        <button routerLink="{{grpCompetence.id}}/modifier" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+        <p-confirmPopup></p-confirmPopup>
+        <button (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
+      </ng-template>
+    </p-card>
   </div>
 </div>
-
 
 <hr>
 
 <div *ngIf="currentRoute()">
   <router-outlet></router-outlet>
 </div>
-
-  <!-- deleteModal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title text-white" id="deleteModalLabel">Demande de confirmation</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Êtes-vous sure de vouloir supprimer ce Groupe de competence ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmModalNo()">Non</button>
-        <button type="button" id="confirmModalYes" class="btn btn-primary" (click)="onClickBtnDelete()" data-dismiss="modal">Oui, je confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  $(document).ready(function () {
-    var theHREF;
-    let table = document.querySelector('table');
-
-    $("#confirmModalYes").click(function(e) {
-      $("#deleteModal").modal("close");
-      $("#updateModal").modal("close");
-    });
-});
-</script>

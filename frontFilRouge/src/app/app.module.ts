@@ -88,6 +88,7 @@ import { GroupeCompetenceService } from './service/groupeCompetenceService/group
 import { CompetenceServiceService } from './service/competenceService/competence-service.service';
 import { ReferentielService } from './service/referentielService/referentiel.service';
 import { PromoService } from './service/promoService/promo.service';
+import {CardModule} from 'primeng/card';
 
 
 
@@ -174,7 +175,8 @@ import { PromoService } from './service/promoService/promo.service';
     PaginatorModule,
     AccordionModule,
     ConfirmPopupModule,
-    SplitterModule
+    SplitterModule,
+    CardModule
   ],
   providers: [
     AuthService,

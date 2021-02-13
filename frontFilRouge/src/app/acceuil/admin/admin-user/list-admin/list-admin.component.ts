@@ -68,14 +68,12 @@ export class ListAdminComponent implements OnInit {
   }
 
 
-  onRowEditInit(id) {
-    let currentUrl = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/admins/${id}/modifier`]);
+  onRowEditInit(admin) {
+    this.clonedProducts[admin.id] = {...admin};
   }
 
-  onRowEditSave(admin, id : number) {
+  onRowEditSave(admin, id) {
+    console.log(admin);
     return this.adminUserService.putAdmin(id, admin).subscribe(
       (res: any) => { 
         console.log(res)
@@ -110,8 +108,5 @@ export class ListAdminComponent implements OnInit {
         }
     });
   }
-
-  onClickBtnDelete() {
-  }
-
+  
 }

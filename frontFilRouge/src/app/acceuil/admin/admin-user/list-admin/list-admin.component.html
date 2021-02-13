@@ -1,9 +1,10 @@
-<a routerLink="/acceuil/ajouter/admin" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3" style="background-color: rgb(74, 122, 110);"></a>
+<a routerLink="/acceuil/ajouter/admin" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
 
 <hr>
 
 <div class="card">
-  <p-table id="p-table" styleClass="p-datatable-responsive-demo" dataKey="id" editMode="row" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" 
+  <p-table id="p-table" styleClass="p-datatable-responsive-demo" dataKey="id" editMode="row" [paginator]="true"
+        [rows]="rows" [showCurrentPageReport]="true" 
         currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
         [value]="admins">
       <ng-template pTemplate="header">
@@ -16,24 +17,54 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-admin let-editing="editing" let-ri="rowIndex">
-          <tr [pEditableRow]="admin">
-            <td style="text-align:center">
+        <tr [pEditableRow]="admin">
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="admin.prenom">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{admin.prenom}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="admin.nom">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{admin.nom}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="admin.email">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{admin.email}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="admin.adresse">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{admin.adresse}}
-            </td>
-            <td style="text-align:center">
-              <button  routerLink="{{admin.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-              <p-confirmPopup></p-confirmPopup>
-              <button *ngIf="!editing" routerLink="{{ admin.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
-            </td>
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(admin)" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(admin, admin.id)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(admin, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+            <p-confirmPopup></p-confirmPopup>
+            <button *ngIf="!editing" routerLink="{{ admin.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
+          </td>
           </tr>
       </ng-template>
   </p-table>

@@ -67,11 +67,22 @@ export class ListCmComponent implements OnInit {
     return false;
   }
 
-  onClickBtnPut(id) {
-    let currentUrl = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/cms/${id}/modifier`]);
+  onRowEditInit(cm) {
+    this.clonedProducts[cm.id] = {...cm};
+  }
+
+  onRowEditSave(cm, id) {
+    console.log(cm);
+    return this.cmUserService.putCm(id, cm).subscribe(
+      (res: any) => { 
+        console.log(res)
+      }
+    );
+  }
+
+  onRowEditCancel(cm, index: number) {
+    this.cms[index] = this.clonedProducts[cm.id];
+    delete this.clonedProducts[cm.id];
   }
 
   confirm(event: Event) {

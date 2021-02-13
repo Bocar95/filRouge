@@ -11,7 +11,6 @@ export class DetailsGrpCompetenceComponent implements OnInit {
 
   element = [];
   competences = [];
-  grpCompetences;
   snapshot: RouterStateSnapshot;
   url: string;
   id = [];

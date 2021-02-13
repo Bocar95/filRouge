@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Admin;
 use App\Service\Service;
+use App\Repository\UserRepository;
 use App\Repository\AdminRepository;
 use App\Repository\ProfilRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -28,6 +29,21 @@ class AdminController extends AbstractController
         $service = new Service($serializer,$encoder,$profilRepo);
         $admin = $service->addUser('ADMIN', $request,$manager);
         //return $this->json($admin);
+        return new JsonResponse("success",Response::HTTP_CREATED,[],true);
+      }
+      else{
+        return $this->json("Access denied!!!");
+      }
+    }
+
+    /**
+     * @Route("/api/admin/{id}", name="put_admin", methods={"PUT"})
+     */
+    public function putAdmin($id, Request $request,SerializerInterface $serializer ,UserPasswordEncoderInterface $encoder, ProfilRepository $profilRepo, UserRepository $userRepo, EntityManagerInterface $manager)
+    {
+      if ($this->isGranted('ROLE_ADMIN')) {
+        $service = new Service($serializer, $encoder, $profilRepo, $userRepo);
+        $admin = $service->putUser($id, $userRepo, $profilRepo, $request, $manager);
         return new JsonResponse("success",Response::HTTP_CREATED,[],true);
       }
       else{

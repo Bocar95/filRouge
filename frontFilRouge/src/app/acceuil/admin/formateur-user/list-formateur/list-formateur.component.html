@@ -1,4 +1,4 @@
-<a routerLink="/acceuil/ajouter/formateur" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3" style="background-color: rgb(74, 122, 110);"></a>
+<a routerLink="/acceuil/ajouter/formateur" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
 
 <hr>
 
@@ -18,19 +18,50 @@
       <ng-template pTemplate="body" let-formateur let-editing="editing" let-ri="rowIndex">
           <tr [pEditableRow]="formateur">
             <td style="text-align:center">
-                  {{formateur.prenom}}
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="formateur.prenom">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{formateur.prenom}}
+                </ng-template>
+            </p-cellEditor>
             </td>
             <td style="text-align:center">
-                  {{formateur.nom}}
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="formateur.nom">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{formateur.nom}}
+                </ng-template>
+              </p-cellEditor>
             </td>
             <td style="text-align:center">
-                  {{formateur.email}}
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="formateur.email">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{formateur.email}}
+                </ng-template>
+            </p-cellEditor>
             </td>
             <td style="text-align:center">
-                  {{formateur.adresse}}
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="formateur.adresse">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{formateur.adresse}}
+                </ng-template>
+            </p-cellEditor>
             </td>
             <td style="text-align:center">
-              <button  routerLink="{{formateur.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              <!-- <button  routerLink="{{formateur.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button> -->
+              <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(formateur)" class="p-button-rounded p-button-text"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(formateur, formateur.id)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(formateur, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
               <p-confirmPopup></p-confirmPopup>
               <button *ngIf="!editing" routerLink="{{ formateur.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
             </td>

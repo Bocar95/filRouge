@@ -67,24 +67,22 @@ export class ListFormateurComponent implements OnInit {
     return false;
   }
 
-  onClickBtnPut(id) {
-    let currentUrl = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/formateurs/${id}/modifier`]);
+  onRowEditInit(formateur) {
+    this.clonedProducts[formateur.id] = {...formateur};
   }
 
-  onClickBtnDelete() {
-    var toDelete: number;
-    toDelete = this.getIdOnUrl();
-    console.log(toDelete);
-    //var toRemove = this.profils.slice().pop();
-     return this.formateurUserService.deleteFormateur(toDelete).subscribe(
+  onRowEditSave(formateur, id) {
+    console.log(formateur);
+    return this.formateurUserService.putFormateur(id, formateur).subscribe(
       (res: any) => { 
-        this.reloadComponent();
         console.log(res)
       }
     );
+  }
+
+  onRowEditCancel(formateur, index: number) {
+    this.formateurs[index] = this.clonedProducts[formateur.id];
+    delete this.clonedProducts[formateur.id];
   }
 
   confirm(event: Event) {
@@ -96,7 +94,7 @@ export class ListFormateurComponent implements OnInit {
           var toDelete: number;
           toDelete = this.getIdOnUrl();
           console.log(toDelete);
-          //var toRemove = this.profils.slice().pop();
+          //var toRemove = this.formateurs.slice().pop();
            return this.formateurUserService.deleteFormateur(toDelete).subscribe(
             (res: any) => { 
               this.reloadComponent();
@@ -109,5 +107,5 @@ export class ListFormateurComponent implements OnInit {
         }
     });
   }
-
+  
 }

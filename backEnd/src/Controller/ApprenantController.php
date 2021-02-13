@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\Service;
+use App\Repository\UserRepository;
 use App\Repository\ProfilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,21 @@ class ApprenantController extends AbstractController
         $service = new Service($serializer,$encoder,$profilRepo);
         $apprenant = $service->addUser('APPRENANT', $request,$manager);
 
+        return new JsonResponse("success",Response::HTTP_CREATED,[],true);
+      }
+      else{
+        return $this->json("Access denied!!!");
+      }
+    }
+
+    /**
+     * @Route("/api/apprenant/{id}", name="put_apprenant", methods={"PUT"})
+     */
+    public function putApprenant($id, Request $request,SerializerInterface $serializer ,UserPasswordEncoderInterface $encoder, ProfilRepository $profilRepo, UserRepository $userRepo, EntityManagerInterface $manager)
+    {
+      if ($this->isGranted('ROLE_ADMIN')) {
+        $service = new Service($serializer, $encoder, $profilRepo, $userRepo);
+        $apprenant = $service->putUser($id, $userRepo, $profilRepo, $request, $manager);
         return new JsonResponse("success",Response::HTTP_CREATED,[],true);
       }
       else{

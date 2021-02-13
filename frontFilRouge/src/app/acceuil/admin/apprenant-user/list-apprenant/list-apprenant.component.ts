@@ -23,13 +23,13 @@ export class ListApprenantComponent implements OnInit {
   clonedProducts: { } = {};
 
   constructor(
-    private ApprenantUserService: ApprenantUserService,
+    private apprenantUserService: ApprenantUserService,
     private router: Router,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
-    this.ApprenantUserService.getApprenants().subscribe(
+    this.apprenantUserService.getApprenants().subscribe(
       (data : any) => {
         this.apprenants= data;
         console.log(data)
@@ -66,12 +66,22 @@ export class ListApprenantComponent implements OnInit {
     }
     return false;
   }
+  onRowEditInit(apprenant) {
+    this.clonedProducts[apprenant.id] = {...apprenant};
+  }
 
-  onClickBtnPut(id) {
-    let currentUrl = this.router.url;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    return this.router.navigate([`/acceuil/liste/apprenants/${id}/modifier`]);
+  onRowEditSave(apprenant, id) {
+    console.log(apprenant);
+    return this.apprenantUserService.putApprenant(id, apprenant).subscribe(
+      (res: any) => { 
+        console.log(res)
+      }
+    );
+  }
+
+  onRowEditCancel(apprenant, index: number) {
+    this.apprenants[index] = this.clonedProducts[apprenant.id];
+    delete this.clonedProducts[apprenant.id];
   }
 
   confirm(event: Event) {
@@ -84,7 +94,7 @@ export class ListApprenantComponent implements OnInit {
           toDelete = this.getIdOnUrl();
           console.log(toDelete);
           //var toRemove = this.profils.slice().pop();
-          return this.ApprenantUserService.deleteApprenant(toDelete).subscribe(
+          return this.apprenantUserService.deleteApprenant(toDelete).subscribe(
             (res: any) => { 
               this.reloadComponent();
               console.log(res)

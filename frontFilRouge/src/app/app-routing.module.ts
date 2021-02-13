@@ -53,7 +53,6 @@ const routes: Routes = [
                       { path: ':id/delete', component: AdminUserComponent }
                     ]
               },
-              { path: 'liste/admins/:id/modifier', component: FormulairePutAdminComponent },
               { path: 'ajouter/admin', component: FormulaireAddAdminComponent },
 
               { path: 'liste/apprenants', component: ApprenantUserComponent,
@@ -61,7 +60,6 @@ const routes: Routes = [
                       { path: ':id/delete', component: ApprenantUserComponent }
                     ]
               },
-              { path: 'liste/apprenants/:id/modifier', component: FormulairePutApprenantComponent },
               { path: 'ajouter/apprenant', component: FormulaireAddApprenantComponent },
 
               { path: 'liste/cms', component: CmUserComponent,
@@ -69,7 +67,6 @@ const routes: Routes = [
                       { path: ':id/delete', component: CmUserComponent }
                     ]
               },
-              { path: 'liste/cms/:id/modifier', component: FormulairePutCmComponent },
               { path: 'ajouter/cm', component: FormulaireAddCmComponent },
 
               { path: 'liste/formateurs', component: FormateurUserComponent,
@@ -77,11 +74,11 @@ const routes: Routes = [
                       { path: ':id/delete', component: FormateurUserComponent }
                     ]
               },
-              { path: 'liste/formateurs/:id/modifier', component: FormulairePutFormateurComponent },
               { path: 'ajouter/formateur', component: FormulaireAddFormateurComponent },
 
               { path: 'liste/groupeCompetences', component: GroupeCompetenceComponent,
                     children:[
+                      { path: ':id/competences', component : GroupeCompetenceComponent },
                       { path: ':id/details', component: DetailsGrpCompetenceComponent },
                       { path: ':id/delete', component: GroupeCompetenceComponent }
                     ]

@@ -32,7 +32,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "put"={"path"="/formateur/{id}",
  *                "requirements"={"id"="\d+"},
  *                "access_control"="(is_granted('ROLE_ADMIN','ROLE_FORMATEUR'))",
- *                "access_control_message"="Vous n'avez pas access à cette Ressource"
+ *                "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *                "route_name"="put_formateur"
  *          },
  *          "delete"={"path"="/formateur/{id}",
  *                "requirements"={"id"="\d+"},

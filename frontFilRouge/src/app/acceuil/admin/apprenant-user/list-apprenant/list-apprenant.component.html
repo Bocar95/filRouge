@@ -1,4 +1,4 @@
-<a routerLink="/acceuil/ajouter/apprenant" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3" style="background-color: rgb(74, 122, 110);"></a>
+<a routerLink="/acceuil/ajouter/apprenant" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
 
 <hr>
 
@@ -16,21 +16,52 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-apprenant let-editing="editing" let-ri="rowIndex">
-          <tr [pEditableRow]="apprenant">
-            <td style="text-align:center">
+        <tr [pEditableRow]="apprenant">
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="apprenant.prenom">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{apprenant.prenom}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="apprenant.nom">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{apprenant.nom}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="apprenant.email">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{apprenant.email}}
-            </td>
-            <td style="text-align:center">
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="apprenant.adresse">
+              </ng-template>
+              <ng-template pTemplate="output">
                   {{apprenant.adresse}}
-            </td>
-            <td style="text-align:center">
-              <button  routerLink="{{apprenant.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+              </ng-template>
+          </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <!-- <button  routerLink="{{apprenant.id}}/modifier" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button> -->
+            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(apprenant)" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(apprenant, apprenant.id)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(apprenant, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
               <p-confirmPopup></p-confirmPopup>
               <button *ngIf="!editing" routerLink="{{ apprenant.id }}/delete" (click)="confirm($event)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
             </td>
