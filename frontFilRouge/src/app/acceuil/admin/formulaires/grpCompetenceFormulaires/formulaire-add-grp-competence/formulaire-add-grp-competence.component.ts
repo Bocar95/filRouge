@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CompetenceServiceService } from 'src/app/service/competenceService/competence-service.service';
 import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
@@ -15,8 +16,15 @@ export class FormulaireAddGrpCompetenceComponent implements OnInit {
   libelleFormControl = new FormControl('', [Validators.required]);
   descriptifFormControl = new FormControl('', [Validators.required]);
   competenceFormControl = new FormControl();
+  competenceLibelleFormControl = new FormControl();
+  competenceDescriptifFormControl = new FormControl();
   competenceList = [];
+  disabled = false;
+  plus = 'pi pi-plus';
+  times = 'pi pi-times';
+  selectedCompetence:any;
   btnText = 'Ajouter';
+  dataSource = new MatTableDataSource(this.competenceList);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,8 +42,15 @@ export class FormulaireAddGrpCompetenceComponent implements OnInit {
     this.addingGrpCompetence = this.formBuilder.group({
       libelle : this.libelleFormControl,
       descriptif : this.descriptifFormControl,
-      competences : this.competenceFormControl
+      competences : this.competenceFormControl,
+      competenceLibelle : this.competenceLibelleFormControl,
+      competenceDescriptif : this.competenceDescriptifFormControl
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   reloadComponent() {
@@ -55,6 +70,20 @@ export class FormulaireAddGrpCompetenceComponent implements OnInit {
         }
       ),this.reloadComponent();
     }
+  }
+
+  disableState(){
+    if(this.disabled == false ){
+      return this.disabled = true;
+    }
+    return this.disabled = false;
+  }
+
+  btnState() {
+    if (this.disabled == false){
+      return this.plus;
+    }
+    return this.times;
   }
 
 }

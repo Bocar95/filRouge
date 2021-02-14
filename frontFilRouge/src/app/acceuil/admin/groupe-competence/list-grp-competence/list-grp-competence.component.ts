@@ -17,7 +17,7 @@ export class ListGrpCompetenceComponent implements OnInit {
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
-  disabled = false;
+  disabled = true;
 
   first = 0;
   rows = 5;
@@ -64,7 +64,7 @@ export class ListGrpCompetenceComponent implements OnInit {
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([`/acceuil/liste/groupeCompetences`]);
+    return this.router.navigate([`/acceuil/liste/groupeCompetences`]);
   }
 
   currentRoute() {
@@ -116,7 +116,6 @@ export class ListGrpCompetenceComponent implements OnInit {
         accept: () => {
           var toDelete: number;
           toDelete = this.getIdOnUrl();
-          //var toRemove = this.grpCompetences.slice().pop();
           return this.groupeCompetenceService.deleteGrpCompetence(toDelete).subscribe(
             (res: any) => { 
               console.log(res)

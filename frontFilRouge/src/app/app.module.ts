@@ -89,7 +89,10 @@ import { CompetenceServiceService } from './service/competenceService/competence
 import { ReferentielService } from './service/referentielService/referentiel.service';
 import { PromoService } from './service/promoService/promo.service';
 import {CardModule} from 'primeng/card';
-
+import {ListboxModule} from 'primeng/listbox';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {PickListModule} from 'primeng/picklist';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -176,7 +179,12 @@ import {CardModule} from 'primeng/card';
     AccordionModule,
     ConfirmPopupModule,
     SplitterModule,
-    CardModule
+    CardModule,
+    DropdownModule,
+    ListboxModule,
+    MultiSelectModule,
+    PickListModule,
+    TabViewModule
   ],
   providers: [
     AuthService,

@@ -35,6 +35,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "access_control_message"="Vous n'avez pas access à cette Ressource",
  *          "normalization_context"={"groups"={"getById_competences:read"}}
  *      },
+ *      "get_grpCompetenceOfCompetenceById"={"path"="/admin/competences/{id}/groupecompetences",
+ *          "method"="GET",
+ *          "access_control"="(is_granted('ROLE_ADMIN','ROLE_FORMATEUR','ROLE_CM'))",
+ *          "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *          "normalization_context"={"groups"={"get_grpCompetenceOfCompetenceById"}}
+ *      },
  *      "put"={"path"="/admin/competences/{id}",
  *          "access_control"="(is_granted('ROLE_ADMIN','ROLE_FORMATEUR','ROLE_CM'))",
  *          "access_control_message"="Vous n'avez pas access à cette Ressource"
@@ -84,12 +90,13 @@ class Competence
 
     /**
      * @ORM\ManyToMany(targetEntity=GroupeCompetence::class, mappedBy="competences")
+     * @Groups({"get_grpCompetenceOfCompetenceById"})
      */
     private $groupeCompetences;
 
     /**
      * @ORM\OneToMany(targetEntity=NiveauCompetence::class, mappedBy="competences", cascade="persist")
-     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Groups({"get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_grpCompetenceOfCompetenceById"})
      */
     private $niveauCompetences;
 

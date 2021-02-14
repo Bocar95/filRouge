@@ -40,6 +40,13 @@ class GrpCompetenceController extends AbstractController
         }
         $grpCompetences->addCompetence($competence);
       }
+      if($grpCompetencesTab["competenceLibelle"] && $grpCompetencesTab["competenceDescriptif"]){
+        $newCompetence = new Competence();
+        $newCompetence->setLibelle($grpCompetencesTab["competenceLibelle"]);
+        $newCompetence->setDescriptif($grpCompetencesTab["competenceDescriptif"]);
+        $grpCompetences->addCompetence($newCompetence);
+      }
+
       $entityManager = $this->getDoctrine()->getManager();
       $entityManager->persist($grpCompetences);
       $entityManager->flush();

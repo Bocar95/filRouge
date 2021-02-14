@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { CompetenceServiceService } from 'src/app/service/competenceService/competence-service.service';
+import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
 
 @Component({
   selector: 'app-list-competences',
@@ -10,17 +11,19 @@ import { CompetenceServiceService } from 'src/app/service/competenceService/comp
 export class ListCompetencesComponent implements OnInit {
 
   competences = [];
-  btnAjouter = "Ajouter";
-  btnNewCompetence = "Nouveau";
-  btnModifier = "Modifier";
-  btnSupprimer = "Supprimer";
+  grpCompetences = [];
+  niveaux = [];
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
+  index: number = null;
+  selectedGroupe = {'libelle': 'Groupe de compétence'};
+  selectedCompetence;
 
   constructor(
     private competenceService: CompetenceServiceService,
-    private router: Router
+    private router: Router,
+    private groupeCompetenceService : GroupeCompetenceService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +32,7 @@ export class ListCompetencesComponent implements OnInit {
         this.competences = data,
         console.log(data)
       }
-    )
+    );
   }
 
   getIdOnUrl() {
@@ -62,6 +65,17 @@ export class ListCompetencesComponent implements OnInit {
     return false;
   }
 
+  onClickCompetence(id){
+    return this.competenceService.getGrpCompetenceOfCompById(id).subscribe(
+      (grpCompetenceData:any) => {
+        this.grpCompetences = grpCompetenceData["groupeCompetences"],
+        this.niveaux = grpCompetenceData["niveauCompetences"],
+        console.log(this.grpCompetences),
+        console.log(this.niveaux)
+      }
+    );
+  }
+
   onClickBtnDetails(toLoad) {
     this.reloadComponent();
     return this.router.navigate([`/acceuil/liste/competences/${toLoad}/details`]);
@@ -80,7 +94,6 @@ export class ListCompetencesComponent implements OnInit {
     console.log(toDelete);
      return this.competenceService.deleteCompetence(toDelete).subscribe(
       (res: any) => { 
-        
         console.log(res)
       }
     ),this.reloadComponent();

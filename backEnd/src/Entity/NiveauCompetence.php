@@ -30,13 +30,13 @@ class NiveauCompetence
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_grpCompetenceOfCompetenceById"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_grpCompetenceOfCompetenceById"})
      */
     private $libelle;
 
@@ -47,13 +47,13 @@ class NiveauCompetence
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_grpCompetenceOfCompetenceById"})
      */
     private $critereEvaluation;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read"})
+     * @Groups({"get_niveaux:read","get_competences:read", "getById_competences:read", "getById_grpCompetences:read","get_competences_of_grpCompetence:read","getById_competences_of_grpCompetence:read","get_grpCompetenceOfCompetenceById"})
      */
     private $groupeAction;
 
