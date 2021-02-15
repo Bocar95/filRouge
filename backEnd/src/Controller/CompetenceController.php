@@ -22,25 +22,39 @@ class CompetenceController extends AbstractController
   */
   public function addCompetences(Request $request,SerializerInterface $serializer,EntityManagerInterface $entityManager,ValidatorInterface $validator,NiveauCompetenceRepository $niveauRepo)
   {
-    $competences = new Competence;
-    if($this->isGranted("EDIT",$competences)){
+    $competence = new Competence;
+    if($this->isGranted("EDIT",$competence)){
       // Get Body content of the Request
-      $competencesJson = $request->getContent();
+      $competenceJson = $request->getContent();
       // On transforme le json en tableau
-      $competencesTab = $serializer->decode($competencesJson, 'json');
-      //dd($competencesTab["libelle"]);
-      $competences->setLibelle($competencesTab["libelle"]);
-      $competences->setDescriptif($competencesTab["descriptif"]);
-      $niveauTab = $competencesTab["niveauCompetences"];
+      $competenceTab = $serializer->decode($competenceJson, 'json');
+      $competence->setLibelle($competenceTab["libelle"]);
+      $competence->setDescriptif($competenceTab["descriptif"]);
       
-      foreach ($niveauTab as $value){
-        $niveau = new NiveauCompetence();
-        $niveau = $niveauRepo-> find($value);
-        $competences->addNiveauCompetence($niveau);
+      if($competenceTab["niveauCritereEvaluation1"] || $competenceTab["niveauGroupeAction1"]){
+        $newNiveau1 = new NiveauCompetence();
+        $newNiveau1->setLibelle("Niveau 1");
+        $newNiveau1->setCritereEvaluation($competenceTab["niveauCritereEvaluation1"]);
+        $newNiveau1->setGroupeAction($competenceTab["niveauGroupeAction1"]);
+        $competence->addNiveauCompetence($newNiveau1);
       }
-      //return $this->json($competences);
+      if($competenceTab["niveauCritereEvaluation2"] || $competenceTab["niveauGroupeAction2"]){
+        $newNiveau2 = new NiveauCompetence();
+        $newNiveau2->setLibelle("Niveau 2");
+        $newNiveau2->setCritereEvaluation($competenceTab["niveauCritereEvaluation2"]);
+        $newNiveau2->setGroupeAction($competenceTab["niveauGroupeAction2"]);
+        $competence->addNiveauCompetence($newNiveau2);
+      }
+      if($competenceTab["niveauCritereEvaluation3"] || $competenceTab["niveauGroupeAction3"]){
+        $newNiveau3 = new NiveauCompetence();
+        $newNiveau3->setLibelle("Niveau 3");
+        $newNiveau3->setCritereEvaluation($competenceTab["niveauCritereEvaluation3"]);
+        $newNiveau3->setGroupeAction($competenceTab["niveauGroupeAction3"]);
+        $competence->addNiveauCompetence($newNiveau3);
+      }
+      //return $this->json($competence);
       $entityManager = $this->getDoctrine()->getManager();
-      $entityManager->persist($competences);
+      $entityManager->persist($competence);
       $entityManager->flush();
     return new JsonResponse("success",Response::HTTP_CREATED,[],true);
     }
@@ -65,30 +79,37 @@ class CompetenceController extends AbstractController
         $competenceTab = $serializer->decode($competenceJson, 'json');
         //On détermine si dans le tableau nous avons les champs libellé et descriptif sont rempli
         //puis on les set.
+
         if (!empty($competenceTab["libelle"])){
           $competence->setLibelle($competenceTab["libelle"]);
         }
         if (!empty($competenceTab["descriptif"])){
           $competence->setDescriptif($competenceTab["descriptif"]);
         }
-        //On récupére les niveaux qu'on met dans un tableau
-        $niveauTab = $competenceTab["niveauCompetences"];
         
-        if (!empty($niveauTab)){
-          //On parcour le tableau de niveau
-          foreach ($niveauTab as $id){
-            if(is_int($id)){
-              //On crée un objet
-              $niveau = new NiveauCompetence();
-              $niveau = $niveauRepo-> find($id);
-              if (isset($niveau)){
-                $competence->addNiveauCompetence($niveau);
-              }
-            }
-          }
+        if(isset($competenceTab["niveauCritereEvaluation1"]) || isset($competenceTab["niveauGroupeAction1"])){
+          $newNiveau1 = new NiveauCompetence();
+          $newNiveau1->setLibelle("Niveau 1");
+          $newNiveau1->setCritereEvaluation($competenceTab["niveauCritereEvaluation1"]);
+          $newNiveau1->setGroupeAction($competenceTab["niveauGroupeAction1"]);
+          $competence->addNiveauCompetence($newNiveau1);
         }
-        //return $this->json($competence);
 
+        if(isset($competenceTab["niveauCritereEvaluation2"])){
+          $newNiveau2 = new NiveauCompetence();
+          $newNiveau2->setLibelle("Niveau 2");
+          $newNiveau2->setCritereEvaluation($competenceTab["niveauCritereEvaluation2"]);
+          $newNiveau2->setGroupeAction($competenceTab["niveauGroupeAction2"]);
+          $competence->addNiveauCompetence($newNiveau2);
+        }
+        if(isset($competenceTab["niveauCritereEvaluation3"])){
+          $newNiveau3 = new NiveauCompetence();
+          $newNiveau3->setLibelle("Niveau 3");
+          $newNiveau3->setCritereEvaluation($competenceTab["niveauCritereEvaluation3"]);
+          $newNiveau3->setGroupeAction($competenceTab["niveauGroupeAction3"]);
+          $competence->addNiveauCompetence($newNiveau3);
+        }
+        
         $entityManager->persist($competence);
         $entityManager->flush();
         return new JsonResponse("success");

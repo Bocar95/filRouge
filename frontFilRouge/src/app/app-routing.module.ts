@@ -97,11 +97,13 @@ const routes: Routes = [
 
               { path: 'liste/referentiels', component: ReferentielComponent,
                     children:[
+                      { path: ':id/groupecompetences', component: ReferentielComponent },
                       { path: ':id/details', component: DetailsReferentielComponent,
                             children:[
                               { path: ':id/competences', component: PlusDeDetailsRefGrpCompComponent }
                             ]
                       },
+                      { path: ':id/delete', component: ReferentielComponent },
                       { path: ':id/modifier', component: FormulairePutReferentielComponent }
                     ]
               },
@@ -110,6 +112,7 @@ const routes: Routes = [
 
               { path: 'liste/promos', component: PromoComponent,
                     children:[
+                      { path: ':id/referentiels', component: PromoComponent },
                       { path: ':id/details', component: DetailsPromoComponent }
                     ]
               },

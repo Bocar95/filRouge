@@ -1,4 +1,35 @@
-<a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/promo" [innerText]="btnNewPromo" style="font-size:1.25vw;"></a>
+<a routerLink="/acceuil/ajouter/promo" pButton pRipple icon="pi pi-plus" class="p-button-rounded mt-3"></a>
+
+<hr>
+
+<div class="row mt-4">
+  <div class="col-md-4 mb-3" *ngFor="let promo of promos">
+    <p-card header="{{promo.titre}}" styleClass="p-card-shadow">
+      <p>
+        {{promo.description | summarize:30}}
+      </p>
+      <p-accordion [activeIndex]="index" (click)="closeAccordion()">
+        <p-accordionTab header="Referentiels" (click)="showRefByPromoId(promo.id)" routerLink="{{promo.id}}/referentiels">
+          <div>
+            <p>{{referentielLibelle}}</p>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab header="Critére admission">
+          <p></p>
+        </p-accordionTab>
+        <p-accordionTab header="Critére évaluation">
+          <p></p>
+        </p-accordionTab>
+      </p-accordion>
+      <ng-template pTemplate="footer">
+        <button routerLink="{{promo.id}}/modifier" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+
+
+<!-- <a class="btn btn-success mt-3" routerLink="/acceuil/ajouter/promo" [innerText]="btnNewPromo" style="font-size:1.25vw;"></a>
 
 <hr>
 
@@ -18,9 +49,9 @@
           <a (click)="onClickBtnPut(promo.id)" routerLink="{{ promo.id }}/modifier" data-target="#updateModal" data-toggle="modal" class="btn btn-primary">Modifier</a>
         </div>
       </div>
-        <!-- <div class="card-footer text-muted">
+        <div class="card-footer text-muted">
           {{event.date | date:'shortDate'}}
-        </div> -->
+        </div>
     </div>
   </div>
 </div>
@@ -41,4 +72,4 @@
       $("#updateModal").modal("close");
     });
 });
-</script>
+</script> -->

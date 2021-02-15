@@ -10,13 +10,12 @@ import { PromoService } from 'src/app/service/promoService/promo.service';
 export class ListPromoComponent implements OnInit {
 
   promos = [];
-  btnAjouter = "Ajouter";
-  btnNewPromo = "Nouveau";
-  btnModifier = "Modifier";
-  btnSupprimer = "Supprimer";
+  referentielLibelle;
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
+  index: number = null;
+  lastIndex = -1;
 
   constructor(
     private promoService: PromoService,
@@ -30,6 +29,15 @@ export class ListPromoComponent implements OnInit {
         console.log(promoData)
       }
     )
+  }
+
+  showRefByPromoId(id){
+    return this.promoService.getRefByPromoId(id).subscribe(
+      (refData: any) => {
+        this.referentielLibelle = refData["referentiel"]["libelle"],
+        console.log(this.referentielLibelle)
+      }
+    );
   }
 
   getIdOnUrl() {
@@ -72,6 +80,10 @@ export class ListPromoComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     return this.router.navigate([`/acceuil/liste/promos/${id}/modifier`]);
+  }
+
+  closeAccordion() {
+    this.index = this.lastIndex--;
   }
 
 }

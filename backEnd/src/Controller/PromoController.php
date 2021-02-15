@@ -8,6 +8,7 @@ use App\Entity\Apprenant;
 use App\Entity\Formateur;
 use App\Entity\Referentiel;
 use App\Entity\GroupeApprenants;
+use App\Repository\AdminRepository;
 use App\Repository\ApprenantRepository;
 use App\Repository\FormateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,7 @@ class PromoController extends AbstractController
   /**
   * @Route(path="/api/admin/promo", name="api_add_promo", methods={"POST"})
   */
-  public function addPromo(Request $request,SerializerInterface $serializer, \Swift_Mailer $mailer, EntityManagerInterface $entityManager,ValidatorInterface $validator,ReferentielRepository $refRepo, FormateurRepository $formateurRepo, ApprenantRepository $apprenantRepo)
+  public function addPromo(Request $request,SerializerInterface $serializer, \Swift_Mailer $mailer, EntityManagerInterface $entityManager,ValidatorInterface $validator,ReferentielRepository $refRepo, FormateurRepository $formateurRepo, ApprenantRepository $apprenantRepo, AdminRepository $AdminRepo)
   {
     $promo = new Promo();
 
@@ -92,17 +93,18 @@ class PromoController extends AbstractController
       }
       $promo->addGroupeApprenant($groupeApprenant);
 
-      // $token = substr($request->server->get("HTTP_AUTHORIZATION"), 7);
-      // $token = explode(".",$token);
+      $token = substr($request->server->get("HTTP_AUTHORIZATION"), 7);
+      $token = explode(".",$token);
 
-      // if (isset($token[1])){
-      //   $payload = $token[1];
-      //   $payload = json_decode(base64_decode($payload));
-      //   $admin = $AdminRepo->findOneBy([
-      //     "username" => $payload->username
-      //   ]);
-      //   $promo->setAdmin($admin);
-      // }
+      if (isset($token[1])){
+        $payload = $token[1];
+        $payload = json_decode(base64_decode($payload));
+        $admin = $AdminRepo->findOneBy([
+          "email" => $payload->username
+        ]);
+        $promo->setAdmin($admin);
+      }
+
       $entityManager->persist($promo);
       $entityManager->flush();
       return new JsonResponse("success",Response::HTTP_CREATED,[],true);

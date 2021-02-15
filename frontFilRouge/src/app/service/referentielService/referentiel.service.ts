@@ -28,11 +28,15 @@ export class ReferentielService {
   }
 
   getGrpCompOfRefById(id:number) {
-    return this.http.get(`${this.defaultReferentielUrl}/${id}/grpecompetences`);
+    return this.http.get(`${this.defaultReferentielUrl}/${id}/groupecompetences`);
   }
 
   getCompOfGrpCompByIdOfRefById(id:number, id2:number) {
     return this.http.get(`${this.defaultReferentielUrl}/${id}/grpecompetences/${id2}`);
+  }
+
+  deleteReferentiel(id){
+    return this.http.delete(`${this.defaultReferentielUrl}/${id}`);
   }
 
 }

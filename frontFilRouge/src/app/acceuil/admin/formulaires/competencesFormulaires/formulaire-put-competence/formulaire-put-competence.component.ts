@@ -11,20 +11,25 @@ import { NiveauxService } from 'src/app/service/niveauxService/niveaux.service';
 })
 export class FormulairePutCompetenceComponent implements OnInit {
 
-  competence = {};
-  snapshot: RouterStateSnapshot;
-  url;
-  id;
-
   competenceForm: FormGroup;
   libelleFormControl = new FormControl();
   descriptifFormControl = new FormControl();
-  niveauCompetencesFormControl = new FormControl();
-  niveauList = [];
+  niveauCritereEvaluation1FormControl = new FormControl();
+  niveauCritereEvaluation2FormControl = new FormControl();
+  niveauCritereEvaluation3FormControl = new FormControl();
+  niveauGroupeAction1FormControl = new FormControl();
+  niveauGroupeAction2FormControl = new FormControl();
+  niveauGroupeAction3FormControl = new FormControl();
   value;
+  competence = {};
+  niveauList = [];
+  niveau1 = {};
+  niveau2 = {};
+  niveau3 = {};
+  snapshot: RouterStateSnapshot;
+  url;
+  id;
   
-  btnText = 'Ajouter';
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -36,18 +41,22 @@ export class FormulairePutCompetenceComponent implements OnInit {
     this.competenceService.getById(this.getIdOnUrl()).subscribe(
       (data : any) => {
         this.competence = data,
+        this.niveauList = data["niveauCompetences"],
+        this.niveau1 = this.niveauList[0],
+        this.niveau2 = this.niveauList[1],
+        this.niveau3 = this.niveauList[2],
         console.log(data)
       }
     );
-    this.niveauService.getNiveaux().subscribe(
-      (data : any)=>{
-        this.niveauList = data,
-        console.log(data)
-      });
     this.competenceForm = this.formBuilder.group({
       libelle : this.libelleFormControl,
       descriptif : this.descriptifFormControl,
-      niveauCompetences : this.niveauCompetencesFormControl
+      niveauCritereEvaluation1 :this.niveauCritereEvaluation1FormControl,
+      niveauCritereEvaluation2 :this.niveauCritereEvaluation2FormControl,
+      niveauCritereEvaluation3 :this.niveauCritereEvaluation3FormControl,
+      niveauGroupeAction1 : this.niveauGroupeAction1FormControl,
+      niveauGroupeAction2 : this.niveauGroupeAction2FormControl,
+      niveauGroupeAction3 : this.niveauGroupeAction3FormControl
     });
   }
 
@@ -73,23 +82,44 @@ export class FormulairePutCompetenceComponent implements OnInit {
     if(this.descriptifFormControl.value==null){
       this.descriptifFormControl.setValue(this.competence['descriptif']);
     }
-    if(this.niveauCompetencesFormControl.value==null){
-      this.niveauCompetencesFormControl.setValue(this.competence['niveauCompetences']);
+    if(this.niveauCritereEvaluation1FormControl.value==null){
+      this.niveauCritereEvaluation1FormControl.setValue(this.niveau1['critereEvaluation']);
+    }
+    if(this.niveauCritereEvaluation2FormControl.value==null){
+      this.niveauCritereEvaluation2FormControl.setValue(this.niveau2['critereEvaluation']);
+    }
+    if(this.niveauCritereEvaluation3FormControl.value==null){
+      this.niveauCritereEvaluation3FormControl.setValue(this.niveau3['critereEvaluation']);
+    }
+    if(this.niveauGroupeAction1FormControl.value==null){
+      this.niveauGroupeAction1FormControl.setValue(this.niveau1['groupeAction']);
+    }
+    if(this.niveauGroupeAction2FormControl.value==null){
+      this.niveauGroupeAction2FormControl.setValue(this.niveau2['groupeAction']);
+    }
+    if(this.niveauGroupeAction3FormControl.value==null){
+      this.niveauGroupeAction3FormControl.setValue(this.niveau3['groupeAction']);
     }
     this.competenceForm = this.formBuilder.group({
       libelle: this.libelleFormControl,
       descriptif: this.descriptifFormControl,
-      niveauCompetences: this.niveauCompetencesFormControl
+      niveauCritereEvaluation1 :this.niveauCritereEvaluation1FormControl,
+      niveauCritereEvaluation2 :this.niveauCritereEvaluation2FormControl,
+      niveauCritereEvaluation3 :this.niveauCritereEvaluation3FormControl,
+      niveauGroupeAction1 : this.niveauGroupeAction1FormControl,
+      niveauGroupeAction2 : this.niveauGroupeAction2FormControl,
+      niveauGroupeAction3 : this.niveauGroupeAction3FormControl
     });
 
-    if(this.competenceForm.value){
-      var id = this.getIdOnUrl();
-      return this.competenceService.putCompetence(id,this.competenceForm.value).subscribe(
-        (res: any) => {
-          console.log(res)
-        }
-      ), this.reloadComponentWithAlert();
-    }
+    console.log(this.competenceForm.value);
+    // if(this.competenceForm.value){
+    //   var id = this.getIdOnUrl();
+    //   return this.competenceService.putCompetence(id,this.competenceForm.value).subscribe(
+    //     (res: any) => {
+    //       console.log(res)
+    //     }
+    //   );
+    // }
   }
 
 }

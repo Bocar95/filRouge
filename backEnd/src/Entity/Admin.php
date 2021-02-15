@@ -46,8 +46,48 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Admin extends User
 {
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promo::class, mappedBy="admin")
+     */
+    private $promos;
+
+    public function __construct()
+    {
+        $this->promos = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection|Promo[]
+     */
+    public function getPromos(): Collection
+    {
+        return $this->promos;
+    }
+
+    public function addPromo(Promo $promo): self
+    {
+        if (!$this->promos->contains($promo)) {
+            $this->promos[] = $promo;
+            $promo->setAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromo(Promo $promo): self
+    {
+        if ($this->promos->removeElement($promo)) {
+            // set the owning side to null (unless already changed)
+            if ($promo->getAdmin() === $this) {
+                $promo->setAdmin(null);
+            }
+        }
+
+        return $this;
     }
 }

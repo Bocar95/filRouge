@@ -12,18 +12,26 @@ import { NiveauxService } from 'src/app/service/niveauxService/niveaux.service';
 export class FormulaireAddCompetenceComponent implements OnInit {
 
   addingCompetence: FormGroup;
+
   //addingNiveau : FormGroup;
   libelleFormControl = new FormControl('', [Validators.required]);
   descriptifFormControl = new FormControl('', [Validators.required]);
   competenceFormControl = new FormControl();
-  niveauCompetencesFormControl = new FormControl();
-  //niveauLibelleFormControl = new FormControl();
-  //niveauCritereEvaluationFormControl = new FormControl();
-  //niveauGroupeActionFormControl = new FormControl();
+  niveauCritereEvaluation1FormControl = new FormControl();
+  niveauCritereEvaluation2FormControl = new FormControl();
+  niveauCritereEvaluation3FormControl = new FormControl();
+  niveauGroupeAction1FormControl = new FormControl();
+  niveauGroupeAction2FormControl = new FormControl();
+  niveauGroupeAction3FormControl = new FormControl();
+  
   competenceList = [];
   niveauCompetencesList = [];
+
   showForms = false;
   btnText = 'Ajouter';
+  disabled = false;
+  plus = 'pi pi-plus';
+  times = 'pi pi-times';
   
   constructor(
     private formBuilder: FormBuilder,
@@ -41,7 +49,12 @@ export class FormulaireAddCompetenceComponent implements OnInit {
     this.addingCompetence = this.formBuilder.group({
       libelle : this.libelleFormControl,
       descriptif : this.descriptifFormControl,
-      niveauCompetences : this.niveauCompetencesFormControl
+      niveauCritereEvaluation1 :this.niveauCritereEvaluation1FormControl,
+      niveauCritereEvaluation2 :this.niveauCritereEvaluation2FormControl,
+      niveauCritereEvaluation3 :this.niveauCritereEvaluation3FormControl,
+      niveauGroupeAction1 : this.niveauGroupeAction1FormControl,
+      niveauGroupeAction2 : this.niveauGroupeAction2FormControl,
+      niveauGroupeAction3 : this.niveauGroupeAction3FormControl
     });
     this.niveauService.getNiveaux().subscribe(
       (niveaux : any)=>{
@@ -97,6 +110,20 @@ export class FormulaireAddCompetenceComponent implements OnInit {
         }
       ),this.reloadComponent();
     }
+  }
+
+  disableState(){
+    if(this.disabled == false ){
+      return this.disabled = true;
+    }
+    return this.disabled = false;
+  }
+
+  btnState() {
+    if (this.disabled == false){
+      return this.plus;
+    }
+    return this.times;
   }
 
 }

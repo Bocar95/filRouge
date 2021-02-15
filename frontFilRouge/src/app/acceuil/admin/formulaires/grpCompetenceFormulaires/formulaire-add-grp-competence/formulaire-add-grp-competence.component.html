@@ -25,7 +25,7 @@
                 <mat-option *ngFor="let competence of competenceList" [value]="competence.id">{{competence.libelle}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <a (click)="disableState()" pButton pRipple icon="{{btnState()}}" class="p-button-rounded p-button-warning mt-1 float-right"></a>
+            <a (click)="disableState()" label="Ajouter un compétences" pButton pRipple icon="{{btnState()}}" class="p-button-rounded p-button-primary mt-1 float-right"></a>
           </article>
 
           <article col="col-4" *ngIf="disabled===true">

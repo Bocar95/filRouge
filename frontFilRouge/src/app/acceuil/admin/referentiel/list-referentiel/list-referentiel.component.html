@@ -4,33 +4,26 @@
 
 <div class="row mt-4">
   <div class="col-md-4 mb-3" *ngFor="let referentiel of referentiels">
-    <div class="card text-center text-light">
-      <div class="card-body">
-        <p class="card-text">{{referentiel.libelle}}</p>
-        <p-accordion [multiple]="true">
-          <p-accordionTab header="Presentation">
-            {{referentiel.presentation}}
-          </p-accordionTab>
-          <p-accordionTab header="Critére d'évaluation">
-            {{referentiel.critereEvaluation}}
-          </p-accordionTab>
-          <p-accordionTab header="Critére d'admission">
-            {{referentiel.critereAdmission}}
-          </p-accordionTab>
-        </p-accordion>
-        <div class="row card-footer">
-          <a (click)="onClickBtnDetails(referentiel.id)" routerLink="{{referentiel.id}}/details" pButton pRipple icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning"></a>
-          <a (click)="onClickBtnPut(referentiel.id)" routerLink="{{ referentiel.id }}/modifier" pButton pRipple icon="pi pi-pencil" data-target="#updateModal" data-toggle="modal" class="p-button-rounded p-button-text"></a>
-        </div>
-      </div>
-        <!-- <div class="card-footer text-muted">
-          {{event.date | date:'shortDate'}}
-        </div> -->
-    </div>
+    <p-card header="{{referentiel.libelle}}" styleClass="p-card-shadow">
+      <p>
+        {{referentiel.presentation | summarize: 50}}
+      </p>
+      <p-accordion [activeIndex]="index" (click)="closeAccordion()">
+        <p-accordionTab header="Groupe Compétences" (click)="showGrpCompetenceById(referentiel.id)" routerLink="{{referentiel.id}}/groupecompetences">
+          <div *ngFor="let groupeCompetence of grpCompetences">
+            <p >{{groupeCompetence.libelle}}</p>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab header="Critére admission">
+          <p>{{referentiel.critereAdmission}}</p>
+        </p-accordionTab>
+        <p-accordionTab header="Critére évaluation">
+          <p>{{referentiel.critereEvaluation}}</p>
+        </p-accordionTab>
+      </p-accordion>
+      <ng-template pTemplate="footer">
+        <button routerLink="{{referentiel.id}}/modifier" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+      </ng-template>
+    </p-card>
   </div>
 </div>
-
-<div *ngIf="currentRoute()">
-  <router-outlet></router-outlet>
-</div>
-

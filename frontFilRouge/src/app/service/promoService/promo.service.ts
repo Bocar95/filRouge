@@ -19,4 +19,8 @@ export class PromoService {
     return this.http.post(this.defaultPromoUrl, data);
   }
 
+  getRefByPromoId(id){
+    return this.http.get(`${this.defaultPromoUrl}s/${id}/referentiels`)
+  }
+
 }

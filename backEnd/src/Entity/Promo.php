@@ -26,6 +26,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      "post"={"path"="/admin/promo",
  *              "route_name"="api_add_promo"
  *          }
+ *  },
+ *   itemOperations={
+ *       "get_RefByIdPromo"={
+ *           "security_post_denormalize"="is_granted('VIEW', object)",
+ *           "security_post_denormalize_message"="Vous n'avez pas ce privilége.",
+ *           "path"="/admin/promos/{id}/referentiels",
+ *           "normalization_context"={"groups"={"get_RefByIdPromo:read"}},
+ *           "method"="GET"
+ *          }
  *  }
  * )
  * @ApiFilter(BooleanFilter::class, properties={"isDeleted"})
@@ -102,7 +111,7 @@ class Promo
     /**
      * @ORM\ManyToOne(targetEntity=Referentiel::class, inversedBy="promos")
      * @ApiSubresource()
-     * @Groups({"getPromos:read"})
+     * @Groups({"getPromos:read","get_RefByIdPromo:read"})
      */
     private $referentiel;
 
@@ -123,6 +132,12 @@ class Promo
      * @ORM\Column(type="boolean")
      */
     private $isDeleted = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Admin::class, inversedBy="promos")
+     * @Groups({"getPromos:read"})
+     */
+    private $admin;
 
     public function __construct()
     {
@@ -329,6 +344,18 @@ class Promo
     public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    public function getAdmin(): ?Admin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?Admin $admin): self
+    {
+        $this->admin = $admin;
 
         return $this;
     }
