@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
 import { ReferentielService } from 'src/app/service/referentielService/referentiel.service';
 
@@ -19,13 +20,15 @@ export class FormulaireAddReferentielComponent implements OnInit {
   critereAdmissionFormControl = new FormControl('', [Validators.required]);
   grpCompetenceFormControl = new FormControl();
   grpCompetenceList = [];
+  uploadedFiles: any[] = [];
   btnText = 'Ajouter';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private referentielService : ReferentielService,
-    private groupeCompetenceService: GroupeCompetenceService
+    private groupeCompetenceService: GroupeCompetenceService,
+    private messageService : MessageService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +45,14 @@ export class FormulaireAddReferentielComponent implements OnInit {
       critereAdmission : this.critereAdmissionFormControl,
       groupeCompetences : this.grpCompetenceFormControl
     });
+
+  }
+
+  onUpload(event) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+    }
+    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   }
 
   reloadComponent() {

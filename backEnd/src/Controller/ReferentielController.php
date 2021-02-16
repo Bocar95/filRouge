@@ -32,15 +32,22 @@ class ReferentielController extends AbstractController
       // On transforme le json en tableau
       $referentielTab = $serializer->decode($referentielJson, 'json');
                         
-      //$programme = $request->files->get("$programme");
-      //$programme = fopen($programme->getRealPath(),"rb");
-      //$referentielTab["programme"] = $programme;
+      // $programme = $request->files->get("$programme");
+      // $programme = fopen($programme->getRealPath(),"rb");
+      // $referentielTab["programme"] = $programme;
+      $uploadedFile = $request->files->get('programme');
+      //return $this->json($uploadedFile);
+      if($uploadedFile){
+        $file = $uploadedFile->getRealPath();
+        $programme = fopen($file, 'r+');
+        $referentielTab["programme"] = $programme;
+      }
 
       $referentiel->setLibelle($referentielTab["libelle"]);
       $referentiel->setPresentation($referentielTab["presentation"]);
       $referentiel->setCritereEvaluation($referentielTab["critereEvaluation"]);
       $referentiel->setCritereAdmission($referentielTab["critereAdmission"]);
-      //$referentiel->setProgramme($referentielTab["programme"]);
+      $referentiel->setProgramme($referentielTab["programme"]);
 
       $grpCompetencesTab = $referentielTab["groupeCompetences"];
 
@@ -90,13 +97,15 @@ class ReferentielController extends AbstractController
         if (!empty($referentielTab["critereAdmission"])){
           $referentiel->setCritereAdmission($referentielTab["critereAdmission"]);
         }
-        //On récupére les groupes de compétences qu'on met dans un tableau
-        $grpCompetencesTab = $referentielTab["groupeCompetences"];
+        //On récupére les groupes de compétences à ajouter qu'on met dans un tableau
+        $grpCompetencesToAddTab = $referentielTab["grpCompetenceToAdd"];
+        //On récupére les groupes de compétences à supprimer qu'on met dans un tableau
+        $grpCompetencesToDeleteTab = $referentielTab["grpCompetenceToDelete"];
         //return $this->json($grpCompetencesTab);
         
-        if (!empty($grpCompetencesTab)){
+        if (!empty($grpCompetencesToAddTab)){
           //On parcour le tableau de groupe competence
-          foreach ($grpCompetencesTab as $id){
+          foreach ($grpCompetencesToAddTab as $id){
             $grpCompetence = new GroupeCompetence();
             if (is_int($id)) {
               //On crée un objet
@@ -107,6 +116,20 @@ class ReferentielController extends AbstractController
             }
           }
         }
+        if (!empty($grpCompetencesToDeleteTab)){
+          //On parcour le tableau de groupe competence
+          foreach ($grpCompetencesToDeleteTab as $id){
+            $grpCompetence = new GroupeCompetence();
+            if (is_int($id)) {
+              //On crée un objet
+              $grpCompetence = $grpCompRepo-> find($id);
+              if (isset($grpCompetence)){
+                $referentiel->removeGroupeCompetence($grpCompetence);
+              }
+            }
+          }
+        }
+
         $entityManager->persist($referentiel);
         $entityManager->flush();
         return new JsonResponse("success");

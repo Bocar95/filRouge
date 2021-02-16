@@ -23,23 +23,36 @@
           <article class="col-8">
             <p-tabView>
               <p-tabPanel header="Niveau 1">
-                <div class="mt-3">
-                <mat-form-field class="example-full-width">
-                    <mat-label style="color: black;">Critére d'évaluation</mat-label>
-                    <textarea matInput [formControl]="niveauCritereEvaluation1FormControl" [value]="niveau1['critereEvaluation']" placeholder="Critére d\'évaluation"></textarea>
+                <div class="mt-3" *ngIf="niveau1">
+                  <mat-form-field class="example-full-width" style="display: none;">
+                    <mat-label style="color: black;"></mat-label>
+                    <textarea matInput [formControl]="id1FormControl" [value]="niveau1['id']"></textarea>
                     <hr>
                     <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <mat-label style="color: black;">Groupe d'actions</mat-label>
-                    <textarea matInput [formControl]="niveauGroupeAction1FormControl" [value]="niveau1['groupeAction']" placeholder="Groupe d\'action"></textarea>
-                    <hr>
-                    <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
-                </mat-form-field>
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                      <mat-label style="color: black;">Critére d'évaluation</mat-label>
+                      <textarea matInput [formControl]="niveauCritereEvaluation1FormControl" [value]="niveau1['critereEvaluation']" placeholder="Critére d\'évaluation"></textarea>
+                      <hr>
+                      <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width">
+                      <mat-label style="color: black;">Groupe d'actions</mat-label>
+                      <textarea matInput [formControl]="niveauGroupeAction1FormControl" [value]="niveau1['groupeAction']" placeholder="Groupe d\'action"></textarea>
+                      <hr>
+                      <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
                 </div>
               </p-tabPanel>
+
               <p-tabPanel header="Niveau 2">
-                <div class="mt-3">
+                <div class="mt-3" *ngIf="niveau2">
+                  <mat-form-field class="example-full-width" style="display: none;">
+                    <mat-label style="color: black;"></mat-label>
+                    <textarea matInput [formControl]="id2FormControl" [value]="niveau2['id']"></textarea>
+                    <hr>
+                    <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <mat-label style="color: black;">Critére évaluation</mat-label>
                     <textarea matInput [formControl]="niveauCritereEvaluation2FormControl" [value]="niveau2['critereEvaluation']" placeholder="Critére d\'évaluation"></textarea>
@@ -54,8 +67,15 @@
                 </mat-form-field>
                 </div>
               </p-tabPanel>
+
               <p-tabPanel header="Niveau 3">
-                <div class="mt-3">
+                <div class="mt-3" *ngIf="niveau3">
+                  <mat-form-field class="example-full-width" style="display: none;">
+                    <mat-label style="color: black;"></mat-label>
+                    <textarea matInput [formControl]="id3FormControl" [value]="niveau3['id']"></textarea>
+                    <hr>
+                    <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
+                  </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <mat-label style="color: black;">Critére évaluation</mat-label>
                     <textarea matInput [formControl]="niveauCritereEvaluation3FormControl" [value]="niveau3['critereEvaluation']" placeholder="Critére d\'évaluation"></textarea>
@@ -70,6 +90,7 @@
                 </mat-form-field>
                 </div>
               </p-tabPanel>
+
             </p-tabView>
         </article>
 

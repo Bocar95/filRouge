@@ -49,7 +49,7 @@ export class ListReferentielComponent implements OnInit {
   }
 
   showGrpCompetenceById(id){
-    this.reloadComponent;
+    //this.loadGprCompetences();
     return this.referentielService.getGrpCompOfRefById(id).subscribe(
       (res: any) => {
         this.grpCompetences = res["groupeCompetences"];

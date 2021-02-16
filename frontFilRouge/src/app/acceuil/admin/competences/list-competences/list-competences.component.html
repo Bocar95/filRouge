@@ -25,14 +25,17 @@
                   <ng-template pTemplate="header">
                       <tr>
                           <th>Compétence libelle</th>
-                          <th></th>
+                          <th>Modifier</th>
                       </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-competence>
-                      <tr [pSelectableRow]="competence" (click)="onClickCompetence(competence.id)">
-                          <td>{{competence.libelle}}</td>
-                          <td>
+                      <tr>
+                          <td [pSelectableRow]="competence" (click)="onClickCompetence(competence.id)">
+                            {{competence.libelle}}
                             <button pButton pRipple type="button" icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning float-right"></button>
+                          </td>
+                          <td>
+                            <button routerLink="{{competence.id}}/modifier" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-success"></button>
                           </td>
                       </tr>
                   </ng-template>

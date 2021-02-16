@@ -74,7 +74,7 @@ class CompetenceController extends AbstractController
       $competenceJson = $request->getContent();
       //On détermine si le compétence existe dans la base de données
       $competence = $compRepo-> find($id);
-      if (isset($competence)){
+      if (!empty($competence)){
         // On transforme les données json en tableau
         $competenceTab = $serializer->decode($competenceJson, 'json');
         //On détermine si dans le tableau nous avons les champs libellé et descriptif sont rempli
@@ -87,24 +87,24 @@ class CompetenceController extends AbstractController
           $competence->setDescriptif($competenceTab["descriptif"]);
         }
         
-        if(isset($competenceTab["niveauCritereEvaluation1"]) || isset($competenceTab["niveauGroupeAction1"])){
+        if(!empty($competenceTab["niveauCritereEvaluation1"]) || !empty($competenceTab["niveauGroupeAction1"])){
           $newNiveau1 = new NiveauCompetence();
-          $newNiveau1->setLibelle("Niveau 1");
+          $newNiveau1 = $niveauRepo->find($competenceTab["id1"]);
           $newNiveau1->setCritereEvaluation($competenceTab["niveauCritereEvaluation1"]);
           $newNiveau1->setGroupeAction($competenceTab["niveauGroupeAction1"]);
           $competence->addNiveauCompetence($newNiveau1);
         }
 
-        if(isset($competenceTab["niveauCritereEvaluation2"])){
+        if(!empty($competenceTab["niveauCritereEvaluation2"])){
           $newNiveau2 = new NiveauCompetence();
-          $newNiveau2->setLibelle("Niveau 2");
+          $newNiveau2 = $niveauRepo->find($competenceTab["id2"]);
           $newNiveau2->setCritereEvaluation($competenceTab["niveauCritereEvaluation2"]);
           $newNiveau2->setGroupeAction($competenceTab["niveauGroupeAction2"]);
           $competence->addNiveauCompetence($newNiveau2);
         }
-        if(isset($competenceTab["niveauCritereEvaluation3"])){
+        if(!empty($competenceTab["niveauCritereEvaluation3"])){
           $newNiveau3 = new NiveauCompetence();
-          $newNiveau3->setLibelle("Niveau 3");
+          $newNiveau3 = $niveauRepo->find($competenceTab["id3"]);
           $newNiveau3->setCritereEvaluation($competenceTab["niveauCritereEvaluation3"]);
           $newNiveau3->setGroupeAction($competenceTab["niveauGroupeAction3"]);
           $competence->addNiveauCompetence($newNiveau3);

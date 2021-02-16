@@ -1,4 +1,8 @@
-<div class="addReferentiel mx-auto pt-5">
+<a routerLink="/acceuil/liste/referentiels" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-danger mt-3"></a>
+
+<hr>
+
+<div class="addReferentiel mx-auto mt-4">
   <h2 class="addReferentiel-header">Ajout d'un Référentiel</h2>
   <div class="addReferentiel-container">
     <form [formGroup]="addingReferentiel" class="example-form" (ngSubmit)="onClickBtnAdd()">
@@ -20,8 +24,8 @@
 
           <article class="col-4">
             <mat-form-field class="example-full-width">
-              <mat-label>Programme</mat-label>
-              <input matInput [formControl]="programmeFormControl" placeholder="Programme">
+              <mat-label>Critére d'admission</mat-label>
+              <input matInput [formControl]="critereAdmissionFormControl" placeholder="Critére d'admission" required>
               <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
             </mat-form-field>
 
@@ -30,14 +34,10 @@
               <input matInput [formControl]="critereEvaluationFormControl" placeholder="Critére d'évaluation" required>
               <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
             </mat-form-field>
+
           </article>
 
           <article class="col-4">
-            <mat-form-field class="example-full-width">
-              <mat-label>Critére d'admission</mat-label>
-              <input matInput [formControl]="critereAdmissionFormControl" placeholder="Critére d'admission" required>
-              <!-- <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error> -->
-            </mat-form-field>
 
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Groupe Competence</mat-label>
@@ -45,6 +45,16 @@
                 <mat-option *ngFor="let grpCompetence of grpCompetenceList" [value]="grpCompetence.id">{{grpCompetence.libelle}}</mat-option>
               </mat-select>
             </mat-form-field>
+
+              <!-- <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
+                      multiple="multiple" accept=".pdf" maxFileSize="1000000">
+                      <ng-template pTemplate="content">
+                          <ul *ngIf="uploadedFiles.length">
+                              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                          </ul>
+                      </ng-template>
+              </p-fileUpload> -->
+
           </article>
 
         </div>

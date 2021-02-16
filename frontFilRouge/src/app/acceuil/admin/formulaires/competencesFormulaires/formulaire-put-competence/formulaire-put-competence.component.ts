@@ -20,6 +20,9 @@ export class FormulairePutCompetenceComponent implements OnInit {
   niveauGroupeAction1FormControl = new FormControl();
   niveauGroupeAction2FormControl = new FormControl();
   niveauGroupeAction3FormControl = new FormControl();
+  id1FormControl = new FormControl();
+  id2FormControl = new FormControl();
+  id3FormControl = new FormControl();
   value;
   competence = {};
   niveauList = [];
@@ -56,7 +59,10 @@ export class FormulairePutCompetenceComponent implements OnInit {
       niveauCritereEvaluation3 :this.niveauCritereEvaluation3FormControl,
       niveauGroupeAction1 : this.niveauGroupeAction1FormControl,
       niveauGroupeAction2 : this.niveauGroupeAction2FormControl,
-      niveauGroupeAction3 : this.niveauGroupeAction3FormControl
+      niveauGroupeAction3 : this.niveauGroupeAction3FormControl,
+      id1 : this.id1FormControl,
+      id2 : this.id1FormControl,
+      id3 : this.id1FormControl
     });
   }
 
@@ -100,6 +106,15 @@ export class FormulairePutCompetenceComponent implements OnInit {
     if(this.niveauGroupeAction3FormControl.value==null){
       this.niveauGroupeAction3FormControl.setValue(this.niveau3['groupeAction']);
     }
+    if(this.id1FormControl.value==null){
+      this.id1FormControl.setValue(this.niveau1['id']);
+    }
+    if(this.id2FormControl.value==null){
+      this.id2FormControl.setValue(this.niveau2['id']);
+    }
+    if(this.id3FormControl.value==null){
+      this.id3FormControl.setValue(this.niveau3['id']);
+    }
     this.competenceForm = this.formBuilder.group({
       libelle: this.libelleFormControl,
       descriptif: this.descriptifFormControl,
@@ -108,18 +123,21 @@ export class FormulairePutCompetenceComponent implements OnInit {
       niveauCritereEvaluation3 :this.niveauCritereEvaluation3FormControl,
       niveauGroupeAction1 : this.niveauGroupeAction1FormControl,
       niveauGroupeAction2 : this.niveauGroupeAction2FormControl,
-      niveauGroupeAction3 : this.niveauGroupeAction3FormControl
+      niveauGroupeAction3 : this.niveauGroupeAction3FormControl,
+      id1 : this.id1FormControl,
+      id2 : this.id2FormControl,
+      id3 : this.id3FormControl
     });
 
     console.log(this.competenceForm.value);
-    // if(this.competenceForm.value){
-    //   var id = this.getIdOnUrl();
-    //   return this.competenceService.putCompetence(id,this.competenceForm.value).subscribe(
-    //     (res: any) => {
-    //       console.log(res)
-    //     }
-    //   );
-    // }
+    if(this.competenceForm.value){
+      var id = this.getIdOnUrl();
+      return this.competenceService.putCompetence(id,this.competenceForm.value).subscribe(
+        (res: any) => {
+          console.log(res)
+        }
+      );
+    }
   }
 
 }

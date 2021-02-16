@@ -88,6 +88,7 @@ const routes: Routes = [
                     ]
               },
               { path: 'liste/competences/:id/modifier', component: FormulairePutCompetenceComponent },
+              { path: 'liste/competences/:id/modifier', component: FormulairePutCompetenceComponent },
               { path: 'ajouter/competence', component: FormulaireAddCompetenceComponent },
 
               { path: 'liste/referentiels', component: ReferentielComponent,
@@ -99,8 +100,7 @@ const routes: Routes = [
                               { path: ':id/competences', component: PlusDeDetailsRefGrpCompComponent }
                             ]
                       },
-                      { path: ':id/delete', component: ReferentielComponent },
-                      { path: ':id/modifier', component: FormulairePutReferentielComponent }
+                      { path: ':id/delete', component: ReferentielComponent }
                     ]
               },
               { path: 'liste/referentiels/:id/modifier', component: FormulairePutReferentielComponent },

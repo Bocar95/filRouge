@@ -22,8 +22,10 @@ export class FormulairePutReferentielComponent implements OnInit {
   programmeFormControl = new FormControl();
   critereEvaluationFormControl = new FormControl('', [Validators.required]);
   critereAdmissionFormControl = new FormControl('', [Validators.required]);
-  grpCompetenceFormControl = new FormControl();
-  grpCompetenceList = [];
+  grpCompetenceToAddFormControl = new FormControl();
+  grpCompetenceToDeleteFormControl = new FormControl();
+  listGrpCompetencesToAdd = [];
+  listGrpCompetencesToDelete = [];
   value;
   
   btnText = 'Ajouter';
@@ -39,21 +41,23 @@ export class FormulairePutReferentielComponent implements OnInit {
     this.referentielService.getById(this.getIdOnUrl()).subscribe(
       (data : any) => {
         this.referentiel = data,
+        this.listGrpCompetencesToDelete = data["groupeCompetences"],
         console.log(data)
       }
     );
     this.grpCompetenceService.getGrpCompetences().subscribe(
       (res : any)=>{
-        this.grpCompetenceList= res,
+        this.listGrpCompetencesToAdd = res,
         console.log(res)
-      });
+     });
     this.puttingReferentielForm = this.formBuilder.group({
       libelle : this.libelleFormControl,
       presentation : this.presentationFormControl,
       programme : this.programmeFormControl,
       critereEvaluation : this.critereEvaluationFormControl,
       critereAdmission : this.critereAdmissionFormControl,
-      groupeCompetences : this.grpCompetenceFormControl
+      grpCompetenceToAdd : this.grpCompetenceToAddFormControl,
+      grpCompetenceToDelete : this.grpCompetenceToDeleteFormControl
     });
   }
 
@@ -88,16 +92,14 @@ export class FormulairePutReferentielComponent implements OnInit {
     if(this.critereAdmissionFormControl.value==null){
       this.critereAdmissionFormControl.setValue(this.referentiel['critereAdmission']);
     }
-    if(this.grpCompetenceFormControl.value==null){
-      this.grpCompetenceFormControl.setValue(this.referentiel['groupeCompetences']);
-    }
     this.puttingReferentielForm = this.formBuilder.group({
       libelle : this.libelleFormControl,
       presentation : this.presentationFormControl,
       programme : this.programmeFormControl,
       critereEvaluation : this.critereEvaluationFormControl,
       critereAdmission : this.critereAdmissionFormControl,
-      groupeCompetences : this.grpCompetenceFormControl
+      grpCompetenceToAdd : this.grpCompetenceToAddFormControl,
+      grpCompetenceToDelete : this.grpCompetenceToDeleteFormControl
     });
 
     if(this.puttingReferentielForm.value){

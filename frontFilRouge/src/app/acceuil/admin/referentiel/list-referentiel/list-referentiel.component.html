@@ -9,7 +9,7 @@
         {{referentiel.presentation | summarize: 50}}
       </p>
       <p-accordion [activeIndex]="index" (click)="closeAccordion()">
-        <p-accordionTab header="Groupe Compétences" (click)="showGrpCompetenceById(referentiel.id)" routerLink="{{referentiel.id}}/groupecompetences">
+        <p-accordionTab header="Groupe Compétences"  routerLink="{{referentiel.id}}/groupecompetences}}" (click)="showGrpCompetenceById(referentiel.id)">
           <div *ngFor="let groupeCompetence of grpCompetences">
             <p >{{groupeCompetence.libelle}}</p>
           </div>
