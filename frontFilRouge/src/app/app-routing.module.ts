@@ -55,11 +55,6 @@ const routes: Routes = [
               },
               { path: 'ajouter/admin', component: FormulaireAddAdminComponent },
 
-              { path: 'liste/apprenants', component: ApprenantUserComponent,
-                    children:[
-                      { path: ':id/delete', component: ApprenantUserComponent }
-                    ]
-              },
               { path: 'ajouter/apprenant', component: FormulaireAddApprenantComponent },
 
               { path: 'liste/cms', component: CmUserComponent,
@@ -98,6 +93,7 @@ const routes: Routes = [
               { path: 'liste/referentiels', component: ReferentielComponent,
                     children:[
                       { path: ':id/groupecompetences', component: ReferentielComponent },
+                      { path: ':id/groupecompetences/imprimer', component: ReferentielComponent },
                       { path: ':id/details', component: DetailsReferentielComponent,
                             children:[
                               { path: ':id/competences', component: PlusDeDetailsRefGrpCompComponent }

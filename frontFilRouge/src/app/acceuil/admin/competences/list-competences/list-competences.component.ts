@@ -11,8 +11,11 @@ import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService
 export class ListCompetencesComponent implements OnInit {
 
   competences = [];
+  competencesList = [];
+  grpCompetencesList = [];
   grpCompetences = [];
   niveaux = [];
+  niveauxList = [];
   snapshot: RouterStateSnapshot;
   id = [];
   url: string;
@@ -33,6 +36,12 @@ export class ListCompetencesComponent implements OnInit {
         console.log(data)
       }
     );
+    this.groupeCompetenceService.getGrpCompetences().subscribe(
+      (grpCompData : any) => {
+        this.grpCompetencesList = grpCompData,
+        console.log(grpCompData)
+      }
+    )
   }
 
   getIdOnUrl() {
@@ -72,6 +81,17 @@ export class ListCompetencesComponent implements OnInit {
         this.niveaux = grpCompetenceData["niveauCompetences"],
         console.log(this.grpCompetences),
         console.log(this.niveaux)
+      }
+    );
+  }
+
+  onClickGrpCompetence(id){
+    return this.groupeCompetenceService.getCompetencesOfGrpCompetenceById(id).subscribe(
+      (competenceData:any) => {
+        this.competencesList = competenceData["competences"],
+        this.niveauxList = competenceData["niveauCompetences"],
+        console.log(this.competencesList),
+        console.log(this.niveauxList)
       }
     );
   }

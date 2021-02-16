@@ -31,7 +31,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *          "get"={
  *              "security_post_denormalize"="is_granted('VIEW', object)",
  *              "security_post_denormalize_message"="Vous n'avez pas ce privilége.",
- *              "path"="/admin/referentiels/{id}"
+ *              "path"="/admin/referentiels/{id}",
+ *              "normalization_context"={"groups"={"get_RefById"}}
  *          },
  *          "get_GrpCompOfRefById"={
  *              "method"="get",
@@ -60,37 +61,37 @@ class Referentiel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $presentation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $programme;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $critereEvaluation;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"get_Referentiels:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","getPromos:read","get_RefById","get_RefByIdPromo:read"})
      */
     private $critereAdmission;
 
@@ -102,7 +103,7 @@ class Referentiel
     /**
      * @ORM\ManyToMany(targetEntity=GroupeCompetence::class, inversedBy="referentiels")
      * @ApiSubresource()
-     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","getPromos:read","get_RefByIdPromo:read"})
+     * @Groups({"get_Referentiels:read","get_GrpCompOfRefById:read","get_RefById","get_CompOfGrpCompByIdOfRefById:read","getPromos:read","get_RefByIdPromo:read"})
      */
     private $groupeCompetences;
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ReferentielService } from 'src/app/service/referentielService/referentiel.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-list-referentiel',
@@ -37,16 +39,40 @@ export class ListReferentielComponent implements OnInit {
         this.referentiels = data,
         console.log(data)
       }
-    )
+    );
+    this.referentielService.getGrpCompOfRefById(this.getIdOnUrl()).subscribe(
+      (res: any) => {
+        this.grpCompetences = res["groupeCompetences"];
+        console.log(res);
+      }
+    );
   }
 
   showGrpCompetenceById(id){
+    this.reloadComponent;
     return this.referentielService.getGrpCompOfRefById(id).subscribe(
       (res: any) => {
         this.grpCompetences = res["groupeCompetences"];
         console.log(res);
       }
     );
+  }
+
+  public openPDF(id,libelle):void {
+    let DATA = document.getElementById(`card${id}`);
+        
+    html2canvas(DATA).then(canvas => {
+        
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+        
+        PDF.save(`${libelle}.pdf`);
+    });     
   }
 
   getIdOnUrl() {
@@ -62,6 +88,12 @@ export class ListReferentielComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/acceuil/liste/referentiels']);
+  }
+
+  load(id){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([`/acceuil/liste/referentiels/${id}/details`]);
   }
 
   confirmModalNo() {

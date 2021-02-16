@@ -43,7 +43,7 @@ export class ListGrpCompetenceComponent implements OnInit {
   }
 
   showCompetencesById(id){
-    return this.groupeCompetenceService.getCompetencesOfGrpCompetence(id).subscribe(
+    return this.groupeCompetenceService.getCompetencesOfGrpCompetenceById(id).subscribe(
       (res: any) => {
         this.competencesElements = res;
         this.competences = this.competencesElements["competences"];

@@ -4,7 +4,7 @@
 
 <div class="row mt-4">
   <div class="col-md-4 mb-3" *ngFor="let referentiel of referentiels">
-    <p-card header="{{referentiel.libelle}}" styleClass="p-card-shadow">
+    <p-card id="card{{referentiel.id}}" header="{{referentiel.libelle}}" styleClass="p-card-shadow">
       <p>
         {{referentiel.presentation | summarize: 50}}
       </p>
@@ -23,7 +23,13 @@
       </p-accordion>
       <ng-template pTemplate="footer">
         <button routerLink="{{referentiel.id}}/modifier" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+        <button (click)="load(referentiel.id)" pButton pRipple type="button" icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning p-mr-2"></button>
       </ng-template>
     </p-card>
   </div>
 </div>
+
+<div *ngIf="currentRoute()">
+<router-outlet></router-outlet>
+</div>
+

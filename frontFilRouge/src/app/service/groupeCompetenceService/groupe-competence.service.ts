@@ -31,7 +31,7 @@ export class GroupeCompetenceService {
     return this.http.delete(`${this.defaultGrpCompetenceUrl}/${id}`);
   }
 
-  getCompetencesOfGrpCompetence(id: number) {
+  getCompetencesOfGrpCompetenceById(id: number) {
     return this.http.get(`${this.defaultGrpCompetenceUrl}/${id}/competences`);
   }
 

@@ -78,7 +78,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import {SplitterModule} from 'primeng/splitter';
 import { AdminUserService } from './service/adminUserService/admin-user.service';
 import { ApprenantUserService } from './service/apprenantUserService/apprenant-user.service';
@@ -93,6 +93,8 @@ import {ListboxModule} from 'primeng/listbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {PickListModule} from 'primeng/picklist';
 import {TabViewModule} from 'primeng/tabview';
+import {FileUploadModule} from 'primeng/fileupload';
+import {FieldsetModule} from 'primeng/fieldset';
 
 
 @NgModule({
@@ -184,7 +186,9 @@ import {TabViewModule} from 'primeng/tabview';
     ListboxModule,
     MultiSelectModule,
     PickListModule,
-    TabViewModule
+    TabViewModule,
+    FileUploadModule,
+    FieldsetModule
   ],
   providers: [
     AuthService,
@@ -200,6 +204,7 @@ import {TabViewModule} from 'primeng/tabview';
     PromoService,
     ConfirmationService,
     VerifyTokenService,
+    MessageService,
     TokenInterceptorProvider
   ],
   bootstrap: [AppComponent]

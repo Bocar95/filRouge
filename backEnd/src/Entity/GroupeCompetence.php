@@ -70,7 +70,7 @@ class GroupeCompetence
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","get_grpCompetenceOfCompetenceById"})
+     * @Groups({"get_grpCompetences:read","get_RefById","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","get_grpCompetenceOfCompetenceById"})
      */
     private $id;
 
@@ -79,7 +79,7 @@ class GroupeCompetence
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","get_grpCompetenceOfCompetenceById","get_RefByIdPromo:read"})
+     * @Groups({"get_grpCompetences:read","get_RefById","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_CompOfGrpCompByIdOfRefById:read","get_grpCompetenceOfCompetenceById","get_RefByIdPromo:read"})
      */
     private $libelle;
 
@@ -88,7 +88,7 @@ class GroupeCompetence
      * @Assert\NotBlank(
      *     message = "Ce Champ ne doit pas être vide."
      * )
-     * @Groups({"get_grpCompetences:read","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_grpCompetenceOfCompetenceById","get_RefByIdPromo:read"})
+     * @Groups({"get_grpCompetences:read","get_RefById","getById_grpCompetences:read","get_Referentiels:read","get_GrpCompOfRefById:read","get_grpCompetenceOfCompetenceById","get_RefByIdPromo:read"})
      */
     private $descriptif;
 

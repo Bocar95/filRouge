@@ -26,7 +26,7 @@ export class DetailsGrpCompetenceComponent implements OnInit {
 
   ngOnInit(): void {
     this.toDetails = this.getIdOnUrl();
-    this.grpCompetenceService.getCompetencesOfGrpCompetence(this.toDetails).subscribe(
+    this.grpCompetenceService.getCompetencesOfGrpCompetenceById(this.toDetails).subscribe(
       (res: any) => {
         this.element = res;
         this.competences = this.element["competences"];

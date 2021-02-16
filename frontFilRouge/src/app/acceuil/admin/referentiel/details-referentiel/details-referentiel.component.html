@@ -1,35 +1,50 @@
 
-<hr>
-
-<div class="text-center" *ngIf="grpCompetences.length>0">
-  <mat-label class="text-white">Voici la liste des groupe de compétences associés à ce référentiel</mat-label>
-  <div class="mat-table table-striped table-bordered mt-2">
-    <table class="text-white w-100">
-      <thead>
-        <tr>
-          <th class="text-center">libelle</th>
-          <th class="text-center">descriptif</th>
-          <th class="text-center">Plus de détails</th>
+<div class="card" #cardToPrint>
+  <p-fieldset legend="{{referentiel.libelle}}">
+    <p-fieldset legend="Présentation">
+      {{referentiel.presentation}}
+    </p-fieldset>
+    <p-fieldset legend="Critére évaluation">
+      {{referentiel.critereEvaluation}}
+    </p-fieldset>
+    <p-fieldset legend="Critére d'admission">
+      {{referentiel.critereAdmission}}
+    </p-fieldset>
+    <p-fieldset legend="Groupe compétences">
+      <p *ngFor="let groupeCompetence of grpCompetences" style="text-align:center">
+        {{groupeCompetence.libelle}}
+      </p>
+    </p-fieldset>
+    <button (click)="openPDF(referentiel.libelle)" pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-warning mt-2"></button>
+  </p-fieldset>
+  <!-- <p-table id="p-table" dataKey="id">
+      <ng-template pTemplate="header">
+          <tr>
+            <th style="text-align:center">Libelle</th>
+            <th style="text-align:center">Presentation</th>
+            <th style="text-align:center">Critére Évaluation</th>
+            <th style="text-align:center">Critére Admission</th>
+            <th style="text-align:center">Actions</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body">
+          <tr>
+            <td style="text-align:center">
+              {{libelle}}
+            </td>
+            <td style="text-align:center">
+              {{libelle}}
+            </td>
+            <td style="text-align:center">
+              {{libelle}}
+            </td>
+            <td style="text-align:center">
+              {{libelle}}
+            </td>
+            <td style="text-align:center">
+              <button routerLink="/groupecompetences/imprimer" (click)="openPDF(idReferentiel,libelle)" pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-warning"></button>
+            </td>
         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let grpCompetence of grpCompetences">
-          <td class="text-center">{{grpCompetence.libelle}}</td>
-          <td class="text-center">{{grpCompetence.descriptif}}</td>
-          <td class="text-center">
-            <a mat-raised-button class="bg-warning" routerLink="{{ grpCompetence.id }}/competences" (click)="onClickBtnMoreDetails(grpCompetence.id)" [innerText]="btnMoreDeDetail" style="font-size:1.25vw;"></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="text-center">
-  <mat-label class="text-white" *ngIf="grpCompetences.length<1">{{elseResponse}}</mat-label>
-</div>
-
-
-<div *ngIf="currentRoute()">
-  <router-outlet></router-outlet>
+      </ng-template>
+  </p-table> -->
 </div>
