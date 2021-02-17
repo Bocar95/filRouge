@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { GroupeCompetenceService } from 'src/app/service/groupeCompetenceService/groupe-competence.service';
 import { ReferentielService } from 'src/app/service/referentielService/referentiel.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-formulaire-put-referentiel',
@@ -22,10 +23,8 @@ export class FormulairePutReferentielComponent implements OnInit {
   programmeFormControl = new FormControl();
   critereEvaluationFormControl = new FormControl('', [Validators.required]);
   critereAdmissionFormControl = new FormControl('', [Validators.required]);
-  grpCompetenceToAddFormControl = new FormControl();
-  grpCompetenceToDeleteFormControl = new FormControl();
-  listGrpCompetencesToAdd = [];
-  listGrpCompetencesToDelete = [];
+  listGrpCompetences = [];
+  listGrpCompetencesToAddOrDelete = [];
   value;
   
   btnText = 'Ajouter';
@@ -41,13 +40,13 @@ export class FormulairePutReferentielComponent implements OnInit {
     this.referentielService.getById(this.getIdOnUrl()).subscribe(
       (data : any) => {
         this.referentiel = data,
-        this.listGrpCompetencesToDelete = data["groupeCompetences"],
+        this.listGrpCompetencesToAddOrDelete = data["groupeCompetences"],
         console.log(data)
       }
     );
     this.grpCompetenceService.getGrpCompetences().subscribe(
       (res : any)=>{
-        this.listGrpCompetencesToAdd = res,
+        this.listGrpCompetences = res,
         console.log(res)
      });
     this.puttingReferentielForm = this.formBuilder.group({
@@ -56,8 +55,7 @@ export class FormulairePutReferentielComponent implements OnInit {
       programme : this.programmeFormControl,
       critereEvaluation : this.critereEvaluationFormControl,
       critereAdmission : this.critereAdmissionFormControl,
-      grpCompetenceToAdd : this.grpCompetenceToAddFormControl,
-      grpCompetenceToDelete : this.grpCompetenceToDeleteFormControl
+      grpCompetenceToAddOrDelete : [this.listGrpCompetencesToAddOrDelete],
     });
   }
 
@@ -76,6 +74,17 @@ export class FormulairePutReferentielComponent implements OnInit {
     alert('Données mofifier avec success');
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
+
   onClickBtnValider() {
     if(this.libelleFormControl.value==null){
       this.libelleFormControl.setValue(this.referentiel['libelle']);
@@ -92,23 +101,24 @@ export class FormulairePutReferentielComponent implements OnInit {
     if(this.critereAdmissionFormControl.value==null){
       this.critereAdmissionFormControl.setValue(this.referentiel['critereAdmission']);
     }
+
     this.puttingReferentielForm = this.formBuilder.group({
       libelle : this.libelleFormControl,
       presentation : this.presentationFormControl,
       programme : this.programmeFormControl,
       critereEvaluation : this.critereEvaluationFormControl,
       critereAdmission : this.critereAdmissionFormControl,
-      grpCompetenceToAdd : this.grpCompetenceToAddFormControl,
-      grpCompetenceToDelete : this.grpCompetenceToDeleteFormControl
+      grpCompetenceToAddOrDelete : [this.listGrpCompetencesToAddOrDelete]
     });
 
+    console.log(this.puttingReferentielForm.value);
     if(this.puttingReferentielForm.value){
       var id = this.getIdOnUrl();
       return this.referentielService.putReferentiel(id, this.puttingReferentielForm.value).subscribe(
         (res: any) => {
           console.log(res)
         }
-      ), this.reloadComponentWithAlert();
+      ),this.reloadComponentWithAlert();
     }
   }
 

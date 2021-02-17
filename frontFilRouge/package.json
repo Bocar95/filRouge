@@ -27,6 +27,7 @@
     "html2canvas": "^1.0.0-rc.7",
     "jspdf": "^2.3.0",
     "multiple-date-picker": "^2.1.6",
+    "ngx-print": "^1.2.0-beta.5",
     "primeicons": "^4.1.0",
     "primeng": "^11.2.0",
     "rxjs": "~6.6.0",

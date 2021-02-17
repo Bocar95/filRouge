@@ -1,5 +1,7 @@
-
-<div class="card" #cardToPrint>
+<button printSectionId="cardToPrint" printTitle="{{referentiel.libelle}}" [useExistingCss]="true" pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-warning mt-2" ngxPrint></button>
+<button routerLink="/acceuil/liste/referentiels" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-danger mt-2 ml-2"></button>
+  
+<div class="card" id="cardToPrint">
   <p-fieldset legend="{{referentiel.libelle}}">
     <p-fieldset legend="Présentation">
       {{referentiel.presentation}}
@@ -15,7 +17,6 @@
         {{groupeCompetence.libelle}}
       </p>
     </p-fieldset>
-    <button (click)="openPDF(referentiel.libelle)" pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-warning mt-2"></button>
   </p-fieldset>
   <!-- <p-table id="p-table" dataKey="id">
       <ng-template pTemplate="header">

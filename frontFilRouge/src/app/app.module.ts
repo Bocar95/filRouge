@@ -95,6 +95,8 @@ import {PickListModule} from 'primeng/picklist';
 import {TabViewModule} from 'primeng/tabview';
 import {FileUploadModule} from 'primeng/fileupload';
 import {FieldsetModule} from 'primeng/fieldset';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {NgxPrintModule} from 'ngx-print';
 
 
 @NgModule({
@@ -188,7 +190,9 @@ import {FieldsetModule} from 'primeng/fieldset';
     PickListModule,
     TabViewModule,
     FileUploadModule,
-    FieldsetModule
+    FieldsetModule,
+    DragDropModule,
+    NgxPrintModule
   ],
   providers: [
     AuthService,

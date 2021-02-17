@@ -35,13 +35,13 @@ class ReferentielController extends AbstractController
       // $programme = $request->files->get("$programme");
       // $programme = fopen($programme->getRealPath(),"rb");
       // $referentielTab["programme"] = $programme;
-      $uploadedFile = $request->files->get('programme');
+      //$uploadedFile = $request->files->get('programme');
       //return $this->json($uploadedFile);
-      if($uploadedFile){
-        $file = $uploadedFile->getRealPath();
-        $programme = fopen($file, 'r+');
-        $referentielTab["programme"] = $programme;
-      }
+      // if($uploadedFile){
+      //   $file = $uploadedFile->getRealPath();
+      //   $programme = fopen($file, 'r+');
+      //   $referentielTab["programme"] = $programme;
+      // }
 
       $referentiel->setLibelle($referentielTab["libelle"]);
       $referentiel->setPresentation($referentielTab["presentation"]);
@@ -98,35 +98,23 @@ class ReferentielController extends AbstractController
           $referentiel->setCritereAdmission($referentielTab["critereAdmission"]);
         }
         //On récupére les groupes de compétences à ajouter qu'on met dans un tableau
-        $grpCompetencesToAddTab = $referentielTab["grpCompetenceToAdd"];
-        //On récupére les groupes de compétences à supprimer qu'on met dans un tableau
-        $grpCompetencesToDeleteTab = $referentielTab["grpCompetenceToDelete"];
-        //return $this->json($grpCompetencesTab);
+        $grpCompetencesToAddOrDeleteTab = $referentielTab["grpCompetenceToAddOrDelete"];
         
-        if (!empty($grpCompetencesToAddTab)){
-          //On parcour le tableau de groupe competence
-          foreach ($grpCompetencesToAddTab as $id){
-            $grpCompetence = new GroupeCompetence();
-            if (is_int($id)) {
-              //On crée un objet
-              $grpCompetence = $grpCompRepo-> find($id);
-              if (isset($grpCompetence)){
-                $referentiel->addGroupeCompetence($grpCompetence);
-              }
-            }
-          }
+        // on recupére les groupes de compétence déja éxistante qu'on met dans un tableau
+        $grpCompetenceOfRefTab = $referentiel->getGroupeCompetences();
+
+        // On supprime l'ancien tab de grp Compétence pour ajouter de nouveaux
+        // Car on utilise le Drag and Drop de angular matérial coté front 
+        foreach ($grpCompetenceOfRefTab as $grpCompetenceOfRef) {
+          $referentiel->removeGroupeCompetence($grpCompetenceOfRef);
         }
-        if (!empty($grpCompetencesToDeleteTab)){
-          //On parcour le tableau de groupe competence
-          foreach ($grpCompetencesToDeleteTab as $id){
-            $grpCompetence = new GroupeCompetence();
-            if (is_int($id)) {
-              //On crée un objet
-              $grpCompetence = $grpCompRepo-> find($id);
-              if (isset($grpCompetence)){
-                $referentiel->removeGroupeCompetence($grpCompetence);
-              }
-            }
+
+        //On parcour le tableau de groupe competence donner coté front
+        foreach ($grpCompetencesToAddOrDeleteTab as $grpCompetencesToAddOrDelete){
+          $grpCompetence = new GroupeCompetence();
+          $grpCompetence = $grpCompRepo-> find($grpCompetencesToAddOrDelete["id"]);
+          if (isset($grpCompetence)){
+            $referentiel->addGroupeCompetence($grpCompetence);
           }
         }
 

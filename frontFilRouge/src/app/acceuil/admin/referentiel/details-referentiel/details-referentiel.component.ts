@@ -2,8 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { ReferentielService } from 'src/app/service/referentielService/referentiel.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-details-referentiel',
@@ -12,7 +10,6 @@ import html2canvas from 'html2canvas';
 })
 
 export class DetailsReferentielComponent implements OnInit {
-@ViewChild("cardToPrint") cardToPrint: ElementRef;
 
   referentiel;
   grpCompetences = [];
@@ -48,22 +45,6 @@ export class DetailsReferentielComponent implements OnInit {
         console.log(res);
       }
     );
-  }
-
-  public openPDF(libelle):void {
-    let DATA = this.cardToPrint.nativeElement;
-        
-    html2canvas(DATA).then(canvas => {
-      let fileWidth = 208;
-      let fileHeight = canvas.height * fileWidth / canvas.width;
-    // console.log(canvas.height);
-      const FILEURI = canvas.toDataURL('image/png')
-      let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = -100;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-     
-      PDF.save(`${libelle}.pdf`);
-    });     
   }
 
   getIdOnUrl() {

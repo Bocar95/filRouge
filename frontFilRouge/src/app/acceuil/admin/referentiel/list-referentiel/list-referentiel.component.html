@@ -23,7 +23,7 @@
       </p-accordion>
       <ng-template pTemplate="footer">
         <button routerLink="{{referentiel.id}}/modifier" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-        <button (click)="load(referentiel.id)" pButton pRipple type="button" icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning p-mr-2"></button>
+        <button routerLink="{{referentiel.id}}/toPrint" pButton pRipple type="button" icon="pi pi-sort-amount-down" class="p-button-rounded p-button-text p-button-warning p-mr-2"></button>
       </ng-template>
     </p-card>
   </div>
